@@ -1,0 +1,89 @@
+<view class='searchCon'>
+  <view class="page__bd search-y">
+    <view class="weui_cell searchbar">
+      <view class="weui-cell__hd search_btn" bindtap="onChangeShowState">
+        <image mode="aspectFit" src="/images/icons/list.png" />
+      </view>
+      <view class="weui-cell_bd">
+        <view class="weui_search-bar">
+          <view class="weui-search-bar_form">
+            <view class="weui-search-bar_box">
+              <icon class="weui_icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar_input" confirm-type="search" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindblur="inputTyping" />
+              <view class="weui_icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                <icon type="clear" size="14"></icon>
+              </view>
+            </view>
+            <label class="weui-search-bar_label" hidden="{{inputShowed}}" bindtap="showInput">
+              <icon class="weui_icon-search" type="search" size="14"></icon>
+              <view class="weui-search-bar_text">搜索</view>
+            </label>
+          </view>
+          <view class="weui-search-bar_cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view style='padding-bottom:150rpx;' scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+    <view wx:if="{{publishList.length>0}}" class='body' wx:for="{{publishList}}" wx:for-item="objs" wx:for-index="index">
+      <view style='border-bottom:1rpx solid rgb(220, 220, 220)'>
+        <view class='bodymsg'>
+          <view class='bodyname'>
+            <image class='nameImg' src='/images/icons/avatar2.jpeg'></image>
+            <text style='margin-left:20rpx;'>{{objs.name}}</text>
+          </view>
+          <view class='loaction'>
+            <view class='time'>
+              <image style='height:30rpx;width:30rpx;border-radius:5rpx;' src='/images/icons/time.png'></image>
+              <text style='margin-left:10rpx;'>{{objs.updatedAt}}</text>
+            </view>
+            <view class='location'>
+              <!-- <image style='height:28rpx;width:28rpx;border-radius:5rpx;margin-left:10rpx;' src='/images/icons/location.png'></image> -->
+              <!-- <text style='margin-left:10rpx;letter-spacing:1px;'>广东广州</text> -->
+            </view>
+          </view>
+          <view class='star'>
+            <!-- <image style='height:100rpx;width:100rpx;' src='/images/icons/star_l.png'></image> -->
+            <image wx:if="{{objs.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star_l.png'></image>
+            <image wx:if="{{!objs.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star.png'></image>
+          </view>
+        </view>
+      </view>
+
+
+      <view style='margin-top:10px;'>
+        <!-- <view>{{index}}</view> -->
+        <view class='bodyproducts' wx:for="{{objs.objects}}" wx:for-item="obj">
+          <view class='bodyclassify'>
+            <text class='bodyclassifyValue' style="{{obj.style==1?'border: 1rpx solid #fd7995;color:#fd7995':''}}">{{obj.classify}}</text>
+          </view>
+          <view class='product'>
+            <view class='name' wx:for="{{obj.object}}" wx:for-item='product'>
+              <view>{{product.name}}</view>
+            </view>
+          </view>
+        </view>
+        <view class='count'>
+          <view style='width:50%;'>
+            <text>浏览 {{objs.visitCount}}</text>
+            <text style='margin-left:20rpx;'>收藏 {{objs.likeCount}}</text>
+          </view>
+
+          <view class='contact' catchtap='onPhoneTap' data-phone="{{objs.phone}}">
+            <image style='height:30rpx;width:30rpx;' src='/images/icons/电话.png'></image>
+            <text style='margin-right:30rpx;margin-left:10rpx;'>{{objs.phone}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{publishList.length==0}}" class='nodata'>
+      <text>暂时没有数据</text>
+    </view>
+  </scroll-view>
+  <view class="body-view">
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+      加载中...
+    </loading>
+  </view>
+</view>

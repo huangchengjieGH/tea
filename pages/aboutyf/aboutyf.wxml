@@ -1,0 +1,81 @@
+<image class="block-img" bindtap="callmeTap" mode="widthFix" src="/images/aboutyf/index_02.jpg" />
+<view class="h5" style="margin-bottom:20px;">小程序的流量，先下手为强</view>
+<view class="panel panel1 text-center">
+  <view class="pl-line">
+    <view class="col-2">
+      <image class="" mode="widthFix" src="/images/aboutyf/pic-1.jpg" />
+      <view class="tt">线下扫码</view>
+      <view class="st">无需下载 触手可及</view>
+    </view>
+    <view class="col-2">
+      <image class="" mode="widthFix" src="/images/aboutyf/pic-2.jpg" />
+      <view class="tt">附近的小程序</view>
+      <view class="st">覆盖周围5公里用户</view>
+    </view>
+  </view>
+  <view class="pl-line">
+    <view class="col-2">
+      <image class="" mode="widthFix" src="/images/aboutyf/pic-3.jpg" />
+      <view class="tt">可代替APP</view>
+      <view class="st">开发周期短 功能强大</view>
+    </view>
+    <view class="col-2">
+      <image class="" mode="widthFix" src="/images/aboutyf/pic-4.jpg" />
+      <view class="tt">好友分享</view>
+      <view class="st">微信9亿用户共同选择</view>
+    </view>
+  </view>
+</view>
+<view class="h5" style="padding-top:35px;">小程序各种功能为你带来高收益</view>
+<view class="panel panel-img">
+  <image class="block-img" mode="widthFix" src="/images/aboutyf/index_05.jpg" />
+  <image class="block-img" mode="widthFix" src="/images/aboutyf/index_08.jpg" />
+  <image class="block-img" mode="widthFix" src="/images/aboutyf/index_10.jpg" />
+</view>
+<view class="h5" style="padding-top:35px;">合作流程</view>
+<view class="panel steps">
+  <view class="step fl-box">
+    <view class="fl-hd">
+      <span>1</span>
+    </view>
+    <view class="fl-bd">
+      <view class="tt">联系项目负责人</view>
+      <view class="st">为您解惑</view>
+    </view>
+  </view>
+  <view class="step fl-box">
+    <view class="fl-hd">
+      <span>2</span>
+    </view>
+    <view class="fl-bd">
+      <view class="tt">双方达成一致</view>
+      <view class="st">注册微信小程序（申请微信支付）</view>
+    </view>
+  </view>
+  <view class="step fl-box">
+    <view class="fl-hd">
+      <span>3</span>
+    </view>
+    <view class="fl-bd">
+      <view class="tt">把小程序一键授权给云风科技</view>
+      <view class="st">我们迅速为您设计、定制、开发</view>
+    </view>
+  </view>
+  <view class="step fl-box">
+    <view class="fl-hd">
+      <span>4</span>
+    </view>
+    <view class="fl-bd">
+      <view class="tt">微信小程序验收</view>
+      <view class="st">微信核审、小程序上线</view>
+    </view>
+  </view>
+</view>
+
+<view class="panel contact text-center">
+  <a bindtap="callmeTap">电话咨询:155-2102-6970</a>
+</view>
+
+<view class="footer text-center" style="padding-top:14px;">
+  <view class="t-grey" style="font-size:13px;">广州云风科技有限公司</view>
+</view>

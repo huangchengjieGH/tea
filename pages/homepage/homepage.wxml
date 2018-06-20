@@ -1,0 +1,138 @@
+<view class='hpContrainer'>
+  <view class='productList' hidden="{{hideShare}}">
+    <view class='top'>
+      <view class='title'>
+        <view class='img'>
+          <image style='width: 30px;height: 31px;' src='/images/icons/avatar2.png'></image>
+        </view>
+
+        <view style='margin-left:20rpx;font-size:20px;'>{{shareList.name}}</view>
+      </view>
+      <!-- <view class='phone'>
+        <image style='height:44rpx;width:45rpx;' src='/images/icons/phone2.png'></image>
+        <text style='margin-left:10rpx;'>15889668184</text>
+      </view> -->
+    </view>
+    <view style='margin-top:10px;padding-bottom:10px;'>
+      <view class='products' wx:for='{{shareList.objects}}'>
+        <view class='classify' style="{{item.style==1?'background-color:#fb85a2;color:white':''}}">
+          <text class='classifyValue'>{{item.classify}}</text>
+        </view>
+        <view class='product'>
+          <view class='name' wx:for='{{item.object}}' wx:for-item='product'>
+            <view>{{product.name}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='phoneView' catchtap='onPhoneTap' data-phone="{{shareList.phone}}">
+      <view class='phone' >
+        <image style='height:44rpx;width:45rpx;' src='/images/icons/phone2.png'></image>
+        <text style='margin-left:10rpx;'>{{shareList.phone}}</text>
+      </view>
+    </view>
+
+  </view>
+
+  <view style="position:sticky;top:0px;z-index:2;position:-webkit-sticky;">
+    <view class='searchCon'>
+      <!-- <image class='avatar' src="{{avatar}}"></image> -->
+      <open-data type="userAvatarUrl" class='avatar'></open-data>
+      <navigator class='search' url='../search/search'>
+        <icon style='padding-left:10rpx;' type="search" size="16"></icon>
+        <!-- <input class="input" placeholder="请输入你想要找的产品" bindblur="productInput" value="{{product}}"/> -->
+        <text style='margin-left:170rpx;'>搜索</text>
+      </navigator>
+    </view>
+    <view class='column'>
+      <view class='reservetype'>
+        <block wx:for="{{columnStatus}}" wx:for-item="item">
+          <view class='type' style="{{status==item.name?'border-bottom:2px solid #4eaefe;':''}}" catchtap='onTypeTap' data-status='{{item.name}}'>{{item.name}}</view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view style='padding-bottom:150rpx;' scroll-top="{{scrollTop}}"   bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+    <view wx:if="{{publishList.length>0}}" class='body' wx:for="{{publishList}}" wx:for-item="objs" wx:for-index="index">
+      <view style='border-bottom:1rpx solid rgb(220, 220, 220)'>
+        <view class='bodymsg'>
+          <view class='bodyname'>
+            <image class='nameImg' src='/images/icons/avatar2.jpeg'></image>
+            <text style='margin-left:20rpx;'>{{objs.name}}</text>
+          </view>
+          <view class='loaction'>
+            <view class='time'>
+              <image style='height:30rpx;width:30rpx;border-radius:5rpx;' src='/images/icons/time.png'></image>
+              <text style='margin-left:10rpx;'>{{objs.updatedAt}}</text>
+            </view>
+            <view class='location'>
+              <!-- <image style='height:28rpx;width:28rpx;border-radius:5rpx;margin-left:10rpx;' src='/images/icons/location.png'></image> -->
+              <!-- <text style='margin-left:10rpx;letter-spacing:1px;'>广东广州</text> -->
+            </view>
+          </view>
+          <view class='star' catchtap='collectTea' data-requireId="{{objs.id}}" data-like="{{objs.like}}" data-index="{{index}}">
+            <image wx:if="{{objs.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star_l.png'></image>
+            <image wx:if="{{!objs.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star.png'></image>
+          </view>
+        </view>
+      </view>
+
+
+      <view style='margin-top:10px;'>
+        <!-- <view>{{index}}</view> -->
+        <view class='bodyproducts' wx:for="{{objs.objects}}" wx:for-item="obj">
+          <view class='bodyclassify'>
+            <text class='bodyclassifyValue' style="{{obj.style==1?'border: 1rpx solid #fd7995;color:#fd7995':''}}">{{obj.classify}}</text>
+          </view>
+          <view class='product'>
+            <view class='name' wx:for="{{obj.object}}" wx:for-item='product'>
+              <view>{{product.name}}</view>
+            </view>
+          </view>
+        </view>
+        <view class='count'>
+          <view style='width:50%;'>
+            <text>浏览 {{objs.visitCount}}</text>
+            <text style='margin-left:20rpx;'>收藏 {{objs.likeCount}}</text>
+          </view>
+
+          <view class='contact' catchtap='onPhoneTap' data-phone="{{objs.phone}}">
+            <image style='height:30rpx;width:30rpx;' src='/images/icons/电话.png'></image>
+            <text style='margin-right:30rpx;margin-left:10rpx;'>{{objs.phone}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{publishList.length==0}}" class='nodata'>
+      <text>暂时没有数据</text>
+    </view>
+  </view>
+  <view class="body-view">
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+      加载中...
+    </loading>
+</view>  
+  <!-- <view class='publish'>
+    <view style='width:100%;display:flex; align-items: center;justify-content:center' catchtap='onPublishTap'>
+      <image style='height:140rpx;width:140rpx' src='/images/icons/aaa.png'></image>
+    </view>
+  </view> -->
+
+  <view class='tarBar'>
+    <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;'>
+      <image style='height:44rpx;width:44rpx;' src='/images/icons/hp.png'></image>
+      <text>首页</text>
+    </view>
+
+    <view style='position:relative;top:-12px;' catchtap='onPublishTap'>
+      <image style='height:140rpx;width:140rpx' src='/images/icons/aaa.png'></image>
+    </view>
+
+    <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' catchtap='onAttentionTap'>
+      <image style='height:44rpx;width:44rpx;' src='/images/icons/my_l.png'></image>
+      <text>关注</text>
+    </view>
+  </view>
+  <!-- <!-- ''<footer></footer>  -->
+</view>

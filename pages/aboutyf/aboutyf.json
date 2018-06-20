@@ -1,0 +1,8 @@
+{
+	"navigationBarTextStyle": "white",
+	"navigationBarBackgroundColor": "#17295d",
+	"navigationBarTitleText": "云风科技",
+	"backgroundColor": "#17295d",
+	"enablePullDownRefresh": true,
+	"backgroundTextStyle": "dark"
+}

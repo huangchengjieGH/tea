@@ -1,0 +1,109 @@
+<view class='editCon'>
+  <view>
+    <view class='msg'>
+      <view class='shopName'>
+        <view style='width:20%;margin-top:15rpx'>
+          <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>店铺名</text>
+        </view>
+        <view style='width:80%;margin-top:15rpx;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;width:60%;border-radius:10rpx;'>
+          <input placeholder-class="inputName" style='margin-left:10rpx;' placeholder="如:东朝茶叶-张三" bindblur="shopNameInput" value="{{shopName}}" />
+        </view>
+
+      </view>
+      <view class='phone'>
+        <view style='width:20%;margin-bottom:15rpx'>
+          <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>电话</text>
+        </view>
+        <view style='width:80%;margin-bottom:15rpx;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;width:60%;border-radius:10rpx;'>
+          <input placeholder-class="inputName" style='margin-left:10rpx;' placeholder="请输入你的联系方式" bindblur="phoneInput" value="{{phone}}" />
+        </view>
+      </view>
+    </view>
+    <view class='Inbody' style="{{flag?'':'display:none'}}">
+      <view style='font-weight: bold;color: rgb(22, 22, 22);font-size:18px;margin-left:70rpx;padding-top:25rpx;'>智能输入</view>
+      <view class='textarea'>
+        <textarea maxlength="-1" placeholder-class="textareaclass" style='padding:10rpx;' bindblur="bodyInput" placeholder="请将你需要发布的产品复制进来，系统智能识别" value="{{body}}" />
+
+      </view>
+    </view>
+    <view class='body' style="{{flag?'':'display:none'}}">
+      <view style='font-weight: bold;color: rgb(22, 22, 22);font-size:18px;margin-left:70rpx;padding-top:25rpx;'>普通输入</view>
+
+
+      <view class='products' wx:for="{{teaList}}" wx:for-index="index">
+        <view style='width:20%;display:flex;flex-direction:row;align-items: center;justify-content: flex-start;'>
+          <picker bindchange="bindPickerChange" bindcancel="bindCancelTap" catchtap='onClickTap' value="{{item.type-1}}" range="{{style}}" data-teaindex="{{index}}">
+            <view style='display:flex;flex-direction:row;align-items: center;justify-content: flex-start;'>
+              <text>{{style[item.type-1]}}</text>
+              <view class="{{down?'triangleDown':'triangleUp'}}" style='margin-left:10rpx;'></view>
+            </view>
+
+          </picker>
+        </view>
+        <view style='width:53%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;'>
+          <input placeholder-class="{{flag?'':'fontclass'}}" style='margin-left:10rpx;' placeholder="请输入名称" bindblur="teaInput" value="{{item.name}}" data-teaindex="{{index}}" />
+        </view>
+        <view style='display:flex;align-items: center;justify-content: center;'>
+          <image style='height:35rpx;width:30rpx;margin-left:8rpx;' src='/images/icons/delete.png' catchtap='onDeleteTap' data-teaindex="{{index}}"></image>
+          <text style='color:#4faffe;font-size:30rpx;margin-left:10rpx;' bindtap="onMoreTap" data-teaindex="{{index}}">更多</text>
+        </view>
+      </view>
+
+
+    </view>
+    <view class='add' catchtap='addTeaTap'>
+      <image style='height:80rpx;width:80rpx;' src='/images/icons/add2.png'></image>
+    </view>
+  </view>
+
+  <view class='confirmcel'>
+    <view class='cancel' catchtap='onPreviewTap'>预览效果</view>
+    <view class='confirm' catchtap='onConfirmTap'>发布</view>
+  </view>
+</view>
+
+
+
+<view class="modal-box" hidden="{{flag}}">
+  <view class="modal-body">
+    <view class="modal-content">
+      <view style='display:flex;flex-direction:row;padding:45px 45rpx 10rpx 30px;align-items: center;justify-content:center'>
+        <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>名称</text>
+        <view style='width:70%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;margin-left:50rpx;'>
+          <input style='margin-left:10rpx;' placeholder="请输入名称" bindblur="onModalNameInput" value="{{chooseTea.name}}" />
+        </view>
+      </view>
+
+      <view style='display:flex;flex-direction:row;padding:5px 45rpx 10rpx 30px;align-items: center;justify-content:center'>
+        <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>数量</text>
+        <view style='width:70%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;margin-left:50rpx;'>
+          <input style='margin-left:10rpx;' placeholder="请输入数量" bindblur="onModalCountInput" value="{{chooseTea.count}}" />
+        </view>
+      </view>
+
+      <view style='display:flex;flex-direction:row;padding:5px 45rpx 10rpx 30px;align-items: center;justify-content:center'>
+        <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>价格</text>
+        <view style='width:70%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;margin-left:50rpx;'>
+          <input style='margin-left:10rpx;' placeholder="请输入价格" bindblur="onModalPriceInput" value="{{chooseTea.price}}" />
+        </view>
+      </view>
+      <view class='onoffline'>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio" wx:for="{{items}}">
+            <radio color="#4faffe" value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+          </label>
+        </radio-group>
+      </view>
+      <view class='confirmcel'>
+        <view class='modelcancel' catchtap='onModalCancelTap'>取消</view>
+        <view class='confirm' catchtap='onModalConfirmTap'>确定</view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+<!-- haibao -->
+<view style="{{showCan ? '':'display:none'}}">
+  <canvas wx:if="{{showCanvas}}" style="width:{{windowWidth}}px;height:{{windowWidth/canvasWHRate}}px;" canvas-id="{{canvasId}}"></canvas>
+</view>

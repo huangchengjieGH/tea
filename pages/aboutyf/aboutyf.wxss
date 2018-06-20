@@ -1,0 +1,88 @@
+.block-img {
+  width: 100%;
+}
+
+.h5 {
+  font-size: 16px;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.panel {
+  padding: 0 18px;
+}
+
+.pl-line {
+  margin-bottom: 35px;
+}
+
+.pl-line image {
+  width: 80%;
+  max-width: 80px;
+}
+
+.tt {
+  font-size: 15px;
+}
+
+.st {
+  color: grey;
+  font-size: 14px;
+  font-weight: light;
+}
+
+.panel.steps {
+}
+
+.step .fl-hd {
+  margin-left: 10vw;
+  width: 50px;
+  justify-content: center;
+}
+
+.step .fl-hd span {
+  color: grey;
+  border: 1px solid #cbcfda;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  padding: 4px 9px;
+}
+
+.step {
+  margin-bottom: 25px;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact {
+  padding: 15px;
+}
+
+.contact a {
+  color: #44bdff;
+  font-size: 15px;
+  display: inline-block;
+  border: 1px solid #44bdff;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.footer {
+  font-size: 16px;
+  background: #f2f2f2;
+}
+.text-center {
+  text-align: center;
+}
+.col-2 {
+  width: 50%;
+  display: inline-block;
+}
+.fl-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}

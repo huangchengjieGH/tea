@@ -1,0 +1,204 @@
+<scroll-view class='publishCon'>
+  <view style="{{edit?'display:none':''}}">
+    <!-- <view class='msg'>
+      <view class='shopName'>
+        <view style='width:20%;margin-top:15rpx'>
+          <image class='shopImg' src='/images/icons/dianpu.png'></image>
+          <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>店铺名</text>
+        </view>
+        <view style='width:80%;margin-top:15rpx;color: rgb(22, 22, 22);font-size:37rpx;'>
+          <text style='margin-left:10rpx;'>{{teaList.name}}</text>
+        </view>
+
+      </view>
+      <view class='phone'>
+        <view style='width:20%;margin-bottom:15rpx'>
+          <image class='shopImg' src='/images/icons/dianhua.png'></image>
+          <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>电话</text>
+        </view>
+        <view style='width:80%;margin-bottom:15rpx;color: rgb(22, 22, 22);font-size:37rpx;'>
+          <text style='margin-left:10rpx;' catchtap='onPhoneTap' data-phone="{{teaList.phone}}">{{teaList.phone}}</text>
+        </view>
+      </view>
+    </view> -->
+    <scroll-view scroll-y="true" style='margin-top: 7px;height:300px;'>
+      <view class='body' wx:for="{{teaList.objects}}">
+        <view class='products'>
+          <view style='width:20%;'>
+            <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>{{style[item.type-1]}}</text>
+          </view>
+          <view style='width:80%;'>
+            <text style='color: rgb(22, 22, 22);font-size:37rpx;margin-left:10rpx;'>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class='msg'>
+      <view class='shopName'>
+        <view style='width:20%;margin-top:15rpx'>
+          <image class='shopImg' src='/images/icons/dianpu.png'></image>
+          <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>店铺名</text>
+        </view>
+        <view style='width:80%;margin-top:15rpx;color: rgb(22, 22, 22);font-size:37rpx;'>
+          <text style='margin-left:10rpx;'>{{teaList.name}}</text>
+        </view>
+
+      </view>
+      <view class='phone'>
+        <view style='width:20%;margin-bottom:15rpx'>
+          <image class='shopImg' src='/images/icons/dianhua.png'></image>
+          <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>电话</text>
+        </view>
+        <view style='width:80%;margin-bottom:15rpx;color: rgb(22, 22, 22);font-size:37rpx;'>
+          <text style='margin-left:10rpx;' catchtap='onPhoneTap' data-phone="{{teaList.phone}}">{{teaList.phone}}</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <view style="{{edit?'':'display:none'}}">
+    <view class='msg'>
+      <view class='shopName'>
+        <view style='width:20%;margin-top:15rpx'>
+          <!-- <image class='shopImg' src='/images/icons/dianpu.png'></image> -->
+          <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>店铺名</text>
+        </view>
+        <view style='width:80%;margin-top:15rpx;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;width:60%;border-radius:10rpx;'>
+          <!-- <text style=''>东朝茶叶-陈生</text> -->
+          <input style='margin-left:10rpx;' placeholder="请输入名称" bindblur="shopNameInput" value="{{teaList.name}}" />
+        </view>
+
+      </view>
+      <view class='phone'>
+        <view style='width:20%;margin-bottom:15rpx'>
+          <!-- <image class='shopImg' src='/images/icons/dianhua.png'></image> -->
+          <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>电话</text>
+        </view>
+        <view style='width:80%;margin-bottom:15rpx;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;width:60%;border-radius:10rpx;'>
+          <!-- <text style=''>15889668181</text> -->
+          <input style='margin-left:10rpx;' placeholder="请输入电话" bindblur="phoneInput" value="{{teaList.phone}}" />
+        </view>
+      </view>
+    </view>
+    <scroll-view class='body' scroll-y="true" style="{{flag?'height:550rpx;':'display:none'}}">
+      <view class='products' wx:for="{{teaList.objects}}" wx:for-index="index">
+        <view style='width:20%;display:flex;flex-direction:row;align-items: center;justify-content: flex-start;'>
+          <!-- <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>出</text> -->
+          <picker bindchange="bindPickerChange" bindcancel="bindCancelTap" catchtap='onClickTap' value="{{item.type-1}}" range="{{style}}" data-teaindex="{{index}}">
+            {{style[item.type-1]}}
+          </picker>
+          <view class="{{down?'triangleDown':'triangleUp'}}" style='margin-left:10rpx;'></view>
+        </view>
+        <view style='width:53%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;'>
+          <input placeholder-class="{{flag?'':'fontclass'}}" style='margin-left:10rpx;' placeholder="请输入名称" bindblur="teaInput" value="{{item.name}}" data-teaindex="{{index}}" />
+        </view>
+        <view style='display:flex;align-items: center;justify-content: center;'>
+          <image style='height:35rpx;width:30rpx;margin-left:8rpx;' src='/images/icons/delete.png' catchtap='onDeleteTap' data-teaindex="{{index}}"></image>
+          <text style='color:#4faffe;font-size:30rpx;margin-left:10rpx;' bindtap="onMoreTap" data-teaindex="{{index}}">更多</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='add' catchtap='addTeaTap'>
+      <image style='height:80rpx;width:80rpx;' src='/images/icons/add2.png'></image>
+    </view>
+  </view>
+
+
+  <view class='func' style="{{edit?'display:none':''}}">
+    <view class='delete' catchtap='onClearTap'>清空并重新发布</view>
+    <view class='edit' catchtap='onEditTap'>编辑</view>
+    <view class='preview' catchtap='onPreviewTap'>预览</view>
+  </view>
+
+  <view class='confirmcel' style="{{edit?'':'display:none'}}">
+    <view class='cancel' catchtap='onCancelTap'>取消</view>
+    <view class='confirm' catchtap='onConfirmTap'>确定</view>
+  </view>
+
+  <view class='bottom' style="{{edit?'display:none':''}}">
+    <button open-type="share" class='friends'>
+      <image style='width:45rpx;height:45rpx;padding-top:10rpx' src='/images/icons/wechat.png'></image>
+      <text style='font-size:25rpx'>分享给朋友</text>
+    </button>
+    <button class='share' catchtap='onGeneratePicTap'>
+      <image style='width:45rpx;height:45rpx;padding-top:10rpx' src='/images/icons/haibao.png'></image>
+      <text style='font-size:25rpx'>分享到朋友圈</text>
+    </button>
+  </view>
+  <!-- tabbar -->
+  <!-- <view class='publish'>
+    <view style='width:100%;display:flex; align-items: center;justify-content:center'>
+      <image style='height:140rpx;width:140rpx' src='/images/icons/aaa.png'></image>
+    </view>
+  </view> -->
+
+  <view class='tarBar'>
+    <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' catchtap='onHpTap'>
+      <image style='height:44rpx;width:44rpx;' src='/images/icons/hp_l.png'></image>
+      <text>首页</text>
+    </view>
+    <view style='position:relative;top:-12px;'>
+      <image style='height:140rpx;width:140rpx' src='/images/icons/aaa.png'></image>
+    </view>
+    <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center' catchtap='onAttentionTap'>
+      <image style='height:44rpx;width:44rpx;' src='/images/icons/my_l.png'></image>
+      <text>关注</text>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- tanchuan -->
+<view class="modal-box" hidden="{{flag}}">
+  <view class="{{ifpreview?'modal-body02':'modal-body'}}">
+    <view class="modal-content" wx-if="{{previewOrMore == '1'}}">
+      <view style='display:flex;flex-direction:row;padding:45px 45rpx 10rpx 30px;align-items: center;justify-content:center'>
+        <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>名称</text>
+        <view style='width:70%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;margin-left:50rpx;'>
+          <input style='margin-left:10rpx;' placeholder="请输入名称" bindblur="onModalNameInput" value="{{chooseTea.name}}" />
+        </view>
+      </view>
+
+      <view style='display:flex;flex-direction:row;padding:5px 45rpx 10rpx 30px;align-items: center;justify-content:center'>
+        <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>数量</text>
+        <view style='width:70%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;margin-left:50rpx;'>
+          <input style='margin-left:10rpx;' placeholder="请输入数量" bindblur="onModalCountInput" value="{{chooseTea.count}}" />
+        </view>
+      </view>
+
+      <view style='display:flex;flex-direction:row;padding:5px 45rpx 10rpx 30px;align-items: center;justify-content:center'>
+        <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>价格</text>
+        <view style='width:70%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;margin-left:50rpx;'>
+          <input style='margin-left:10rpx;' placeholder="请输入价格" bindblur="onModalPriceInput" value="{{chooseTea.price}}" />
+        </view>
+      </view>
+      <view class='onoffline'>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio" wx:for="{{items}}">
+            <radio color="#4faffe" value="{{item.name}}" checked="{{item.checked}}" />{{item.name}}
+          </label>
+        </radio-group>
+      </view>
+      <view class='confirmcel'>
+        <view class='modelcancel' catchtap='onModalCancelTap'>取消</view>
+        <view class='confirm' catchtap='onModalConfirmTap'>确定</view>
+      </view>
+
+    </view>
+
+    <view class='modalpreview' wx-if="{{previewOrMore == '0'}}">
+      <image mode='aspectFit' style='width:100%;height:100%;' src="{{localImg}}"></image>
+    </view>
+  </view>
+  <view style='width:100%;display:flex;align-items:center;justify-content:center;' wx-if="{{previewOrMore == '0'}}">
+    <view class='ModalConfirmPreview' catchtap='onModalPreviewConfirm'>确定预览</view>
+  </view>
+
+</view>
+<!-- tanchuan -->
+
+<!-- haibao -->
+<view style="{{showCan ? '':'display:none'}}">
+  <canvas wx:if="{{showCanvas}}" style="width:{{windowWidth}}px;height:{{windowWidth/canvasWHRate}}px;" canvas-id="{{canvasId}}"></canvas>
+</view>

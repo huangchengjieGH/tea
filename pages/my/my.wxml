@@ -1,0 +1,21 @@
+<scroll-view class='myCon'>
+  <view style='position:relative'>
+    <view>
+       <image class='myImg' mode="aspectFill" src='/images/icons/fangzi.jpeg'></image> 
+    </view>
+    <view class='msg'>
+      <open-data type="userAvatarUrl" class='Avatar'></open-data>
+      <open-data type="userNickName" class='userNickName'></open-data>
+    </view>
+  </view> 
+
+  <button class='call' open-type="contact">
+   <image class='kefuImg' src='/images/icons/calls.png'></image>
+   <view class='calltxt'>联系客服</view>
+  </button>
+<!-- <button class="float-btn service-btn" open-type="contact">
+  <image class="kefu" mode="widthFix" src="/images/icons/kefu_r.png" />
+</button> -->
+
+ <!-- <footer></footer>   -->
+</scroll-view>

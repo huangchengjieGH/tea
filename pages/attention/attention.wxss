@@ -1,0 +1,165 @@
+/* pages/attention/attention.wxss */
+.attentionCon{
+  display: flex;
+  flex-direction: column;
+  background-color:rgb(240, 242, 247);
+  /* height: 100%; */
+}
+  .reservetype{
+  font-size: 35rpx;
+  /* padding: 20rpx; */
+  font-weight: 300;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: white;
+ 
+}
+.type{
+  color: black;
+  padding: 20rpx 110rpx; 
+  width: 50%;
+  height: 100%;
+}
+
+.body {
+  background-color: white;
+  margin: 30rpx 20rpx;
+  border-radius: 10rpx;
+  /* margin-bottom: 140rpx; */
+}
+
+.bodymsg {
+  padding-top: 15px;
+  padding-left: 15px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.bodyname {
+  font-size: 38rpx;
+  display: flex;
+  align-items: center;
+  /* font-weight: 400; */
+  color: #161616;
+}
+
+.loaction {
+  color: #acacac;
+  margin-top: 14rpx;
+  display: flex;
+  flex-direction: row;
+  margin-left: 5rpx;
+  font-size: 25rpx;
+}
+
+.nameImg {
+  height: 50rpx;
+  width: 50rpx;
+  border-radius: 5rpx;
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  color: rgb(172, 172, 172);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 30rpx;
+  color: rgb(172, 172, 172);
+  letter-spacing: 1.6;
+}
+.star {
+  position: absolute;
+  top: 1rpx;
+  right: 50rpx;
+}
+.bodyproducts {
+  padding: 5rpx 10rpx;
+  display: flex;
+  flex-direction: row;
+  padding-left: 30rpx;
+  position: relative;
+  /* overflow: scroll; */
+}
+
+.count {
+  color: #919191;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 28rpx;
+  background-color: #fafafa;
+  height: 100rpx;
+  padding-left: 30rpx;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+  margin-top: 10px;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 50%;
+}
+.bodyclassifyValue {
+  border: 1rpx solid #34daa4;
+  font-size: 25rpx;
+  padding: 5rpx;
+  border-radius: 8rpx;
+  color: #34daa4;
+  /* margin: 20rpx 40rpx; */
+}
+.name {
+  /* width:50%; */
+  text-align: left;
+  font-size: 30rpx;
+  color: rgb(84, 84, 84);
+}
+.products {
+  padding: 10rpx 40rpx;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  /* overflow: scroll; */
+}
+.bodyclassify {
+  margin-top: 10rpx;
+  margin-left: 5rpx;
+  position: absolute;
+  /* position: absolute; */
+}
+.product {
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; *//* padding:10rpx 20rpx */
+  padding-left: 115rpx;
+  padding-top: 10rpx;
+   line-height: 22px; 
+}
+.nodata {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 800rpx;
+  font-size: 36rpx;
+  color: rgb(104, 104, 104);
+}
+.tarBar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  align-items: center;
+  color: rgb(51, 51, 51);
+   z-index: 2; 
+}

@@ -1,0 +1,13 @@
+<navigator class="credit" url="../aboutyf/aboutyf">
+    <view class="credit-ct">
+      <image class="yfkj" mode="widthFix" src="/images/icons/index_13.png" /> 提供技术支持
+    </view>
+  </navigator>
+
+
+
+    <!-- <navigator wx:if="{{!property.bottomLinkName && !property.bottomImgUrl}}" class="credit" url="../aboutyf/aboutyf">
+    <view class="credit-ct">
+      <image class="yfkj" mode="widthFix" src="../../resources/aboutyf/index_13.png" /> 提供技术支持
+    </view>
+  </navigator> -->

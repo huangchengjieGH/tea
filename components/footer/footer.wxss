@@ -1,0 +1,16 @@
+.credit {
+  background-color: #fbfbfb; 
+   padding: 15px 215rpx; 
+  text-align: center;
+  font-size: 12px;
+   color: #b9b9b9;
+   /* position: absolute;  */
+   /* bottom: 0rpx;   */
+  /* width: 100%;  */
+}
+
+.yfkj {
+  width: 150rpx;
+  vertical-align: middle;
+}
+

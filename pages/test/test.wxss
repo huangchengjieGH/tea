@@ -1,0 +1,148 @@
+.aaa{
+  height:1000rpx;
+  width: 100%;
+  border: 1rpx solid red;
+}
+
+.btn{
+  position:-webkit-sticky;
+  position:sticky; 
+  top:0;
+}
+.productList {
+  background-color: white;
+  border-radius: 20rpx;
+  margin: 50rpx 20rpx;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  height: 600rpx;  
+  overflow: scroll; 
+  /* position: relative; */
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(79, 175, 254);
+   position: sticky;
+  bottom: 0;
+  z-index: 2; 
+  /* position: fixed;
+  width: 94.7%; */
+}
+
+.img {
+  border-radius: 9rpx;
+  /* background-color: rgb(212, 236, 255); *//* width: 44px;height: 45px; */
+}
+
+.products {
+  padding: 10rpx 40rpx;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  /* overflow: scroll; */
+}
+
+.classify {
+  margin-top: 10rpx;
+  position: absolute;
+}
+
+.classifyValue {
+  background-color: #34daa4;
+  font-size: 25rpx;
+  padding: 6rpx;
+  border-radius: 8rpx;
+  color: white;
+  /* margin: 20rpx 40rpx; */
+}
+
+.title {
+  color: rgb(255, 255, 255);
+  display: flex;
+  padding-left: 40rpx;
+  height: 120rpx;
+  align-items: center;
+  width: 60%;
+}
+
+.product {
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; *//* padding:10rpx 20rpx */
+  padding-left: 115rpx;
+  padding-top: 10rpx;
+  line-height: 19pt;
+}
+
+.name {
+  /* width:50%; */
+  text-align: left;
+  font-size: 30rpx;
+  color: rgb(84, 84, 84);
+}
+
+.phone {
+  width: 40%;
+  display: flex;
+  color: white;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 40rpx;
+}
+
+.searchCon {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 25rpx;
+  border-bottom: 1rpx solid #f8f8f8;
+}
+
+.avatar {
+  height: 70rpx;
+  width: 70rpx;
+  border-radius: 50%;
+  display: block;
+  overflow: hidden;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  border: 1rpx solid #e0e0e0;
+  align-items: center;
+  padding: 8rpx;
+  margin-left: 40rpx;
+  border-radius: 8rpx;
+  width: 79%;
+}
+
+.input {
+  padding-left: 10rpx;
+}
+
+.column {
+  background-color: white;
+}
+
+.reservetype {
+  font-size: 17px;
+  /* padding: 20rpx; *//* font-weight: 300; */
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: white;
+  align-items: center;
+  height: 48px;
+}
+
+.type {
+  /* color: black; */
+  color: rgb(22, 22, 22);
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

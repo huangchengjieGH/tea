@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "编辑",
+  "navigationBarBackgroundColor": "white",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "footer": "/components/footer/footer"
+  }
+}
