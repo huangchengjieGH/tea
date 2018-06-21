@@ -171,7 +171,7 @@ Page({
     // this.setData({
     //   publishList: data
     // })
-    
+    console.log(new Date());
   },
   processShareData: function (data) {
     // var object = data.objects;
@@ -292,6 +292,8 @@ Page({
     );
   },
   getRecommendList: function (e) {
+
+    console.log(new Date());
     var that = this;
     var data = {
       page: page,
@@ -306,10 +308,7 @@ Page({
       function (data) {
         console.log(data);
         if (data.status == 1) {
-          // that.processPublishData(data.data)
-          // that.setData({
-          //   recommandList:data.data
-          // })
+          console.log(new Date());
           page++;
           that.setData({
             hidden: true

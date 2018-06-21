@@ -96,9 +96,11 @@ let tools = {
           !request.isRes && (data = res.data.data);
           callback && callback(data);
         }else if (res.data.status == -3) {
+          console.log('res',res)
           if (requestTimes % 5 !== 0) {
             that.login().then(() => {
               setTimeout(function () {
+                console.log('request')
                 that.requestByLogin(request, callback, errCallback, requestTimes);
               }, 1000 * requestTimes++);
             });
@@ -117,6 +119,7 @@ let tools = {
     let prev = Date.now()-1000
     let todoList = [];
     return function (callback) {
+      console.log('loginstart')
       return new Promise(function (resolve) {
         let now = Date.now();
         // console.log('prev=' + prev);
@@ -126,10 +129,12 @@ let tools = {
           prev = now;
           wx.login({
             success: function (res) {
+              console.log('login',res.code)
               wx.request({
                 url: api.wxlogin + '?code=' + res.code,
                 method: 'POST',
                 success: function (res) {
+                  console.log('sid',res)
                   wx.setStorageSync('token', res.data.data);
                   resolve(res);
                   todoList.forEach(resolve => {
@@ -139,6 +144,9 @@ let tools = {
                   callback && callback(res.data.data);
                 }
               });
+            },
+            complete:function(res){
+              console.log(res)
             }
           });
         } else {

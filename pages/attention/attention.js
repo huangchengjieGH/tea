@@ -202,6 +202,12 @@ Page({
       url: '../publish/publish',
     })
   },
+  onPhoneTap: function (e) {
+    var phone = e.currentTarget.dataset.phone;
+    wx.makePhoneCall({
+      phoneNumber: phone //仅为示例，并非真实的电话号码
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

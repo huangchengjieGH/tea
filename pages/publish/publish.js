@@ -169,7 +169,7 @@ Page({
             teaList: data.data[0]
           })
           if(data.data.length == 0){
-            wx.redirectTo({
+            wx.navigateTo({
               url: '../edit/edit',
             })
           }
@@ -253,7 +253,8 @@ Page({
       flag: false,
       chooseTea: chooseTea,
       moreIndex: moreIndex,
-      previewOrMore:'1'
+      previewOrMore:'1',
+      ifpreview:false
     })
   },
   onModalNameInput: function (e) {
@@ -335,7 +336,10 @@ Page({
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定')
-          // that.clearRequire();  清空数据，待测
+          that.clearRequire(); // 清空数据，待测
+          wx.navigateTo({
+            url: '../edit/edit',
+          })
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -419,12 +423,12 @@ Page({
         success: function (res) {
           resolve();
           wx.previewImage({ urls: [res.tempFilePath] });
-           wx.saveImageToPhotosAlbum({
-             filePath: res.tempFilePath,
-             success: function (res) {
-               that.setData({ showCanvas: false });
-             }
-           });
+          //  wx.saveImageToPhotosAlbum({
+          //    filePath: res.tempFilePath,
+          //    success: function (res) {
+          //      that.setData({ showCanvas: false });
+          //    }
+          //  });
         }
       });
     });
@@ -485,25 +489,36 @@ Page({
     let pImgH = 0.0;
     let pTextX = 0.0;
     let pTextY = 0.0;
+    let pImgW02 = 0.0;
+    let addx  = 0.0;
+    let addf = 0.0;
     var findLength = this.data.textFindList.length;
     var SoldLength = this.data.textSoldList.length;
     // findLength = 0;
-    // SoldLength = 0;
+    //  SoldLength = 0;
     if (findLength > 0 && SoldLength > 0) {
-       pImgW = 0.15;
-       pImgH = 0.08;
-       pTextX = 0.35;
-       pTextY = 0.11;
+       fontSize = 18;
+       pImgW = 0.18;
+       pImgH = 0.35;
+       pTextX = 0.1;
+       pTextY = 0.48;
+       pImgW02 = 0.64;
+       addx = 120;
+       addf = 0;
     } else if (findLength == 0 && SoldLength == 0){
 
     }else{
       pImgW = 0.15;
-      pImgH = 0.28;
-      pTextX = 0.35;
-      pTextY = 0.3;
+      pImgH = 0.4;
+      pTextX = 0;
+      addx = 100;
+      pTextY = 0.43;
+      pImgW02 = 0.2;
+      addf = 100;
     }
     // http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529394343847_c114c89cb8b96e86812abf89b9f7c2ba.jpg  
-    let imgList = [`http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529493460659_537640df3e0bf3454e4b797e6b4c6d60.jpeg`, `http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1528775750604_6e385e0e3a1d687726c97bbb7bb64a28.png`, `http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529394825902_94cbfaab4e7a34562c24c49b36907de7.png`, `http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529394888202_9e110b7960ee001ca47e3f67caf61ed8.png`];
+    // http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529493460659_537640df3e0bf3454e4b797e6b4c6d60.jpeg
+    let imgList = [`http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529394343847_c114c89cb8b96e86812abf89b9f7c2ba.jpg`, `http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1528775750604_6e385e0e3a1d687726c97bbb7bb64a28.png`, `http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529394825902_94cbfaab4e7a34562c24c49b36907de7.png`, `http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529394888202_9e110b7960ee001ca47e3f67caf61ed8.png`];
     let ctx = wx.createCanvasContext(canvasId);
     that.setData({ showCanvas: true });
     wx.showLoading({ title: '生成中...' });
@@ -521,11 +536,12 @@ Page({
       ctx.drawImage(imgInfo.url, 0, 0, windowWidth, imgHeight);
       ctx.drawImage(urlList[1].url, windowWidth * 0.6, imgHeight * 0.8, qrCodeSize, qrCodeSize);   //二维码
 
-      let x = windowWidth * pTextX;
+      let x = windowWidth * pTextX + addf;
       let y = imgHeight * pTextY;
 
       if (findLength>0){
-        ctx.drawImage(urlList[2].url, windowWidth * pImgW, imgHeight * pImgH, qrCodeSize * 0.5, qrCodeSize * 0.5);  //找
+        // ctx.drawImage(urlList[2].url, windowWidth * pImgW, imgHeight * pImgH, qrCodeSize * 0.4, qrCodeSize * 0.4);  //找
+        ctx.drawImage(urlList[2].url, windowWidth * pImgW, imgHeight * pImgH, qrCodeSize * 0.4, qrCodeSize * 0.4);  //找
         //文字
         ctx.setFontSize(fontSize);
         ctx.setFillStyle(textColor);
@@ -534,10 +550,12 @@ Page({
           y += fontSize * 1.2;
         })
       }
-
+      x = windowWidth * pTextX + addx;
+       y = imgHeight * pTextY;
       if (SoldLength > 0){
-        ctx.drawImage(urlList[3].url, windowWidth * 0.15, y, qrCodeSize * 0.5, qrCodeSize * 0.5);
-        y += 20;
+        // ctx.drawImage(urlList[3].url, windowWidth * 0.15, y, qrCodeSize * 0.4, qrCodeSize * 0.4);
+        ctx.drawImage(urlList[3].url, windowWidth * pImgW02, imgHeight * pImgH, qrCodeSize * 0.4, qrCodeSize * 0.4);
+        x += 20;
         ctx.setFontSize(fontSize);
         ctx.setFillStyle(textColor);
         textSoldList.forEach(item => {

@@ -14,11 +14,12 @@ App({
     util:util,
     Login:'0',
     onLaunch: function () {
-      
+      // tools.login();
+      // tools.todoEvent.trigger('login');
     },
     onShow() {
           const that = this;
-            tools.login();
+        //     tools.login();
     }, 
     getUerInfo() {
       const that = this;

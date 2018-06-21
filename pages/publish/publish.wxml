@@ -67,7 +67,7 @@
         </view>
         <view style='width:80%;margin-top:15rpx;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;width:60%;border-radius:10rpx;'>
           <!-- <text style=''>东朝茶叶-陈生</text> -->
-          <input style='margin-left:10rpx;' placeholder="请输入名称" bindblur="shopNameInput" value="{{teaList.name}}" />
+          <input style="margin-left:10rpx;" placeholder="请输入名称" bindblur="shopNameInput" value="{{teaList.name}}" />
         </view>
 
       </view>
@@ -78,7 +78,7 @@
         </view>
         <view style='width:80%;margin-bottom:15rpx;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;width:60%;border-radius:10rpx;'>
           <!-- <text style=''>15889668181</text> -->
-          <input style='margin-left:10rpx;' placeholder="请输入电话" bindblur="phoneInput" value="{{teaList.phone}}" />
+          <input style="margin-left:10rpx;" placeholder="请输入电话" bindblur="phoneInput" value="{{teaList.phone}}" />
         </view>
       </view>
     </view>
@@ -151,7 +151,7 @@
 
 <!-- tanchuan -->
 <view class="modal-box" hidden="{{flag}}">
-  <view class="{{ifpreview?'modal-body02':'modal-body'}}">
+  <view class="{{ifpreview?'':'modal-body'}}">
     <view class="modal-content" wx-if="{{previewOrMore == '1'}}">
       <view style='display:flex;flex-direction:row;padding:45px 45rpx 10rpx 30px;align-items: center;justify-content:center'>
         <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>名称</text>
