@@ -11,8 +11,8 @@
       <view style='border-bottom:1rpx solid rgb(220, 220, 220)'>
         <view class='bodymsg'>
           <view class='bodyname'>
-            <image class='nameImg' src='/images/icons/avatar2.jpeg'></image>
-            <text style='margin-left:20rpx;'>{{objs.name}}</text>
+            <image class='nameImg' src="{{objs.wxUser.avatarUrl==null?'/images/icons/avatar2.jpeg':objs.wxUser.avatarUrl}}"></image>
+            <text style='margin-left:20rpx;' catchtap='onBodyTap' data-requireid="{{objs.id}}" data-ortheruserid = "{{objs.wxUser.id}}">{{objs.name}}</text>
           </view>
           <view class='loaction'>
             <view class='time'>
@@ -34,24 +34,39 @@
 
       <view style='margin-top:10px;'>
         <!-- <view>{{index}}</view> -->
-        <view class='bodyproducts' wx:for="{{objs.objects}}" wx:for-item="obj">
+        <view class='bodyproducts' wx:for="{{objs.objects}}" wx:for-item="obj" catchtap='onBodyTap' data-requireid="{{objs.id}}" data-ortheruserid = "{{objs.wxUser.id}}">
           <view class='bodyclassify'>
             <text class='bodyclassifyValue' style="{{obj.style==1?'border: 1rpx solid #fd7995;color:#fd7995':''}}">{{obj.classify}}</text>
           </view>
           <view class='product'>
-            <view class='name' wx:for="{{obj.object}}" wx:for-item='product'>
-              <view>{{product.name}}</view>
+            <!-- <view class='name' wx:for="{{obj.object}}" wx:for-item='product'> -->
+            <!-- <view>{{product.name}}</view> -->
+            <view class='name' wx:for="{{obj.object}}" wx:for-item='product' wx:for-index="productindex">
+              <!-- <view>{{product.name}}</view> -->
+              <view wx-if="{{productindex<15}}" style='display:flex'>
+                <text>{{product.name}}</text>
+                <text style='font-weight:300;margin-left:5px;letter-spacing:2px' wx:if="{{product.count>0}}">X{{product.count}}{{product.unit}}</text>
+                <view class="money-wrapper">
+                  <text style='font-weight:300;color: #EC820E;margin-left:20px;letter-spacing:1px;' wx:if="{{product.price}}">￥{{product.price>10000?(product.price/10000):product.price}}</text>
+                  <text style='font-weight:300;color: #EC820E;letter-spacing:1px;' wx:if="{{product.price>10000}}">万</text>
+                </view>
+              </view>
             </view>
+            <!-- </view> -->
           </view>
         </view>
+        <view class='checkmore' wx-if="{{objs.maxLength}}" catchtap='onCheckMoreTap' data-id="{{objs.id}}">查看全部({{objs.length}}条)</view>
         <view class='count'>
-          <view style='width:50%;'>
+          <view style='width:38%;'>
             <text>浏览 {{objs.visitCount}}</text>
-            <text style='margin-left:20rpx;'>收藏 {{objs.likeCount}}</text>
+            <text style='margin-left:20rpx;'>关注 {{objs.likeCount}}</text>
           </view>
-
+          <view class='chat' catchtap='onBodyTap' data-requireid="{{objs.id}}" data-ortheruserid = "{{objs.wxUser.id}}">
+            <image src='/images/icons/chat2.png' style='height:35rpx;width:35rpx;'></image>
+            <text style='font-size:22rpx;margin-left:5rpx;'>私信ta</text>
+          </view>
           <view class='contact' catchtap='onPhoneTap' data-phone="{{objs.phone}}">
-            <image style='height:30rpx;width:30rpx;' src='/images/icons/电话.png'></image>
+            <image style='height:30rpx;width:30rpx;' src='/images/icons/phone3.png'></image>
             <text style='margin-right:30rpx;margin-left:10rpx;'>{{objs.phone}}</text>
           </view>
         </view>
@@ -63,16 +78,42 @@
   </view>
 
   <view class='tarBar'>
-    <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' catchtap='onHpTap'>
-      <image style='height:44rpx;width:44rpx;' src='/images/icons/hp_l.png'></image>
-      <text>首页</text>
+    <view class='left'>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../homepage/homepage" open-type="switchTab">
+        <image style='height:44rpx;width:44rpx;' src='/images/icons/hp_l.png'></image>
+        <text>首页</text>
+      </navigator>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../quotation/quotation" open-type="switchTab">
+        <image style='height:50rpx;width:50rpx;' src='/images/icons/price.png'></image>
+        <text>报价</text>
+      </navigator>
     </view>
-    <view style='position:relative;top:-12px;' catchtap='onPublishTap'>
-      <image style='height:140rpx;width:140rpx' src='/images/icons/aaa.png'></image>
-    </view>
-    <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center'>
-      <image style='height:44rpx;width:44rpx;' src='/images/icons/my.png'></image>
-      <text>关注</text>
+    <navigator style='position:relative;top:-10px;' url="../publish/publish" open-type="switchTab">
+      <image style='height:130rpx;width:130rpx' src='/images/icons/aaa.png'></image>
+    </navigator>
+    <view class='right'>
+      <!-- <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../message/message" open-type="switchTab">
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:50rpx;width:50rpx;' src='/images/icons/message_l.png'></image>
+          <text>私信</text>
+        </view>
+      </navigator> -->
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../message/message" open-type="switchTab">
+        <view class='message'>
+          <view style='display:flex;flex-direction:column'>
+            <image style='height:50rpx;width:50rpx;' src='/images/icons/message_l.png'></image>
+            <text>私信</text>
+          </view>
+          <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view>
+        </view>
+      </navigator>
+      <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;'>
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:55rpx;width:55rpx;' src='/images/icons/attention_l.png'></image>
+          <text>关注</text>
+        </view>
+      </view>
     </view>
   </view>
+
 </view>

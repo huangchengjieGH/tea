@@ -14,11 +14,18 @@ App({
     util:util,
     Login:'0',
     onLaunch: function () {
-      // tools.login();
-      // tools.todoEvent.trigger('login');
+      console.log('hide')
+      wx.hideTabBar({
+
+        complete:function(e) {
+          console.log(e)
+        }
+      });
+      wx.hideTabBar();
     },
     onShow() {
           const that = this;
+          wx.hideTabBar();
         //     tools.login();
     }, 
     getUerInfo() {
@@ -39,6 +46,6 @@ App({
     userInfo: null,
     customerInfo:null,
     classify:null,
-    format:null
+    format:null,
   }
 })

@@ -1,17 +1,21 @@
-  /* pages/test/test.wxss */
+/* pages/test/test.wxss */
+
 /*input*/
-.searchCon{
+
+.searchCon {
   display: flex;
   background-color: #f0f2f7;
   flex-direction: column;
   /* height: 100%; */
 }
+
 .search-y {
-   /* position: fixed;  */
+  /* position: fixed;  */
   top: 0rpx;
   left: 0;
   right: 0;
 }
+
 .weui_cell {
   padding: 12px 0;
   position: relative;
@@ -22,6 +26,7 @@
   -webkit-align-items: center;
   align-items: center;
 }
+
 .weui-cell_bd {
   /* cc */
   font-size: 14px;
@@ -29,19 +34,23 @@
   -webkit-flex: 1;
   flex: 1;
 }
+
 .search-y .searchbar {
   background: #f9f9f9;
 }
+
 .search_btn {
-  font-size:16px;
+  font-size: 16px;
   padding: 8px 0 8px 10px;
 }
+
 .search_btn image {
-  margin-top:5px;
+  margin-top: 5px;
   height: 25px;
   width: 23px;
-  display:inline-block;
+  display: inline-block;
 }
+
 .weui_search-bar {
   position: relative;
   padding: 8px 10px;
@@ -49,9 +58,9 @@
   display: -webkit-flex;
   display: flex;
   box-sizing: border-box;
-  background-color: #f9f9f9;/*#f9f9f9*/
-  /* border-top: 1rpx solid #D7D6DC; *//* border-bottom: 1rpx solid #e6e6e6; */
+  background-color: #f9f9f9; /*#f9f9f9*//* border-top: 1rpx solid #D7D6DC; *//* border-bottom: 1rpx solid #e6e6e6; */
 }
+
 .weui-search-bar_form {
   position: relative;
   -webkit-box-flex: 1;
@@ -61,6 +70,7 @@
   background: #fff;
   border: 1rpx solid #e6e6ea;
 }
+
 .weui-search-bar_box {
   position: relative;
   padding-left: 30px;
@@ -69,16 +79,19 @@
   box-sizing: border-box;
   z-index: 1;
 }
+
 .weui_icon-search_in-box {
   position: absolute;
   left: 10px;
   top: 7px;
 }
+
 .weui-search-bar_input {
   height: 28px;
   line-height: 28px;
   font-size: 14px;
 }
+
 .weui_icon-clear {
   position: absolute;
   top: 0;
@@ -86,6 +99,7 @@
   padding: 7px 8px;
   font-size: 0;
 }
+
 .weui-search-bar_label {
   position: absolute;
   top: 0;
@@ -99,10 +113,12 @@
   background: #fff;
   line-height: 28px;
 }
+
 .weui_icon-search {
   margin-right: 8px;
   font-size: inherit;
 }
+
 .weui-search-bar_text {
   display: inline-block;
   font-size: 14px;
@@ -111,14 +127,20 @@
 
 .weui-search-bar_cancel-btn {
   margin-left: 10px;
-  line-height: 28px;
-  color: #09bb07;
+  color: white;
   white-space: nowrap;
+  background-color: #4eaefe;
+  padding: 5px 8px;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 300;
 }
 
 .body {
   background-color: white;
-  margin: 30rpx 20rpx;
+  margin: 25rpx 20rpx;
   border-radius: 10rpx;
   /* margin-bottom: 140rpx; */
 }
@@ -136,6 +158,7 @@
   align-items: center;
   /* font-weight: 400; */
   color: #161616;
+  width: 80%;
 }
 
 .loaction {
@@ -211,7 +234,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 50%;
+  width: 40%;
+  margin-left: 25rpx;
 }
 
 .star {
@@ -219,12 +243,14 @@
   top: 1rpx;
   right: 50rpx;
 }
+
 .name {
   /* width:50%; */
   text-align: left;
   font-size: 30rpx;
   color: rgb(84, 84, 84);
 }
+
 .product {
   /* display: flex;
   flex-direction: row;
@@ -233,6 +259,7 @@
   padding-top: 10rpx;
   /* line-height: 19pt; */
 }
+
 .nodata {
   display: flex;
   justify-content: center;
@@ -240,4 +267,39 @@
   height: 800rpx;
   font-size: 36rpx;
   color: rgb(104, 104, 104);
+}
+
+.checkmore {
+  color: #4eaefe;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: right;
+  margin-right: 20px;
+}
+
+.chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number {
+  color: #000;
+  font-size: 15px;
+  padding-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20rpx;
+  font-weight: 300;
+}
+
+.zhao {
+  padding: 0 10rpx;
+  letter-spacing: 2px;
+}
+
+.chu {
+  padding: 0 10rpx;
+  border-right: 0.5px solid #c9c5c5;
+  letter-spacing: 2px;
 }

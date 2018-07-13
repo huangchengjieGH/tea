@@ -19,14 +19,30 @@
           <text class='classifyValue'>{{item.classify}}</text>
         </view>
         <view class='product'>
-          <view class='name' wx:for='{{item.object}}' wx:for-item='product'>
+          <!-- <view class='name' wx:for='{{item.object}}' wx:for-item='product'>
             <view>{{product.name}}</view>
+            <text style='font-weight:300;margin-left:5px;letter-spacing:2px' wx:if="{{product.count>0}}">X{{product.count}}{{product.unit}}</text>
+            <view class="money-wrapper">
+              <text style='font-weight:300;color: #EC820E;margin-left:20px;letter-spacing:1px;' wx:if="{{product.price}}">￥{{product.price>10000?(product.price/10000):product.price}}</text>
+              <text style='font-weight:300;color: #EC820E;letter-spacing:1px;' wx:if="{{product.price>10000}}">万</text>
+            </view>
+          </view> -->
+          <view class='name' wx:for="{{item.object}}" wx:for-item='product' wx:for-index="productindex">
+            <view wx-if="{{productindex<15}}">
+              <text>{{product.name}}</text>
+              <text style='font-weight:300;margin-left:5px;letter-spacing:2px' wx:if="{{product.count>0}}">X{{product.count}}{{product.unit}}</text>
+              <view class="money-wrapper">
+                <text style='font-weight:300;color: #EC820E;margin-left:20px;letter-spacing:1px;' wx:if="{{product.price}}">￥{{product.price>10000?(product.price/10000):product.price}}</text>
+                <text style='font-weight:300;color: #EC820E;letter-spacing:1px;' wx:if="{{product.price>10000}}">万</text>
+              </view>
+            </view>
           </view>
         </view>
       </view>
+      <view class='checkmore' wx-if="{{shareList.maxLength}}" catchtap='onCheckMoreTap' data-id="{{shareList.id}}">查看全部({{shareList.length}}条)</view>
     </view>
     <view class='phoneView' catchtap='onPhoneTap' data-phone="{{shareList.phone}}">
-      <view class='phone' >
+      <view class='phone'>
         <image style='height:44rpx;width:45rpx;' src='/images/icons/phone2.png'></image>
         <text style='margin-left:10rpx;'>{{shareList.phone}}</text>
       </view>
@@ -34,16 +50,21 @@
 
   </view>
 
-  <view style="position:sticky;top:0px;z-index:2;position:-webkit-sticky;">
+  <view>
     <view class='searchCon'>
       <!-- <image class='avatar' src="{{avatar}}"></image> -->
-      <open-data type="userAvatarUrl" class='avatar'></open-data>
+      <view class='AvatarUrl'>
+        <open-data type="userAvatarUrl" class='Avatar'></open-data>
+      </view>
+
       <navigator class='search' url='../search/search'>
         <icon style='padding-left:10rpx;' type="search" size="16"></icon>
-        <!-- <input class="input" placeholder="请输入你想要找的产品" bindblur="productInput" value="{{product}}"/> -->
         <text style='margin-left:170rpx;'>搜索</text>
       </navigator>
     </view>
+  </view>
+
+  <view style="position:sticky;top:0px;z-index:2;position:-webkit-sticky;">
     <view class='column'>
       <view class='reservetype'>
         <block wx:for="{{columnStatus}}" wx:for-item="item">
@@ -53,13 +74,14 @@
     </view>
   </view>
 
-  <view style='padding-bottom:150rpx;' scroll-top="{{scrollTop}}"   bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+  <view style='padding-bottom:150rpx;' scroll-top="{{scrollTop}}" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
     <view wx:if="{{publishList.length>0}}" class='body' wx:for="{{publishList}}" wx:for-item="objs" wx:for-index="index">
       <view style='border-bottom:1rpx solid rgb(220, 220, 220)'>
         <view class='bodymsg'>
           <view class='bodyname'>
-            <image class='nameImg' src='/images/icons/avatar2.jpeg'></image>
-            <text style='margin-left:20rpx;'>{{objs.name}}</text>
+            <!-- <view>{{objs.wxUser.avatarUrl}}</view> -->
+            <image class='nameImg' src="{{objs.wxUser.avatarUrl==null?'/images/icons/avatar2.jpeg':objs.wxUser.avatarUrl}}" catchtap='onAvatarTap' data-url='{{objs.wxUser.avatarUrl}}'></image>
+            <text style='margin-left:20rpx;' catchtap='onBodyTap' data-requireid="{{objs.id}}" data-ortheruserid = "{{objs.wxUser.id}}">{{objs.name}}</text>
           </view>
           <view class='loaction'>
             <view class='time'>
@@ -71,40 +93,54 @@
               <!-- <text style='margin-left:10rpx;letter-spacing:1px;'>广东广州</text> -->
             </view>
           </view>
-          <view class='star' catchtap='collectTea' data-requireId="{{objs.id}}" data-like="{{objs.like}}" data-index="{{index}}">
-            <image wx:if="{{objs.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star_l.png'></image>
-            <image wx:if="{{!objs.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star.png'></image>
-          </view>
-        </view>
-      </view>
-
-
-      <view style='margin-top:10px;'>
-        <!-- <view>{{index}}</view> -->
-        <view class='bodyproducts' wx:for="{{objs.objects}}" wx:for-item="obj">
-          <view class='bodyclassify'>
-            <text class='bodyclassifyValue' style="{{obj.style==1?'border: 1rpx solid #fd7995;color:#fd7995':''}}">{{obj.classify}}</text>
-          </view>
-          <view class='product'>
-            <view class='name' wx:for="{{obj.object}}" wx:for-item='product'>
-              <view>{{product.name}}</view>
+          <view>
+            <view class='star' catchtap='collectTea' data-requireId="{{objs.id}}" data-like="{{objs.like}}" data-index="{{index}}">
+              <image wx:if="{{objs.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star_l.png'></image>
+              <image wx:if="{{!objs.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star.png'></image>
+              <text wx:if="{{!objs.like}}" class='attention'>关注</text>
+              <text wx:if="{{objs.like}}" class='attention'>已关注</text>
             </view>
           </view>
         </view>
+      </view>
+      <view style='margin-top:10px;'>
+        <view class='bodyproducts' wx:for="{{objs.objects}}" wx:for-item="obj" catchtap='onBodyTap' data-requireid="{{objs.id}}" data-ortheruserid = "{{objs.wxUser.id}}">
+          <view class='bodyclassify' style="{{obj.style==1?'border: 1rpx solid #fd7995;color:#fd7995':''}}">
+            <text class='bodyclassifyValue'>{{obj.classify}}</text>
+          </view>
+          <view class='product'>
+            <view class='name' wx:for="{{obj.object}}" wx:for-item='product' wx:for-index="productindex">
+              <view wx-if="{{productindex<15}}" style='display:flex'>
+                <text>{{product.name}}</text>
+                <text style='font-weight:300;margin-left:5px;letter-spacing:2px' wx:if="{{product.count>0}}">X{{product.count}}{{product.unit}}</text>
+                <view class="money-wrapper">
+                  <text style='font-weight:300;color: #EC820E;margin-left:20px;letter-spacing:1px;' wx:if="{{product.price}}">￥{{product.price>10000?(product.price/10000):product.price}}</text>
+                  <text style='font-weight:300;color: #EC820E;letter-spacing:1px;' wx:if="{{product.price>10000}}">万</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='checkmore' wx-if="{{objs.maxLength}}" catchtap='onCheckMoreTap' data-id="{{objs.id}}">查看全部({{objs.length}}条)</view>
         <view class='count'>
-          <view style='width:50%;'>
+          <view style='width:38%;'>
             <text>浏览 {{objs.visitCount}}</text>
-            <text style='margin-left:20rpx;'>收藏 {{objs.likeCount}}</text>
+            <text style='margin-left:20rpx;'>关注 {{objs.likeCount}}</text>
+          </view>
+
+          <view class='chat' catchtap='onBodyTap' data-requireid="{{objs.id}}" data-ortheruserid = "{{objs.wxUser.id}}">
+            <image src='/images/icons/chat2.png' style='height:35rpx;width:35rpx;'></image>
+            <text style='font-size:22rpx;margin-left:5rpx;'>私信ta</text>
           </view>
 
           <view class='contact' catchtap='onPhoneTap' data-phone="{{objs.phone}}">
-            <image style='height:30rpx;width:30rpx;' src='/images/icons/电话.png'></image>
+            <image style='height:30rpx;width:30rpx;' src='/images/icons/phone3.png'></image>
             <text style='margin-right:30rpx;margin-left:10rpx;'>{{objs.phone}}</text>
           </view>
         </view>
       </view>
     </view>
-    <view wx:if="{{publishList.length==0}}" class='nodata'>
+    <view wx:if="{{nodata}}" class='nodata'>
       <text>暂时没有数据</text>
     </view>
   </view>
@@ -112,7 +148,7 @@
     <loading hidden="{{hidden}}" bindchange="loadingChange">
       加载中...
     </loading>
-</view>  
+  </view>
   <!-- <view class='publish'>
     <view style='width:100%;display:flex; align-items: center;justify-content:center' catchtap='onPublishTap'>
       <image style='height:140rpx;width:140rpx' src='/images/icons/aaa.png'></image>
@@ -120,18 +156,42 @@
   </view> -->
 
   <view class='tarBar'>
-    <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;'>
-      <image style='height:44rpx;width:44rpx;' src='/images/icons/hp.png'></image>
-      <text>首页</text>
+    <view class='left'>
+      <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;'>
+        <image style='height:44rpx;width:44rpx;' src='/images/icons/hp.png'></image>
+        <text>首页</text>
+      </view>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../quotation/quotation" open-type="switchTab">
+        <image style='height:50rpx;width:50rpx;' src='/images/icons/price.png'></image>
+        <text>报价</text>
+      </navigator>
     </view>
-
-    <view style='position:relative;top:-12px;' catchtap='onPublishTap'>
-      <image style='height:140rpx;width:140rpx' src='/images/icons/aaa.png'></image>
-    </view>
-
-    <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' catchtap='onAttentionTap'>
-      <image style='height:44rpx;width:44rpx;' src='/images/icons/my_l.png'></image>
-      <text>关注</text>
+    <navigator style='position:relative;top:-10px;' url="../publish/publish" open-type="switchTab">
+      <image style='height:130rpx;width:130rpx' src='/images/icons/aaa.png'></image>
+    </navigator>
+    <view class='right'>
+      <!-- <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;position:relative' url="../message/message" open-type="switchTab">
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:50rpx;width:50rpx;' src='/images/icons/message_l.png'></image>
+          <text>私信</text>
+        </view>
+        <view class='number'>22</view>
+      </navigator> -->
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../message/message" open-type="switchTab">
+        <view class='message'>
+          <view style='display:flex;flex-direction:column'>
+            <image style='height:50rpx;width:50rpx;' src='/images/icons/message_l.png'></image>
+            <text>私信</text>
+          </view>
+          <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view>
+        </view>
+      </navigator>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../attention/attention" open-type="switchTab">
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:50rpx;width:50rpx;' src='/images/icons/attention.png'></image>
+          <text>关注</text>
+        </view>
+      </navigator>
     </view>
   </view>
   <!-- <!-- ''<footer></footer>  -->

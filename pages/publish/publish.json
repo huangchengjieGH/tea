@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "发布",
-  "navigationBarBackgroundColor": "white",
-  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#4EAEFE",
+  "navigationBarTextStyle": "white",
   "usingComponents": {
     "footer": "/components/footer/footer"
   }

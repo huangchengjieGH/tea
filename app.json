@@ -1,12 +1,18 @@
 {
   "pages": [
-    "pages/homepage/homepage",
-    "pages/publish/publish",
-    "pages/edit/edit",
-    "pages/attention/attention",
-    "pages/search/search",
+    "pages/message/message",
     "pages/test/test",
+    "pages/homepage/homepage",
+    "pages/chat/chat",
+    "pages/publish/publish",
+    "pages/more/more",
+    "pages/edit/edit",
+    "pages/search/search",
+    "pages/attention/attention",
     "pages/my/my",
+    "pages/searchtea/searchtea",
+    "pages/detail/detail",
+    "pages/quotation/quotation",
     "pages/index/index",
     "pages/logs/logs",
     "pages/aboutyf/aboutyf"
@@ -17,5 +23,43 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
     "backgrondColorTop": "#16b8e5"
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#4faffe",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/homepage/homepage",
+        "text": "首页",
+        "iconPath": "images/icons/hp_l.png",
+        "selectedIconPath": "/images/icons/hp.png"
+      },
+      {
+        "pagePath": "pages/quotation/quotation",
+        "text": "报价",
+        "iconPath": "images/icons/price.png",
+        "selectedIconPath": "/images/icons/price_l.png"
+      },
+      {
+        "pagePath": "pages/publish/publish",
+        "text": "发布",
+        "iconPath": "images/icons/pic.png",
+        "selectedIconPath": "/images/icons/pic_l.png"
+      },
+      {
+        "pagePath": "pages/attention/attention",
+        "text": "我的",
+        "iconPath": "images/icons/my_l.png",
+        "selectedIconPath": "/images/icons/my.png"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "关注",
+        "iconPath": "images/icons/attention.png",
+        "selectedIconPath": "/images/icons/attention_l.png"
+      }
+    ]
   }
 }

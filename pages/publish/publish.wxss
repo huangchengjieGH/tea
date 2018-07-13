@@ -1,5 +1,9 @@
 /* pages/publish/publish.wxss */
 
+page {
+  background-color: #f0f2f7;
+}
+
 .publishCon {
   display: flex;
   background-color: #f0f2f7;
@@ -8,11 +12,10 @@
 }
 
 .msg {
-  margin-top: 7px;
-  width: 100%;
-  height: 105px;
+  /* margin-top: 7px; *//* width: 100%; */
+  height: 88px;
   background-color: white;
-  border-bottom: 1rpx solid rgb(220,220,220)
+  border-bottom: 1rpx solid rgb(220, 220, 220);
 }
 
 .shopImg {
@@ -21,7 +24,7 @@
 }
 
 .shopName {
-  width: 100%;
+  /* width: 700rpx;  */
   height: 50%;
   padding-left: 70rpx;
   display: flex;
@@ -29,7 +32,7 @@
 }
 
 .phone {
-  width: 100%;
+  /* width: 100%; */
   height: 50%;
   padding-left: 70rpx;
   display: flex;
@@ -40,17 +43,27 @@
   /* margin-top: 7px; */
   width: 100%;
   background-color: white;
+  padding: 10px 5px 0px 5px;
+  border-bottom: 1rpx dashed rgb(220, 220, 220);
+  /* padding-top:10px; *//* margin-top: 10px; */
 }
 
 .products {
   width: 100%;
-  /* height: 50%; */
-  padding-left: 70rpx;
+  /* height: 50%; *//* padding-left: 70rpx; */
   display: flex;
   align-items: center;
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
-  border-bottom: 1rpx solid rgb(220, 220, 220);
+  padding-bottom: 10px;
+  position: relative;
+  /* padding-left: 10px; */
+}
+
+.products02 {
+  width: 100%;
+  /* height: 50%; *//* padding-left: 70rpx; */
+  display: flex;
+  align-items: center;
+  /* padding-bottom: 10px;  *//* padding-left: 10px; */
 }
 
 .func {
@@ -97,19 +110,21 @@
   margin-left: 30rpx;
   border-radius: 10rpx;
 }
-.bottom{
+
+.bottom {
   background-color: white;
   position: fixed;
   width: 100%;
-  height: 120rpx;
-  bottom: 101rpx;
+  height: 127rpx;
+  bottom: 100rpx;
   display: flex;
   flex-direction: row;
   color: rgb(163, 163, 163);
   font-size: 35rpx;
   /* border: 1rpx solid rgb(220,220,220); */
 }
-.friends{
+
+.friends {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -119,7 +134,8 @@
   border: none;
   background-color: white;
 }
-.share{
+
+.share {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -128,143 +144,162 @@
   background-color: white;
 }
 
-
 .tarBar {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 50px;
+  height: 100rpx;
   background-color: white;
   display: flex;
   flex-direction: row;
   font-size: 12px;
   align-items: center;
   color: rgb(51, 51, 51);
-   z-index: 2; 
+  z-index: 2;
+  border-top: 1rpx solid rgb(220, 220, 220);
 }
 
 .publish {
   position: fixed;
   bottom: 0;
-  width: 100%;
   z-index: 3;
 }
-.confirmcel{
-  margin-top: 7px;
+
+.confirmcel {
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
 }
-.confirm{
-  background-color:#4faffe;
-  font-size: 38rpx; 
+
+.confirm {
+  background-color: #4faffe;
+  font-size: 38rpx;
   color: white;
   width: 300rpx;
-  height: 100rpx;
+  height: 90rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10rpx;
   margin-left: 30rpx;
 }
-.cancel{
-  background-color:white; 
+
+.cancel {
+  background-color: white;
   font-size: 38rpx;
   color: rgb(104, 104, 104);
   width: 300rpx;
-  height: 100rpx;
+  height: 90rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10rpx;
   margin-left: 60rpx;
 }
-.add{
+
+.add {
   background: white;
   padding: 20rpx;
   display: flex;
+  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   margin-bottom: 20rpx;
 }
 
-.triangleUp{
-  border-left: 5px solid transparent;  
-  border-right: 5px solid transparent;  
-  border-bottom: 5px solid #555555;  
-  width: 0;   
-}
-.triangleDown{
-  border-left: 5px solid transparent;  
-  border-right: 5px solid transparent;  
-  border-top: 5px solid #555555;  
-  width: 0;   
+.triangleUp {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #555;
+  width: 0;
+  position: absolute;
+  right: 11rpx;
+  top: 15px;
 }
 
-
+.triangleDown {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #555;
+  width: 0;
+  position: absolute;
+  right: 11rpx;
+  top: 15px;
+}
 
 /* pages/bottompop/bottompop.wxss */
-.modal-box{
-  position:fixed;
-  width:100%;
-  height:100%;
-  top:0px;
-  background:rgba(0,0,0,0.2);
-  overflow: hidden;
-  }
 
-.modal-body{
-   position:fixed;  
-   width: 100%; 
-   top: 15%;
-  }
-.modal-body2{
-   position:fixed;  
-   width: 100%; 
-   top: 5%;
-  }
-.modal-content{
+.modal-box {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-body {
+  position: fixed;
+  width: 100%;
+  top: 15%;
+}
+
+.modal-body2 {
+  position: fixed;
+  width: 100%;
+  top: 5%;
+}
+
+.modal-content {
   overflow: auto;
   border-radius: 10rpx;
   background-color: white;
   margin: 20rpx;
   height: 650rpx;
-   /* z-index: 1;  */
-  }
-  .modalpreview{
-   overflow: auto;
-   border-radius: 10rpx;
-   background-color: white;
-   margin: 20rpx 50rpx;
-   height: 900rpx;
-  }
+  /* z-index: 1;  */
+}
+
+.modalpreview {
+  overflow: auto;
+  border-radius: 10rpx;
+  background-color: white;
+  margin: 20rpx 50rpx;
+  height: 900rpx;
+}
 
 /* .modal-content{
   padding: 10rpx 30rpx;
   height:150px; 
 } */
-  .modal-content .fenxiang{
+
+.modal-content .fenxiang {
   width: 100%;
   height: 40%;
-}  
-.modal-cancel{
+}
+
+.modal-cancel {
   margin-top: 20rpx;
 }
-.radio-group{
-  margin-left:180rpx;
+
+.radio-group {
+  margin-left: 180rpx;
 }
-.onoffline{
+
+.onoffline {
   display: flex;
   flex-direction: row;
   padding: 20rpx;
   align-items: center;
   justify-content: flex-start;
 }
-.radio{
+
+.radio {
   padding-right: 120rpx;
 }
-.modelcancel{
+
+.modelcancel {
   border: 1rpx solid rgb(220, 220, 220);
-  background-color:white; 
+  background-color: white;
   font-size: 38rpx;
   color: rgb(104, 104, 104);
   width: 300rpx;
@@ -275,9 +310,10 @@
   border-radius: 10rpx;
   margin-left: 40rpx;
 }
-.modelconfirm{
-  background-color:#4faffe;
-  font-size: 38rpx; 
+
+.modelconfirm {
+  background-color: #4faffe;
+  font-size: 38rpx;
   color: white;
   width: 300rpx;
   height: 90rpx;
@@ -287,18 +323,144 @@
   border-radius: 10rpx;
   margin-left: 30rpx;
 }
-.fontclass{
+
+.fontclass {
   z-index: -1;
 }
-.ModalConfirmPreview{
-width:250rpx;
-justify-content:center;
-align-items:center;
-display:flex;
-height:77rpx;
-border-radius:10rpx;
-font-size:35rpx;
-margin-top:10rpx;
-background-color:#4faffe;
-color:white;
+
+.ModalConfirmPreview {
+  width: 250rpx;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 77rpx;
+  border-radius: 10rpx;
+  font-size: 35rpx;
+  margin-top: 10rpx;
+  background-color: #4faffe;
+  color: white;
+}
+
+.style {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid rgb(220, 220, 220);
+  position: relative;
+  margin: 12rpx;
+  padding: 16rpx 10rpx;
+  border-radius: 5px;
+}
+
+.editinput {
+  width: 50%;
+  color: rgb(22, 22, 22);
+  font-size: 37rpx;
+  border: 1rpx solid rgb(220, 220, 220);
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  border-radius: 10rpx;
+}
+
+.picker {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  margin-left: 5px;
+}
+
+.left {
+  display: flex;
+  width: 40%;
+}
+
+.right {
+  display: flex;
+  width: 40%;
+}
+
+.userInfo {
+  font-size: 11px;
+  margin-top: 6px;
+  height: 70rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff7146;
+  color: white;
+  font-weight: 300;
+}
+
+.phoneInfo {
+  font-size: 11px;
+  /* margin-top:6px; */
+  height: 70rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff7146;
+  color: white;
+  font-weight: 300;
+  position: absolute;
+  top: 6rpx;
+  right: 15rpx;
+}
+.number {
+  background-color: red;
+  color: white;
+  height: 28rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 10rpx;
+  font-size: 20rpx;
+  position: absolute;
+  left: 38rpx;
+}
+
+/* Tooltip 容器 */
+
+.tips {
+  position: fixed;
+  bottom: 230rpx;
+  right: 20px;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black;  悬停元素上显示点线  *//* margin-top:5px;
+    margin-left: 500rpx; */
+}
+
+/* Tooltip 文本 */
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 230px;
+  background-color: white;
+  color: #000000;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 3px;
+  /* 定位 *//* position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%; */
+  position: absolute;
+  z-index: 1;
+  top: -1px;
+  right: 117%;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+/* 鼠标移动上去后显示提示框 */
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+.message {
+  display: flex;
+  position: relative;
 }

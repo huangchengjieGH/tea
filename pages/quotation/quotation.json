@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "报价",
+  "navigationBarBackgroundColor": "#4EAEFE",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "footer": "/components/footer/footer"
+  }
+}

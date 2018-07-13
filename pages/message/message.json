@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "消息",
+  "navigationBarBackgroundColor": "#4EAEFE",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "footer": "/components/footer/footer"
+  }
+}

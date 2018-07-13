@@ -2,7 +2,7 @@
 let app = getApp();
 const tools = require('../../tools.js');
 var page = 1;
-var page_size = 20;
+var page_size = 10;
 Page({
 
   /**
@@ -31,12 +31,19 @@ Page({
       }
     });
     this.getPublishList();
+    this.getMyMsg();
   },
   showInput: function () {
     console.log("onChangeShowState");
     this.setData({
       inputShowed: true
     });
+  },
+  checkinputTyping: function (e) {
+    var queryString = e.detail.value;
+    this.setData({
+      inputVal: queryString
+    })
   },
   inputTyping: function (e) {
     console.log("inputTyping");
@@ -48,6 +55,26 @@ Page({
       this.setData({
         search:true,
         publishList:[]
+      })
+      page = 1;
+      this.getPublishList();
+    } 
+  },
+  clearInput: function (e) {
+    this.setData({
+      inputVal: "",
+      inputShowed: false,
+      search: false,
+      publishList: []
+    });
+    page = 1;
+    this.getPublishList();
+  },
+  onSearchTap: function (e) {
+    if (this.data.str != '') {
+      this.setData({
+        search: true,
+        publishList: []
       })
       page = 1;
       this.getPublishList();
@@ -129,6 +156,16 @@ Page({
           that.setData({
             hidden: true
           });
+          var str = JSON.stringify(data.extra)
+          if (str != "{}"){
+            that.setData({
+              buyCount: data.extra.buyCount,
+              sellCount: data.extra.sellCount
+            })
+          }else{
+
+          }
+          
         }
       }
     );
@@ -142,8 +179,13 @@ Page({
     var find02 = [];  //代客找
     var out01 = [];   // 出
     var out02 = [];   //代客出
+    var maxLength = false;
+    var length = 0;
     for (var idx in data) {
+      length = 0;
+      maxLength = false;
       var object = data[idx].objects;
+      length += object.length;
       data[idx].updatedAt = app.util.formatTime(new Date(data[idx].updatedAt));
       data[idx].createdAt = app.util.formatTime(new Date(data[idx].createdAt));
       for (var idx2 in object) {
@@ -162,6 +204,9 @@ Page({
             break;
           default:
             break;
+        }
+        if (object.length >= 15) {
+          maxLength = true;
         }
       }
       if (find01.length != 0) {
@@ -201,6 +246,8 @@ Page({
         out02 = [];
       }
       data[idx].objects = objects;
+      data[idx].maxLength = maxLength;
+      data[idx].length = length;
       objects = [];
     }
     var publishList = that.data.publishList;
@@ -216,10 +263,10 @@ Page({
   },
   bindDownLoad: function () {
     var that = this;
-    this.setData({
-      hidden: false
-    })
-    this.getPublishList();
+    // this.setData({
+    //   hidden: false
+    // })
+    // this.getPublishList();
 
     console.log("bindDownLoad");
   },
@@ -228,7 +275,7 @@ Page({
     this.setData({
       scrollTop: event.detail.scrollTop
     });
-    console.log('scroll');
+    // console.log('scroll');
   },
   topLoad: function (event) {
     //   该方法绑定了页面滑动到顶部的事件，然后做上拉刷新
@@ -241,13 +288,67 @@ Page({
     // } else {
     //   this.getPublishList();
     // }
-    console.log("topLoad");
+    // console.log("topLoad");
   },
   onPhoneTap: function (e) {
     var phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({
       phoneNumber: phone //仅为示例，并非真实的电话号码
     })
+  },
+  onCheckMoreTap: function (e) {
+    var id = e.currentTarget.dataset.id;
+    console.log(id);
+    wx.navigateTo({
+      url: '../more/more?requireId=' + id,
+    })
+  },
+  onBodyTap: function (e) {
+    // console.log('ssss');
+    var requireId = e.currentTarget.dataset.requireid;
+    var ortherUserId = e.currentTarget.dataset.ortheruserid;
+    this.getVisit(requireId);
+    wx.navigateTo({
+      url: '../chat/chat?ortherUserId=' + ortherUserId,
+    })
+    console.log(requireId);
+  },
+  getVisit: function (requireId) {
+    var that = this;
+    var data = {
+      requireId: requireId
+    }
+    app.apiFunctions.requestUrl(
+      app.api.visit,
+      'POST',
+      true,
+      true,
+      data,
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+
+        }
+      }
+    );
+  },
+  getMyMsg: function (e) {
+    var that = this;
+    app.apiFunctions.requestUrl(
+      app.api.getMyMsg,
+      'GET',
+      true,
+      true,
+      '',
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+          that.setData({
+            myMsg: data.data
+          })
+        }
+      }
+    );
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -288,9 +389,14 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    console.log('onPullDownRefresh');
+    var that = this;
+    this.setData({
+      hidden: false
+    })
+    this.getPublishList();
+    console.log('onReachBottom');
   },
-
   /**
    * 用户点击右上角分享
    */

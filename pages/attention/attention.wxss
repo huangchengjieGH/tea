@@ -1,9 +1,12 @@
 /* pages/attention/attention.wxss */
+page{
+  background-color: #f0f2f7;
+}
 .attentionCon{
   display: flex;
   flex-direction: column;
   background-color:rgb(240, 242, 247);
-  /* height: 100%; */
+   /* height: 100%;  */
 }
   .reservetype{
   font-size: 35rpx;
@@ -13,11 +16,10 @@
   flex-direction: row;
   width: 100%;
   background-color: white;
- 
 }
 .type{
   color: black;
-  padding: 20rpx 110rpx; 
+  padding: 25rpx 110rpx; 
   width: 50%;
   height: 100%;
 }
@@ -42,6 +44,7 @@
   align-items: center;
   /* font-weight: 400; */
   color: #161616;
+  width:80%;
 }
 
 .loaction {
@@ -105,7 +108,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 50%;
+  width: 40%;
+  margin-left: 25rpx;
 }
 .bodyclassifyValue {
   border: 1rpx solid #34daa4;
@@ -154,7 +158,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 50px;
+  height: 100rpx;
   background-color: white;
   display: flex;
   flex-direction: row;
@@ -162,4 +166,39 @@
   align-items: center;
   color: rgb(51, 51, 51);
    z-index: 2; 
+}
+.left {
+  display: flex;
+  width: 40%;
+}
+
+.right {
+  display: flex;
+  width: 40%;
+}
+.checkmore {
+  color: #4eaefe;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: right;
+  margin-right: 20px;
+}
+.number {
+  background-color: red;
+  color: white;
+  height: 28rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 10rpx;
+  font-size: 20rpx;
+  position: absolute;
+  left: 38rpx;
+}
+.message {
+  display: flex;
+  position: relative;
+}
+.chat{
+ display: flex;
+ justify-content: center;
+ align-items: center;
 }

@@ -23,7 +23,6 @@ Page({
       { name: '上线', value: '0', checked: 'true' },
       { name: '下架', value: '1' },
     ],
-    userId: '3',
     chooseTea: {
     },
     canvasId: 'shareCanvas',
@@ -31,34 +30,23 @@ Page({
     canvasWHRate: 9 / 16,
     showCanvas: false,
     qrCode: '',
-    // textFindList: [
-    //   '1501 御贡圆茶',
-    //   '1801-0562',
-    //   '1801黄金甲',
-    //   '101女儿贡饼',
-    //   '101女儿贡饼',
-    //   '101女儿贡饼'
-    // ],
-    // textSoldList: [
-    //   '1702-7572',
-    //   '1801-0562',
-    //   '1801黄金甲',
-    //   '101女儿贡饼',
-    //   '101女儿贡饼',
-    //   '101女儿贡饼'
-    // ],
     contact: [
     ],
     showCan: true,
-    previewOrMore: 0   //0 预览  1 更多
+    previewOrMore: 0,   //0 预览  1 更多
+    teaList: {},
+    modyfyStatus: true,
+    localImg:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(app.grobalData.userId);
-    this.getPublish();
+    // wx.setNavigationBarTitle({
+    //   title: '发布'
+    // })
+    this.getWindowWidth();
   },
   onEditTap: function (e) {
     var edit = !this.data.edit;
@@ -67,11 +55,20 @@ Page({
     })
   },
   onConfirmTap: function (e) {
-    this.modifyRequire();
+    var requireId = e.currentTarget.dataset.requireid;
+    this.modifyRequire(requireId);
+    this.setData({
+      modyfyStatus: true,
+      showCan: true,
+      flag: true,
+      previewOrMore: '0'
+    })
+    this.makeGoodsCard(2);
   },
   onCancelTap: function (e) {
+    this.getPublish();
     this.setData({
-      edit: false
+      edit: false,
     })
   },
   // onClickTap: function (e) {
@@ -164,15 +161,49 @@ Page({
       function (data) {
         console.log(data);
         if (data.status == 1) {
-          // that.processPublishData(data.data)
           that.setData({
             teaList: data.data[0]
           })
-          if(data.data.length == 0){
-            wx.navigateTo({
-              url: '../edit/edit',
-            })
+          if (data.data.length != 0){
+            that.getQrcode();   //测试生成二维码
           }
+          
+          if (data.data.length == 0) {
+            wx.showModal({
+              title: '商品为空',
+              content: '是否前往发布商品',
+              success:function(res){
+                if (res.confirm) {
+                  console.log('用户点击确定');
+                  wx.navigateTo({
+                    url: '../edit/edit',
+                  })
+                } else if (res.cancel) {
+                  console.log('用户点击取消')
+                }
+              }
+            })
+            
+          }
+        }
+      }
+    );
+  },
+  deletePublish: function (requireId) {
+    var url = `${app.api.deletePublish}` + '/' + `${requireId}`;
+    var that = this;
+    app.apiFunctions.requestUrl(
+      url,
+      'delete',
+      true,
+      true,
+      '',
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+          wx.navigateTo({
+            url: '../edit/edit',
+          })
         }
       }
     );
@@ -219,6 +250,7 @@ Page({
     }
   },
   addTeaTap: function (e) {
+    console.log('addTeaTap');
     var teas = [],
       teas = this.data.teaList;
     var temp = {
@@ -238,13 +270,25 @@ Page({
     console.log(e.currentTarget.dataset.teaindex);
     var index = e.currentTarget.dataset.teaindex;
     var teaList = [];
-    if (index != '0') {
+    var length = this.data.teaList.objects.length;
+    if (length > '1') {
       teaList = this.data.teaList;
       teaList.objects.splice(index, 1);
       this.setData({
         teaList: teaList
       })
     }
+
+    // var index = e.currentTarget.dataset.teaindex;
+    // var teaList = [];
+    // var length = this.data.teaList.length;
+    // if (length > '1') {
+    //   teaList = this.data.teaList;
+    //   teaList.splice(index, 1);
+    //   this.setData({
+    //     teaList: teaList
+    //   })
+    // }
   },
   onMoreTap: function (e) {
     var moreIndex = e.currentTarget.dataset.teaindex;
@@ -253,8 +297,8 @@ Page({
       flag: false,
       chooseTea: chooseTea,
       moreIndex: moreIndex,
-      previewOrMore:'1',
-      ifpreview:false
+      previewOrMore: '1',
+      ifpreview: false
     })
   },
   onModalNameInput: function (e) {
@@ -272,6 +316,16 @@ Page({
     var chooseTea = this.data.chooseTea;
     if (count != '') {
       chooseTea.count = count;
+      this.setData({
+        chooseTea: chooseTea
+      })
+    }
+  },
+  onModalUnitInput: function (e) {
+    var unit = e.detail.value;
+    var chooseTea = this.data.chooseTea;
+    if (unit != '') {
+      chooseTea.unit = unit;
       this.setData({
         chooseTea: chooseTea
       })
@@ -303,10 +357,11 @@ Page({
       chooseTea: {}
     })
   },
-  modifyRequire: function (e) {
-    var url = `${app.api.modify}` + '/' + `${this.data.userId}`;
+  modifyRequire: function (requireid) {
+    var url = `${app.api.modify}` + '/' + `${requireid}`;
     var that = this;
     var data = this.data.teaList;
+    console.log(data);
     app.apiFunctions.requestUrl(
       url,
       'PUT',
@@ -329,6 +384,7 @@ Page({
     );
   },
   onClearTap: function (e) {
+    var requireId = e.currentTarget.dataset.requireid;
     var that = this;
     wx.showModal({
       title: '提示',
@@ -336,10 +392,18 @@ Page({
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定')
-          that.clearRequire(); // 清空数据，待测
-          wx.navigateTo({
-            url: '../edit/edit',
+          that.setData({
+            modyfyStatus: true
           })
+          let url = '../edit/edit';
+          if (requireId){
+            url = url + '?requireId=' + requireId;
+
+          }
+          wx.navigateTo({
+            url: url,
+          })
+        
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -373,24 +437,52 @@ Page({
   // haibao
   onGeneratePicTap: function (e) {
     console.log('ee');
+    var that = this;
     this.setData({
       showCan: true
     })
-    this.makeGoodsCard(1);
+    // wx.showLoading({ title: '生成中...' });
+    // this.makeGoodsCard(1);
+    if (this.data.modyfyStatus) {
+      wx.showLoading({ title: '生成中...' });
+      this.makeGoodsCard(1);
+    } else {
+      wx.previewImage({ urls: [that.data.localImg] });
+      wx.saveImageToPhotosAlbum({
+        filePath: that.data.localImg,
+        success: function (res) {
+          that.setData({ showCanvas: false });
+        }
+      });
+    }
+
   },
   onPreviewTap: function (e) {
     this.setData({
       showCan: true,
       flag: false,
-      previewOrMore:'0'
+      previewOrMore: '0'
     })
-    this.makeGoodsCard(2);
+    if (this.data.modyfyStatus) {
+      wx.showLoading({ title: '生成中...' });
+      this.makeGoodsCard(2);
+    }else{
+      this.setData({
+        showCan: false,
+      })
+    }
+    // wx.showLoading({ title: '生成中...' });
+    // this.makeGoodsCard(2);
   },
   getWindowWidth() {
     const that = this;
     wx.getSystemInfo({
       success: function (res) {
-        that.setData({ windowWidth: res.windowWidth * 2 });
+        console.log(res)
+        that.setData({
+          windowWidth: res.windowWidth * 2,
+          windowHeight: res.windowHeight * 2
+        });
       }
     });
   },
@@ -401,13 +493,18 @@ Page({
       wx.canvasToTempFilePath({
         x: 0,
         y: 0,
+        width: that.data.windowWidth,
+        height: that.data.canvasHeight,
+        destWidth: that.data.windowWidth,
+        destHeight: that.data.canvasHeight,
         canvasId,
         success: function (res) {
           resolve();
+          console.log(res.tempFilePath);
           // wx.previewImage({ urls: [res.tempFilePath] });
           that.setData({
             localImg: res.tempFilePath,
-            showCan: false
+            showCan:false
           })
         }
       });
@@ -419,16 +516,23 @@ Page({
       wx.canvasToTempFilePath({
         x: 0,
         y: 0,
+        width: that.data.windowWidth,
+        height: that.data.canvasHeight,
+        destWidth: that.data.windowWidth,
+        destHeight: that.data.canvasHeight,
         canvasId,
         success: function (res) {
           resolve();
           wx.previewImage({ urls: [res.tempFilePath] });
-          //  wx.saveImageToPhotosAlbum({
-          //    filePath: res.tempFilePath,
-          //    success: function (res) {
-          //      that.setData({ showCanvas: false });
-          //    }
-          //  });
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+            success: function (res) {
+              that.setData({ showCanvas: false });
+            }
+          });
+          that.setData({
+            localImg: res.tempFilePath,
+          })
         }
       });
     });
@@ -462,10 +566,10 @@ Page({
     }
     return Promise.all(pList);
   },
-  setparameter:function(e){
+  setparameter: function (e) {
     var findLength = this.data.textFindList.length;
     var SoldLength = this.data.textSoldList.length;
-    if (findLength > 0 && SoldLength > 0){
+    if (findLength > 0 && SoldLength > 0) {
 
     }
   },
@@ -473,55 +577,48 @@ Page({
     const that = this;
     let canvasId = that.data.canvasId;
     let windowWidth = that.data.windowWidth;
+    let windowHeight = that.data.windowHeight;
     let canvasWHRate = that.data.canvasWHRate;
     let qrCode = that.data.qrCode;
     let textFindList = that.data.textFindList;
     let textSoldList = that.data.textSoldList;
     let textContect = that.data.contact;
-    let canvasColor = 'white';
+    let canvasColor = '#fefcf7';
     let keywordColor = 'white';
     let textColor = 'black';
-    let fontSize = 20;
+    let fontSize = 55;
     let qrCodeSize = 100;
-    let padding = -10;
     let token = wx.getStorageSync('token');
-    let pImgW = 0.0;
-    let pImgH = 0.0;
     let pTextX = 0.0;
     let pTextY = 0.0;
-    let pImgW02 = 0.0;
-    let addx  = 0.0;
-    let addf = 0.0;
     var findLength = this.data.textFindList.length;
     var SoldLength = this.data.textSoldList.length;
-    // findLength = 0;
-    //  SoldLength = 0;
-    if (findLength > 0 && SoldLength > 0) {
-       fontSize = 18;
-       pImgW = 0.18;
-       pImgH = 0.35;
-       pTextX = 0.1;
-       pTextY = 0.48;
-       pImgW02 = 0.64;
-       addx = 120;
-       addf = 0;
-    } else if (findLength == 0 && SoldLength == 0){
-
-    }else{
-      pImgW = 0.15;
-      pImgH = 0.4;
-      pTextX = 0;
-      addx = 100;
-      pTextY = 0.43;
-      pImgW02 = 0.2;
-      addf = 100;
+    // SoldLength=0;
+    // findLength=0;
+    let canvasHeight = (findLength + SoldLength) * 100 + 400;
+    if (canvasHeight >= 1150) {
+      canvasHeight = 1150;
     }
-    // http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529394343847_c114c89cb8b96e86812abf89b9f7c2ba.jpg  
-    // http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529493460659_537640df3e0bf3454e4b797e6b4c6d60.jpeg
-    let imgList = [`http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529394343847_c114c89cb8b96e86812abf89b9f7c2ba.jpg`, `http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1528775750604_6e385e0e3a1d687726c97bbb7bb64a28.png`, `http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529394825902_94cbfaab4e7a34562c24c49b36907de7.png`, `http://damaizs.oss-cn-shenzhen.aliyuncs.com/file/1529394888202_9e110b7960ee001ca47e3f67caf61ed8.png`];
+    this.setData({
+      canvasHeight: canvasHeight
+    })
+    if (findLength > 0 && SoldLength > 0) {
+      pTextX = 0.32;
+      pTextY = 0.2;
+    } else if (findLength == 0 && SoldLength == 0) {
+
+    } else {
+      pTextX = 0.32;
+      pTextY = 0.2;
+    }
+    let imgList = [`https://zhaocha.yf-gz.cn/oss/file/1529394343847_c114c89cb8b96e86812abf89b9f7c2ba.jpg`, `https://zhaocha.yf-gz.cn/oss/file/1529760540068_964ac564fd6027e18ca4caa1f1768b67.png`, `https://zhaocha.yf-gz.cn/oss/file/1529760562033_4d073e86592b3b66cdfdc966dabcbb65.png`, `https://zhaocha.yf-gz.cn/oss/file/1529822340278_9c1385517cbc8860981a2e72e3ad310f.png`, `https://zhaocha.yf-gz.cn/oss/file/1529394825902_94cbfaab4e7a34562c24c49b36907de7.png`, `https://zhaocha.yf-gz.cn/oss/file/1529394888202_9e110b7960ee001ca47e3f67caf61ed8.png`,
+      `${that.data.qrcode.imgUrl}`,
+      `https://zhaocha.yf-gz.cn/oss/file/1529825482542_43cecb63f716dd6b9dd7390b20dabb3.png`,
+      `https://zhaocha.yf-gz.cn/oss/file/1529825635940_7a8b4ce5c1abaedd5af521eb4006e616.png`,
+      `https://zhaocha.yf-gz.cn/oss/file/1529828023628_4061fc6131b97ed4cdfcd0a53ea6d579.png`,
+      `https://zhaocha.yf-gz.cn/oss/file/1529828109391_78412cb505dba7f0981003b51ac9b541.png`];
     let ctx = wx.createCanvasContext(canvasId);
     that.setData({ showCanvas: true });
-    wx.showLoading({ title: '生成中...' });
     that.downloadFileList(imgList).then(urlList => {
       let imgInfo = urlList[0];
       let sw = imgInfo.info.width;
@@ -530,61 +627,101 @@ Page({
       that.setData({ canvasWHRate: sw / sh });
       //画布框
       ctx.setFillStyle(canvasColor);
-      ctx.fillRect(0, 0, windowWidth, imgHeight);
+      ctx.fillRect(0, 0, windowWidth, canvasHeight);
       //图片
-      console.log(windowWidth, imgHeight);
-      ctx.drawImage(imgInfo.url, 0, 0, windowWidth, imgHeight);
-      ctx.drawImage(urlList[1].url, windowWidth * 0.6, imgHeight * 0.8, qrCodeSize, qrCodeSize);   //二维码
+      console.log(windowWidth, windowHeight);
+      ctx.drawImage(urlList[1].url, 20, 20, 50, 50);
+      ctx.drawImage(urlList[2].url, windowWidth - 70, 20, 50, 50);
 
-      let x = windowWidth * pTextX + addf;
-      let y = imgHeight * pTextY;
+      ctx.drawImage(urlList[7].url, 20, canvasHeight - 70, 50, 50);
+      ctx.drawImage(urlList[8].url, windowWidth - 70, canvasHeight - 70, 50, 50);
+      ctx.beginPath();
+      ctx.moveTo(71, 22);
+      ctx.lineTo(windowWidth - 72, 22);
 
-      if (findLength>0){
-        // ctx.drawImage(urlList[2].url, windowWidth * pImgW, imgHeight * pImgH, qrCodeSize * 0.4, qrCodeSize * 0.4);  //找
-        ctx.drawImage(urlList[2].url, windowWidth * pImgW, imgHeight * pImgH, qrCodeSize * 0.4, qrCodeSize * 0.4);  //找
+      ctx.moveTo(22, 75);
+      ctx.lineTo(22, canvasHeight - 72);
+
+      ctx.moveTo(windowWidth - 20, 75);
+      ctx.lineTo(windowWidth - 20, canvasHeight - 72);
+
+      ctx.moveTo(71, canvasHeight - 20);
+      ctx.lineTo(windowWidth - 72, canvasHeight - 20);
+
+      ctx.setLineWidth(4);
+      ctx.setStrokeStyle('#c4b696');
+      ctx.stroke();
+
+      //山坡
+      ctx.drawImage(urlList[3].url, 0, 0, windowWidth, imgHeight);
+
+      //二维码
+      ctx.drawImage(urlList[6].url, windowWidth - 240, canvasHeight - 240, qrCodeSize * 1.8, qrCodeSize * 1.8);
+
+
+      let x = windowWidth * pTextX;
+      let y = windowWidth * pTextY;
+
+      if (findLength > 0) {
+        ctx.drawImage(urlList[4].url, 85, 85, qrCodeSize * 1.3, qrCodeSize * 1.3);  //找
         //文字
         ctx.setFontSize(fontSize);
         ctx.setFillStyle(textColor);
         textFindList.forEach(item => {
           ctx.fillText(item, x, y);
-          y += fontSize * 1.2;
+          y += fontSize * 1.3;
         })
       }
-      x = windowWidth * pTextX + addx;
-       y = imgHeight * pTextY;
-      if (SoldLength > 0){
-        // ctx.drawImage(urlList[3].url, windowWidth * 0.15, y, qrCodeSize * 0.4, qrCodeSize * 0.4);
-        ctx.drawImage(urlList[3].url, windowWidth * pImgW02, imgHeight * pImgH, qrCodeSize * 0.4, qrCodeSize * 0.4);
-        x += 20;
+      var y2 = y;
+      var y3 = y;
+      if (SoldLength > 0) {
+        if (findLength == 0) {
+          y2 = 85;
+        } else {
+          y2 = y;
+          y3 = y3 + 60;
+        }
+        ctx.drawImage(urlList[5].url, 85, y2, qrCodeSize * 1.3, qrCodeSize * 1.3);
         ctx.setFontSize(fontSize);
         ctx.setFillStyle(textColor);
         textSoldList.forEach(item => {
-          ctx.fillText(item, x, y);
-          y += fontSize * 1.2;
+          ctx.fillText(item, x, y3);
+          y3 += fontSize * 1.3;
         })
-      }    
-      // let x2 = windowWidth * 0.45 + padding + qrCodeSize * 0.5;
-      // let y2 = imgHeight * 0.48 + padding * 0.4;
-      
-      let x3 = windowWidth * 0.06 + padding + qrCodeSize * 0.5;
-      let y3 = imgHeight * 0.9 + padding*1.5;
-      ctx.setFontSize(fontSize-3);
-      textContect.forEach(item => {
-        ctx.fillText(item, x3, y3);
-        y3 += fontSize * 1.2;
-      })
+      }
 
-      ctx.draw(false, function () {
-        //生成海报
+
+      ctx.drawImage(urlList[9].url, 110, canvasHeight - 200, qrCodeSize * 0.4, qrCodeSize * 0.4);
+      ctx.drawImage(urlList[10].url, 110, canvasHeight - 130, qrCodeSize * 0.4, qrCodeSize * 0.4);
+      let x4 = 160;
+      let y4 = canvasHeight - 165;
+      ctx.setFontSize(40);
+      textContect.forEach(item => {
+        ctx.fillText(item, x4, y4);
+        y4 += fontSize * 1.2;
+      })
+ 
+      console.log('开始');
+      console.log(data);
+      ctx.draw(false, function (res) {
+        //生成海报     
+        console.log(res)
         if (data == 1) {
           that.saveCanvas(canvasId).then(() => {
             wx.hideLoading();
           });
+          that.setData({
+            modyfyStatus: false
+          })
         }
         //预览
         if (data == 2) {
+          console.log('预览');
           that.previewCanvas(canvasId).then(() => {
             wx.hideLoading();
+            that.setData({
+              modyfyStatus: false
+            })
           });
         }
 
@@ -613,12 +750,12 @@ Page({
   },
   makeGoodsCard(data) {
     const that = this;
-    this.processPreviewData(function(res){
+    this.processPreviewData(function (res) {
       console.log(res);
-      if (res ='success'){
+      if (res = 'success') {
         that.drawCanvas(data);
       }
-    });  
+    });
     // that.checkSaveImageAuthor().then(() => {
     //   that.drawCanvas();
     // });
@@ -641,18 +778,22 @@ Page({
       textFindList: temp
     })
   },
-  processPreviewData:function(callback){
+  processPreviewData: function (callback) {
+    var that = this;
     var contact = [];
     var textFind = [];
     var textSold = [];
+    var textFindList = [];
+    var textSoldList = [];
     var objects = this.data.teaList.objects;
-    contact.push(this.data.teaList.name);
+    var name = this.data.teaList.name;
+    contact.push(name.substring(0,8));
     contact.push(this.data.teaList.phone);
-    for (var idx in objects){
-      if (objects[idx].type == 1 || objects[idx].type == 2){
+    for (var idx in objects) {
+      if (objects[idx].type == 1 || objects[idx].type == 2) {
         textFind.push(objects[idx].name)
       }
-      if (objects[idx].type == 3 || objects[idx].type == 4){
+      if (objects[idx].type == 3 || objects[idx].type == 4) {
         textSold.push(objects[idx].name);
       }
     }
@@ -661,7 +802,7 @@ Page({
       textFindList: textFind,
       textSoldList: textSold
     })
-    callback("success");
+    callback('success');
   },
   onModalPreviewConfirm: function (e) {
     this.setData({
@@ -669,14 +810,66 @@ Page({
       showCan: false
     })
   },
+  getQrcode: function (e) {
+    var url = `${app.api.qrcode}` + '/' + `${this.data.teaList.id}`;
+    var that = this;
+    var data = {
+      requireId: this.data.teaList.id
+    };
+    app.apiFunctions.requestUrl(
+      app.api.qrcode,
+      'GET',
+      true,
+      true,
+      data,
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+          that.setData({
+            qrcode: data.data
+          });
+          if (that.data.modyfyStatus){
+            that.setData({
+              showCan: true,
+              flag: true,
+              previewOrMore: '0'
+            })
+            that.makeGoodsCard(2);
+          }
+        }
+      }
+    );
+  },
   /**
  * 生命周期函数--监听页面显示
  */
   onShow: function () {
-    console.log('onShow')
+    console.log('onShow');
+    this.getPublish();
     this.setData({
-      showCan: false
+      showCan: false,
+      edit: false
     })
+   this.getUnreadCount();
+    this.interval = setInterval(this.getUnreadCount, 10000);
+  },
+  getUnreadCount: function (requireId) {
+    var that = this;
+    app.apiFunctions.requestUrl(
+      app.api.unreadCount,
+      'GET',
+      true,
+      true,
+      '',
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+          that.setData({
+            unReadCount: data.data
+          })
+        }
+      }
+    );
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -688,14 +881,17 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    console.log('onHide');
+    var that = this;
+    clearInterval(that.interval);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    var that = this;
+    clearInterval(that.interval);
   },
 
   /**
@@ -717,43 +913,29 @@ Page({
    */
 
   onShareAppMessage: function (options) {
-    // if (options.from == 'button') {
-    //   // 来自页面内转发按钮
-    //   console.log(options.target)
-    // }
-    // return {
-    //   title: '自定义转发标题',
-    //   path: '/page/user?id=123'
-    // }
     console.log(options);
     let teaList = this.data.teaList;
     var that = this;
-    　　// 设置菜单中的转发按钮触发转发事件时的转发内容
-    　　var shareObj = {
-        title: `${teaList.name}` + '-' + `${teaList.phone}`,      // 默认是小程序的名称(可以写slogan等)
-      　　　　path: '/pages/share/share',        // 默认是当前页面，必须是以‘/’开头的完整路径
-      　　　　imgUrl: '',     //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
-      　　　　success: function (res) {
-        　　　　　　// 转发成功之后的回调
-        　　　　　　if (res.errMsg == 'shareAppMessage:ok') {
-        　　　　　　}
-      　　　　},
-      　　　　fail: function (res) {
-        　　　　　　// 转发失败之后的回调
-        　　　　　　if (res.errMsg == 'shareAppMessage:fail cancel') {
-          　　　　　　　　// 用户取消转发
-        　　　　　　} else if (res.errMsg == 'shareAppMessage:fail') {
-          　　　　　　　　// 转发失败，其中 detail message 为详细失败信息
-        　　　　　　}
-      　　　　}
-  　　};
-  　　// 来自页面内的按钮的转发
-      if (options.from == 'button') {
-    // 　　　　var eData = options.target.dataset;
-    　　　　// 此处可以修改 shareObj 中的内容
-        shareObj.path = '/pages/homepage/homepage?userId=' + teaList.id;
-  　　}
-　　// 返回shareObj
-　　return shareObj;
+    var shareObj = {
+      title: `${teaList.name}` + '-' + `${teaList.phone}`,
+      path: '/pages/share/share',
+      imageUrl: `${that.data.localImg}`,
+      success: function (res) {
+        if (res.errMsg == 'shareAppMessage:ok') {
+        }
+      },
+      fail: function (res) {
+        if (res.errMsg == 'shareAppMessage:fail cancel') {
+        } else if (res.errMsg == 'shareAppMessage:fail') {
+        }
+      }
+    };
+    if (options.from == 'button') {
+      shareObj.path = '/pages/homepage/homepage?requireId=' + teaList.id;
+    } else {
+      shareObj.path = '/pages/homepage/homepage?requireId=' + teaList.id;
+    }
+    return shareObj;
+    
   }
 })

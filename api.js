@@ -1,7 +1,24 @@
 const server = require('./server.js');
 const url = server.domain;
- 
+const dhyurl = server.dhData;
 module.exports = {
+  getMyMsg:'/api/wx/user',
+  requireUserId:'/api/wx/require/byUserId',
+  unreadCount:'/api/wx/chat/unreadCount',
+  unreadMessage:'/api/wx/chat/unread',
+  sendMessage:'/api/wx/chat',
+  setRead:'/api/wx/chat/setRead',
+  message:'/api/wx/chat/',
+  messageList:'/api/wx/chat/list',
+  userPhone: '/api/wx/user/phone',
+  userInfo:'/api/wx/user/userInfo',
+  detaiResult: dhyurl+'/spider/detail_result/',
+  historySearch:'/api/wx/search/history',
+  hotSearch:'/api/wx/search/hot',
+  searchTea: dhyurl + '/spider/search_detail/',
+  getTeaclassify: dhyurl +'/spider/index_result/',
+  qrcode: '/api/wx/require/qrcode',
+  deletePublish: '/api/wx/require',
   visit:'/api/wx/require/visit',
   myPublish:'/api/wx/require/myRequire',
   myLikeRequire:'/api/wx/require/myLikeRequire',

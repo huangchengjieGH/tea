@@ -1,0 +1,408 @@
+/* pages/searchtea/searchtea.wxss */
+
+page {
+  background-color: #f0f2f7;
+}
+
+.searchCon {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-y {
+  /* position: fixed;  */
+  top: 0rpx;
+  left: 0;
+  right: 0;
+}
+
+.weui_cell {
+  padding: 0 0 7px 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.weui-cell_bd {
+  /* cc */
+  font-size: 14px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+.search-y .searchbar {
+  background: #4eaefe;
+}
+
+.search_btn {
+  font-size: 16px;
+  padding: 8px 0 8px 10px;
+}
+
+.search_btn image {
+  margin-top: 5px;
+  height: 25px;
+  width: 23px;
+  display: inline-block;
+}
+
+.weui_search-bar {
+  position: relative;
+  padding: 8px 10px;
+   padding-right: 18px; 
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  box-sizing: border-box;
+  background-color: #4eaefe; /*#f9f9f9*//* border-top: 1rpx solid #D7D6DC; *//* border-bottom: 1rpx solid #e6e6e6; */
+}
+
+.weui-search-bar_form {
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex: auto;
+  flex: auto;
+  border-radius: 5px;
+  background: #fff;
+  border: 1rpx solid #e6e6ea;
+}
+
+.weui-search-bar_box {
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.weui_icon-search_in-box {
+  position: absolute;
+  left: 10px;
+  top: 7px;
+}
+
+.weui-search-bar_input {
+  height: 28px;
+  line-height: 28px;
+  font-size: 14px;
+}
+
+.weui_icon-clear {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 7px 8px;
+  font-size: 0;
+}
+
+.weui-search-bar_label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  border-radius: 3px;
+  text-align: center;
+  color: #9b9b9b;
+  background: #fff;
+  line-height: 28px;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.weui_icon-search {
+  margin-right: 8px;
+  font-size: inherit;
+  /* margin-top: 3px; */
+}
+
+.weui-search-bar_text {
+  display: inline-block;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.weui-search-bar_cancel-btn {
+  margin-left: 10px;
+  color: white;
+  white-space: nowrap;
+  background-color: #ec820e;
+  padding: 5px 8px;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 300;
+}
+
+.history {
+  background-color: white;
+  border-bottom: 1rpx solid rgb(220, 220, 220);
+  padding-bottom:18rpx;
+
+}
+
+.title {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  font-weight: 300;
+  padding: 20rpx 20rpx 15rpx 40rpx;
+  /* border-bottom: 1rpx solid rgb(220, 220, 220); */
+}
+
+.cancelBtn {
+  position: absolute;
+  right: 18px;
+  top: 8px;
+}
+
+.searchfor {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 10px;
+}
+
+.searchhistory {
+  display: flex;
+  font-size: 13px;
+  font-weight: 300;
+  padding: 8px 8px;
+  background-color: rgb(220, 220, 220);
+  margin: 8px 8px;
+  border-radius: 5rpx;
+}
+
+.namemsg {
+  position: relative;
+  margin: 20rpx;
+  background-color: white;
+  border-radius: 5rpx;
+  padding: 10rpx 0;
+}
+
+.namescore {
+  padding: 25rpx 0;
+  width: 100%;
+  border-bottom: 1rpx solid rgb(220, 220, 220);
+}
+
+.name {
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.score {
+  position: absolute;
+  font-size: 25px;
+  color: #feaa02;
+  right: 80rpx;
+  top: 25rpx;
+}
+
+.fen {
+  position: absolute;
+  right: 40rpx;
+  color: #feaa02;
+  top: 40rpx;
+}
+
+.yearbatch {
+  position: relative;
+  padding: 15rpx 0;
+  margin-left: 30rpx;
+  margin-top: 10rpx;
+}
+
+.batch {
+  position: absolute;
+  right: 300rpx;
+}
+
+.batchValue {
+  /* position: absolute;
+  right: 170rpx; */
+  margin-left: 200rpx;
+}
+
+.Technology {
+  padding: 15rpx 0;
+  position: relative;
+  margin-left: 30rpx;
+}
+
+.product {
+  position: absolute;
+  right: 210rpx;
+}
+
+.productValue {
+  /* position: absolute;
+  right: 50rpx; */
+  margin-left: 250rpx;
+}
+
+.specification {
+  /* padding: 20rpx 30rpx; */
+  margin-left: 30rpx;
+  margin-top: 15rpx;
+}
+
+.reference {
+  padding: 15rpx 0 20rpx 30rpx;
+}
+
+.price {
+  color: red;
+  font-size: 20px;
+  margin-left: 10rpx;
+  letter-spacing: 1px;
+}
+
+/* pages/leftpop/leftpop.wxss */
+.view_show2 {
+  display: block;
+}
+.view_hide2, .modal1 {
+  display: none;
+}
+.popup-wrapper2 {
+  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  overflow: auto;
+  margin: 0;
+  z-index: 3;
+  animation: fadein 0.5s;
+}
+.popup-left2 {
+  width: 250px;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  height: 100%;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  box-shadow: rgba(0, 0, 0, 0.270588) 0px -2px 20px 0px;
+  flex-direction: column;
+  z-index: 200;
+  animation: moveright 0.4s ease;
+  overflow-y: scroll;
+}
+.weui-flex__item2 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  font-size: 35rpx;
+}
+.weui-cell_access2 {
+  color: inherit;
+}
+.weui-flex {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.weui-cells {
+  margin: 0;
+  opacity: 0;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.weui-cells:before, .weui-cells:after {
+  display: none;
+}
+
+.weui-cells_show {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.weui-cell:before {
+  right: 15px;
+}
+
+.kind-list {
+  padding: 6px 0;
+}
+
+.kind-list__item {
+  margin: 10px 0;
+  background-color: #fff;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.kind-list__item:first-child {
+  margin-top: 0;
+}
+
+.kind-list__item-hd {
+  padding: 6px 12px;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  font-size: 16px;
+}
+
+.kind-list__item-hd_show {
+  opacity: 0.4;
+}
+
+.kind-list__item-bd {
+  height: 0;
+  overflow: hidden;
+}
+
+.kind-list__item-bd_show {
+  height: auto;
+}
+
+.search_y .searchbar {
+  background: #f9f9f9;
+}
+
+.search_y .searchbar-result {
+  opacity: 1;
+  top: 52px;
+  left: 0;
+  right: 0;
+  border-bottom: 1rpx solid #e6e6e6;
+}
+.weui-cell__bd2 {
+  /* cc */
+  font-size: 16px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  padding: 10rpx;
+}
+.year {
+  padding: 10rpx 20rpx;
+  font-size: 18px;
+  border-bottom: 1rpx solid rgb(210, 210, 210);
+}
+
+.yearlist {
+  width: 100%;
+  height: 36px;
+  align-items: center;
+  display: flex;
+  padding-left: 43px;
+}

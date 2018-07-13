@@ -3,7 +3,7 @@ let app = getApp();
 const tools = require('../../tools.js');
 
 var page = 1;
-var page_size = 20;
+var page_size = 10;
 
 Page({
 
@@ -26,17 +26,34 @@ Page({
     hideShare:true,
     scrollTop: 0,
     scrollHeight: 0,
-    publishList:[]
+    publishList:[],
+    nodata:false,
+    photos: []
   },
-
+  GetQueryString: function (url, key) {
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+      var str = url.split("?")[1];
+      var strs = str.split("&");
+      for (var i = 0; i < strs.length; i++) {
+        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+      }
+    }
+    return theRequest[key];
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getPublishList();
-    // var url = decodeURIComponent(options.q);
-    var userId = options.userId;
-    // var userId = 3;
+    var requireId = options.requireId;
+    // var requireId = 37;
+    var scene = decodeURIComponent(options.scene);
+    if (requireId == null || requireId==''){
+      requireId = this.GetQueryString(scene, 'requireId');
+    }
+    console.log('url');
+    console.log(scene);
+    console.log(requireId);
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -45,18 +62,26 @@ Page({
         });
       }
     });
-    if (userId != null && userId != ''){
+    if (requireId != null && requireId!=''){
       this.setData({
-        userId: userId,
+        requireId: requireId,
         hideShare: false
       })
-      this.getSharePublish(userId);
-      this.getVisit(userId);
+      this.getSharePublish(requireId);
+      this.getVisit(requireId);
     }
+
+    page = 1;
+    this.setData({
+      status: '智能推荐',
+      publishList: []
+    })
+    this.getRecommendList();
+    this.getMyMsg();
   },
   onShow: function () {
-    page=1;
-    this.getRecommendList();
+    this.getUnreadCount();
+    this.interval = setInterval(this.getUnreadCount, 10000);
   },
   onTypeTap: function (e) {
     var status = e.currentTarget.dataset.status;
@@ -98,10 +123,18 @@ Page({
     var find02=[];  //代客找
     var out01=[];   // 出
     var out02=[];   //代客出
+    var maxLength = false;
+    var length = 0;
+    console.log('hcj')
+    console.log(data);
     for (var idx in data){
+      maxLength = false;
+      length = 0;
       var object = data[idx].objects;
+      var obj = data[idx].objects;
       data[idx].updatedAt = app.util.formatTime(new Date(data[idx].updatedAt)); 
-      data[idx].createdAt = app.util.formatTime(new Date(data[idx].createdAt));   
+      data[idx].createdAt = app.util.formatTime(new Date(data[idx].createdAt));  
+      length += object.length;
       for (var idx2 in object) {
         switch (object[idx2].type) {
           case 1:
@@ -118,6 +151,9 @@ Page({
             break;
           default:
             break;
+        }
+        if (object.length >=15){
+          maxLength = true;
         }
       }
       if (find01.length != 0) {
@@ -157,12 +193,19 @@ Page({
         out02=[];
       }
       data[idx].objects = objects;
+      data[idx].maxLength = maxLength;
+      data[idx].length = length;
       objects = [];
     }  
 
     var publishList = that.data.publishList;
     for (var i = 0; i < data.length; i++) {
       publishList.push(data[i]);
+    }
+    if (publishList.length ==0){
+      this.setData({
+        nodata:true
+      })
     }
     that.setData({
       publishList: publishList
@@ -181,10 +224,12 @@ Page({
     var find02 = [];  //代客找
     var out01 = [];   // 出
     var out02 = [];   //代客出
+    var maxLength = false;
+    var length = 0;
     var object = data.objects;
-
     data.updatedAt = app.util.formatTime(new Date(data.updatedAt));
     data.createdAt = app.util.formatTime(new Date(data.createdAt));
+    length += object.length;
       for (var idx2 in object) {
         switch (object[idx2].type) {
           case 1:
@@ -201,6 +246,9 @@ Page({
             break;
           default:
             break;
+        }
+        if (object.length >= 15) {
+          maxLength = true;
         }
       }
       if (find01.length != 0) {
@@ -240,6 +288,8 @@ Page({
         out02 = [];
       }
       data.objects = objects;
+      data.maxLength = maxLength;
+      data.length = length;
       objects = [];
     
 
@@ -261,7 +311,7 @@ Page({
       false,
       data,
       function (data) {
-        console.log(data);
+        console.log(data.data);
         if (data.status == 1) {
           page++;
           that.setData({
@@ -269,6 +319,8 @@ Page({
           });
           that.processPublishData(data.data);
         }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
       }
     );
   },
@@ -292,7 +344,6 @@ Page({
     );
   },
   getRecommendList: function (e) {
-
     console.log(new Date());
     var that = this;
     var data = {
@@ -315,12 +366,14 @@ Page({
           });
           that.processPublishData(data.data);     
         }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
       }
     );
   },
-  getSharePublish: function (userId) {
+  getSharePublish: function (requireId) {
     var that = this;
-    var url = `${app.api.getPublish}` + '/' + `${userId}`;
+    var url = `${app.api.getPublish}` + '/' + `${requireId}`;
     app.apiFunctions.requestUrl(
       url,
       'GET',
@@ -366,10 +419,7 @@ Page({
   //   );
   // },
   onInputTap:function(e){
-    // console.log('hshs');
-    // this.setData({
-    //   hideShare:true
-    // })
+ 
   },
   collectTea: function (e) {
     // var flag = 0;
@@ -384,10 +434,10 @@ Page({
     };
     if (!like){
       var url = `${app.api.collect}`;
-      var title = '收藏成功';
+      var title = '关注成功';
     }else{
       var url = `${app.api.uncollect}`;
-      var title = '取消收藏';
+      var title = '取消关注';
     }
     app.apiFunctions.requestUrl(
       url,
@@ -446,6 +496,68 @@ Page({
     // }
     console.log("topLoad");
   },
+  onCheckMoreTap:function(e){
+    var id = e.currentTarget.dataset.id;
+    console.log(id);
+    wx.navigateTo({
+      url: '../more/more?requireId=' + id,
+    })
+  },
+  onAvatarTap:function(e){
+    var url = e.currentTarget.dataset.url;
+    var photoList = [];
+    var temp = {};
+    temp={
+      url:url
+    }
+    photoList.push(temp);
+    console.log(photoList);
+    this.setData({
+      photos: photoList
+    })
+    this.previewImage();
+  },
+  previewImage: function (e) {
+    // let index = e.currentTarget.dataset.index;
+    let index = 0;
+    let imgList = [];
+    this.data.photos.forEach(photo => {
+      imgList.push(photo.url);
+    });
+    console.log(imgList);
+    wx.previewImage({
+      current: imgList[index],
+      urls: imgList
+    });
+  },
+  onBodyTap:function(e){
+    // console.log('ssss');
+    var requireId = e.currentTarget.dataset.requireid;
+    var ortherUserId = e.currentTarget.dataset.ortheruserid;
+    this.getVisit(requireId);
+    wx.navigateTo({
+      url: '../chat/chat?ortherUserId=' + ortherUserId,
+    })
+    console.log(requireId);
+  },
+  getUnreadCount: function (e) {
+    var that = this;
+    app.apiFunctions.requestUrl(
+      app.api.unreadCount,
+      'GET',
+      true,
+      true,
+      '',
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+          that.setData({
+            unReadCount:data.data
+          })
+        }
+      }
+    );
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -462,14 +574,17 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    console.log('onHide');
+    var that = this;
+    clearInterval(that.interval);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    var that = this;
+    clearInterval(that.interval);
   },
 
   /**
@@ -477,15 +592,40 @@ Page({
    */
   onPullDownRefresh: function () {
     console.log('onPullDownRefresh');
-    // this.setData({
-    //   hideShare:false
-    // })
+    wx.showNavigationBarLoading();
+    page = 1;
+    this.setData({
+      publishList: []
+    })
+    if(this.data.status == '最新发布'){
+      this.getPublishList();
+    }else{
+      this.getRecommendList();
+    }    
   },
-
+  getMyMsg: function (e) {
+    var that = this;
+    app.apiFunctions.requestUrl(
+      app.api.getMyMsg,
+      'GET',
+      true,
+      true,
+      '',
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+           that.setData({
+             myMsg:data.data
+           })
+        }
+      }
+    );
+  },
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    console.log('onPullDownRefresh');
     var that = this;
     this.setData({
       hidden: false

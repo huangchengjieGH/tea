@@ -1,47 +1,13 @@
-<scroll-view class='publishCon'>
+<view class='publishCon'>
   <view style="{{edit?'display:none':''}}">
-    <!-- <view class='msg'>
-      <view class='shopName'>
-        <view style='width:20%;margin-top:15rpx'>
-          <image class='shopImg' src='/images/icons/dianpu.png'></image>
-          <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>店铺名</text>
-        </view>
-        <view style='width:80%;margin-top:15rpx;color: rgb(22, 22, 22);font-size:37rpx;'>
-          <text style='margin-left:10rpx;'>{{teaList.name}}</text>
-        </view>
-
-      </view>
-      <view class='phone'>
-        <view style='width:20%;margin-bottom:15rpx'>
-          <image class='shopImg' src='/images/icons/dianhua.png'></image>
-          <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>电话</text>
-        </view>
-        <view style='width:80%;margin-bottom:15rpx;color: rgb(22, 22, 22);font-size:37rpx;'>
-          <text style='margin-left:10rpx;' catchtap='onPhoneTap' data-phone="{{teaList.phone}}">{{teaList.phone}}</text>
-        </view>
-      </view>
-    </view> -->
-    <scroll-view scroll-y="true" style='margin-top: 7px;height:300px;'>
-      <view class='body' wx:for="{{teaList.objects}}">
-        <view class='products'>
-          <view style='width:20%;'>
-            <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>{{style[item.type-1]}}</text>
-          </view>
-          <view style='width:80%;'>
-            <text style='color: rgb(22, 22, 22);font-size:37rpx;margin-left:10rpx;'>{{item.name}}</text>
-          </view>
-        </view>
-      </view>
-    </scroll-view>
-
     <view class='msg'>
       <view class='shopName'>
-        <view style='width:20%;margin-top:15rpx'>
+        <view style='width:160rpx;margin-top:15rpx'>
           <image class='shopImg' src='/images/icons/dianpu.png'></image>
           <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>店铺名</text>
         </view>
-        <view style='width:80%;margin-top:15rpx;color: rgb(22, 22, 22);font-size:37rpx;'>
-          <text style='margin-left:10rpx;'>{{teaList.name}}</text>
+        <view style='width:500rpx;margin-top:15rpx;color: rgb(22, 22, 22);font-size:37rpx;'>
+          <text style='margin-left:10rpx;'>{{teaList.name!=null?teaList.name:''}}</text>
         </view>
 
       </view>
@@ -51,9 +17,30 @@
           <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>电话</text>
         </view>
         <view style='width:80%;margin-bottom:15rpx;color: rgb(22, 22, 22);font-size:37rpx;'>
-          <text style='margin-left:10rpx;' catchtap='onPhoneTap' data-phone="{{teaList.phone}}">{{teaList.phone}}</text>
+          <text style='margin-left:10rpx;' catchtap='onPhoneTap' data-phone="{{teaList.phone}}">{{teaList.phone!=null?teaList.phone:''}}</text>
         </view>
       </view>
+    </view>
+
+    <view style=''>
+      <scroll-view scroll-y="true" style='margin-top: 7px;max-height:600rpx;'>
+        <view class='body' wx:for="{{teaList.objects}}">
+          <view class='products'>
+            <view style='width:20%;display:flex;justify-content:center'>
+              <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>{{style[item.type-1]}}</text>
+            </view>
+            <view style='width:80%;display:flex'>
+              <text style='color: rgb(22, 22, 22);font-size:19px;margin-left:10rpx;'>{{item.name}}</text>
+              <text style='font-weight:300;font-size:19px;margin-left:10rpx;letter-spacing:2px' wx:if="{{item.count>0}}">X{{item.count}}{{item.unit}}</text>
+              <view style='position:absolute;left:280px;'>
+                <text style='font-weight:300;color: #EC820E;font-size:19px;margin-left:10rpx;letter-spacing:1px' wx:if="{{item.price}}">￥{{item.price>10000?(item.price/10000):item.price}}</text>
+                <text style='font-weight:300;color: #EC820E;letter-spacing:1px;' wx:if="{{item.price>10000}}">万</text>
+              </view>
+
+            </view>
+          </view>
+        </view>
+      </scroll-view>
     </view>
 
   </view>
@@ -62,92 +49,111 @@
     <view class='msg'>
       <view class='shopName'>
         <view style='width:20%;margin-top:15rpx'>
-          <!-- <image class='shopImg' src='/images/icons/dianpu.png'></image> -->
           <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>店铺名</text>
         </view>
-        <view style='width:80%;margin-top:15rpx;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;width:60%;border-radius:10rpx;'>
-          <!-- <text style=''>东朝茶叶-陈生</text> -->
+        <view style='width:60%;margin-top:15rpx;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;'>
           <input style="margin-left:10rpx;" placeholder="请输入名称" bindblur="shopNameInput" value="{{teaList.name}}" />
         </view>
-
       </view>
       <view class='phone'>
         <view style='width:20%;margin-bottom:15rpx'>
-          <!-- <image class='shopImg' src='/images/icons/dianhua.png'></image> -->
           <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>电话</text>
         </view>
-        <view style='width:80%;margin-bottom:15rpx;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;width:60%;border-radius:10rpx;'>
-          <!-- <text style=''>15889668181</text> -->
+        <view style='width:60%;margin-bottom:15rpx;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;'>
           <input style="margin-left:10rpx;" placeholder="请输入电话" bindblur="phoneInput" value="{{teaList.phone}}" />
         </view>
       </view>
     </view>
-    <scroll-view class='body' scroll-y="true" style="{{flag?'height:550rpx;':'display:none'}}">
-      <view class='products' wx:for="{{teaList.objects}}" wx:for-index="index">
-        <view style='width:20%;display:flex;flex-direction:row;align-items: center;justify-content: flex-start;'>
-          <!-- <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>出</text> -->
-          <picker bindchange="bindPickerChange" bindcancel="bindCancelTap" catchtap='onClickTap' value="{{item.type-1}}" range="{{style}}" data-teaindex="{{index}}">
+    <scroll-view class='body' scroll-y="true" style="{{flag?'max-height:550rpx;':'display:none'}}">
+      <view class='products02' wx:for="{{teaList.objects}}" wx:for-index="index">
+        <view class='style'>
+          <picker class='picker' bindchange="bindPickerChange" bindcancel="bindCancelTap" catchtap='onClickTap' value="{{item.type-1}}" range="{{style}}" data-teaindex="{{index}}">
             {{style[item.type-1]}}
+            <view class="{{down?'triangleDown':'triangleUp'}}" style='margin-left:10rpx;'></view>
           </picker>
-          <view class="{{down?'triangleDown':'triangleUp'}}" style='margin-left:10rpx;'></view>
         </view>
-        <view style='width:53%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;'>
-          <input placeholder-class="{{flag?'':'fontclass'}}" style='margin-left:10rpx;' placeholder="请输入名称" bindblur="teaInput" value="{{item.name}}" data-teaindex="{{index}}" />
+        <view class='editinput'>
+          <input placeholder-class="{{flag?'':'fontclass'}}" style='margin-left:10px;' placeholder="请输入名称" bindinput="teaInput" value="{{item.name}}" data-teaindex="{{index}}" />
         </view>
         <view style='display:flex;align-items: center;justify-content: center;'>
-          <image style='height:35rpx;width:30rpx;margin-left:8rpx;' src='/images/icons/delete.png' catchtap='onDeleteTap' data-teaindex="{{index}}"></image>
-          <text style='color:#4faffe;font-size:30rpx;margin-left:10rpx;' bindtap="onMoreTap" data-teaindex="{{index}}">更多</text>
+          <image style='height:22px;width:17px;margin-left:7px;' src='/images/icons/delete.png' catchtap='onDeleteTap' data-teaindex="{{index}}"></image>
+          <text style='color:#4faffe;font-size:17px;margin-left:8px;' bindtap="onMoreTap" data-teaindex="{{index}}">更多</text>
         </view>
       </view>
     </scroll-view>
-    <view class='add' catchtap='addTeaTap'>
-      <image style='height:80rpx;width:80rpx;' src='/images/icons/add2.png'></image>
+    <view class='add'>
+      <image catchtap='addTeaTap' style='height:80rpx;width:80rpx;' src='/images/icons/add2.png'></image>
     </view>
+    <view style='font-size:10px;color:#868383;padding-left:20px;'>提示:名称不超过10字效果最好,点击更多录入价格,数量等信息</view>
   </view>
 
 
   <view class='func' style="{{edit?'display:none':''}}">
-    <view class='delete' catchtap='onClearTap'>清空并重新发布</view>
+    <view class='delete' catchtap='onClearTap' data-requireId="{{teaList.id}}">清空并重新发布</view>
     <view class='edit' catchtap='onEditTap'>编辑</view>
     <view class='preview' catchtap='onPreviewTap'>预览</view>
   </view>
 
   <view class='confirmcel' style="{{edit?'':'display:none'}}">
     <view class='cancel' catchtap='onCancelTap'>取消</view>
-    <view class='confirm' catchtap='onConfirmTap'>确定</view>
+    <view class='confirm' catchtap='onConfirmTap' data-requireId="{{teaList.id}}">发布</view>
   </view>
-
+  <view class='tips' style="{{edit?'display:none':''}}">
+    <view class="tooltip">
+      <image src='/images/icons/tips.png' style='height:45rpx;width:45rpx;'></image>
+      <text class='tooltiptext'>生成分享图片，长按图片可分享给朋友</text>
+    </view>
+  </view>
   <view class='bottom' style="{{edit?'display:none':''}}">
     <button open-type="share" class='friends'>
-      <image style='width:45rpx;height:45rpx;padding-top:10rpx' src='/images/icons/wechat.png'></image>
+      <image style='width:50rpx;height:50rpx;padding-top:10rpx' src='/images/icons/wechat2.png'></image>
       <text style='font-size:25rpx'>分享给朋友</text>
     </button>
     <button class='share' catchtap='onGeneratePicTap'>
-      <image style='width:45rpx;height:45rpx;padding-top:10rpx' src='/images/icons/haibao.png'></image>
-      <text style='font-size:25rpx'>分享到朋友圈</text>
+      <image style='width:45rpx;height:45rpx;padding-top:10rpx' src='/images/icons/share.png'></image>
+      <text style='font-size:25rpx'>生成分享图片</text>
     </button>
   </view>
-  <!-- tabbar -->
-  <!-- <view class='publish'>
-    <view style='width:100%;display:flex; align-items: center;justify-content:center'>
-      <image style='height:140rpx;width:140rpx' src='/images/icons/aaa.png'></image>
-    </view>
-  </view> -->
 
   <view class='tarBar'>
-    <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' catchtap='onHpTap'>
-      <image style='height:44rpx;width:44rpx;' src='/images/icons/hp_l.png'></image>
-      <text>首页</text>
+    <view class='left'>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../homepage/homepage" open-type="switchTab">
+        <image style='height:44rpx;width:44rpx;' src='/images/icons/hp_l.png'></image>
+        <text>首页</text>
+      </navigator>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../quotation/quotation" open-type="switchTab">
+        <image style='height:50rpx;width:50rpx;' src='/images/icons/price.png'></image>
+        <text>报价</text>
+      </navigator>
     </view>
-    <view style='position:relative;top:-12px;'>
-      <image style='height:140rpx;width:140rpx' src='/images/icons/aaa.png'></image>
-    </view>
-    <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center' catchtap='onAttentionTap'>
-      <image style='height:44rpx;width:44rpx;' src='/images/icons/my_l.png'></image>
-      <text>关注</text>
+    <navigator style='position:relative;top:-10px;' url="../publish/publish" open-type="switchTab">
+      <image style='height:130rpx;width:130rpx' src='/images/icons/aaa.png'></image>
+    </navigator>
+    <view class='right'>
+      <!-- <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../message/message" open-type="switchTab">
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:50rpx;width:50rpx;' src='/images/icons/message_l.png'></image>
+          <text>私信</text>
+        </view>
+      </navigator> -->
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../message/message" open-type="switchTab">
+        <view class='message'>
+          <view style='display:flex;flex-direction:column'>
+            <image style='height:50rpx;width:50rpx;' src='/images/icons/message_l.png'></image>
+            <text>私信</text>
+          </view>
+          <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view>
+        </view>
+      </navigator>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../attention/attention" open-type="switchTab">
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:50rpx;width:50rpx;' src='/images/icons/attention.png'></image>
+          <text>关注</text>
+        </view>
+      </navigator>
     </view>
   </view>
-</scroll-view>
+</view>
 
 <!-- tanchuan -->
 <view class="modal-box" hidden="{{flag}}">
@@ -168,17 +174,17 @@
       </view>
 
       <view style='display:flex;flex-direction:row;padding:5px 45rpx 10rpx 30px;align-items: center;justify-content:center'>
+        <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>单位</text>
+        <view style='width:70%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;margin-left:50rpx;'>
+          <input style='margin-left:10rpx;' placeholder="如:件/提" bindblur="onModalUnitInput" value="{{chooseTea.unit}}" />
+        </view>
+      </view>
+
+      <view style='display:flex;flex-direction:row;padding:5px 45rpx 10rpx 30px;align-items: center;justify-content:center'>
         <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>价格</text>
         <view style='width:70%;color: rgb(22, 22, 22);font-size:37rpx;border:1rpx solid rgb(220, 220, 220);padding-top:10rpx;padding-bottom:10rpx;border-radius:10rpx;margin-left:50rpx;'>
           <input style='margin-left:10rpx;' placeholder="请输入价格" bindblur="onModalPriceInput" value="{{chooseTea.price}}" />
         </view>
-      </view>
-      <view class='onoffline'>
-        <radio-group class="radio-group" bindchange="radioChange">
-          <label class="radio" wx:for="{{items}}">
-            <radio color="#4faffe" value="{{item.name}}" checked="{{item.checked}}" />{{item.name}}
-          </label>
-        </radio-group>
       </view>
       <view class='confirmcel'>
         <view class='modelcancel' catchtap='onModalCancelTap'>取消</view>

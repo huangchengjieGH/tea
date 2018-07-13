@@ -1,0 +1,66 @@
+<view class='quotaionCon'>
+  <view class='namemsg'>
+    <view class='namescore'>
+      <text class='name'>{{teaList.name}}</text>
+      <text class='score'>{{teaList.score}}</text>
+      <text class='fen'>分</text>
+    </view>
+    <view style='font-weight: 300;'>
+      <view class='yearbatch'>
+        <text>年份:</text>
+        <text style='margin-left:10rpx;'>{{teaList.year}}</text>
+        <text class='batch'>批次:</text>
+        <text class='batchValue'>{{teaList.batch}}</text>
+      </view>
+      <view class='Technology'>
+        <text>生产工艺:</text>
+        <text style='margin-left:10rpx;'>{{teaList.productionTechnology}}</text>
+        <text class='product'>公斤生产价:</text>
+        <text class='productValue'>{{teaList.referencePricePerKg}}</text>
+      </view>
+      <view class='specification'>
+        <text>规格:</text>
+        <text style='margin-left:10rpx;'>{{teaList.specification}}</text>
+      </view>
+      <view class='reference'>
+        <text>参考价:</text>
+        <text class='price'>{{teaList.referencePrice}}</text>
+        <text style='color:#0068aa;margin-left:10rpx;'>({{teaList.updateDate}} 更新)</text>
+      </view>
+    </view>
+  </view>
+  <view class='chart'>
+    <scroll-view scroll-x="true" class="scroll-classify">
+      <view class="classify" wx:for="{{timeStatus}}" wx:key="{{index}}" wx:for-item="isClassify" catchtap="onclassiTap" data-Name="{{isClassify.name}}" data-id="{{isClassify.id}}" style="{{isClassify.id == time?'border-bottom:1px solid red;':''}}">
+        <view class="classify-txt">
+          <text style="{{isClassify.id == time?'color:red;':'color:#000'}}">{{isClassify.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class='chartValue'>
+      <view class="price-chart">
+        <canvas canvas-id="{{canvasId}}" class="canvas" bindtouchstart="touchHandler" bindtouchmove="touchmove" bindtouchend="touchend"></canvas>
+      </view>
+    </view>
+  </view>
+  <view class='dateChoose'>
+    <view class='begintime'>
+      <!-- <text>2018-01-01</text> -->
+      <picker bindchange="inputStartTime" mode="date" value="{{startTime}}" start="1970-01-01" end="{{today}}">{{startTime}}</picker>
+      <view class='triangleDown'></view>
+    </view>
+    <view style='margin:0rpx 15rpx;'>至</view>
+    <view class='endtime'>
+      <picker bindchange="inputEndTime" mode="date" value="{{endTime}}" start="{{startTime}}" end="{{today}}">{{endTime}}</picker>
+      <view class='triangleDown'></view>
+    </view>
+    <view class='search'>
+      <button class="hoverclass">查询</button>
+    </view>
+  </view>
+
+  <!-- <view class='search'>
+    <button class="hoverclass">查询</button>
+  </view> -->
+</view>

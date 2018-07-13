@@ -21,23 +21,52 @@ Page({
    * 页面的初始数据
    */
   data: {
-    years: years,
-    year: date.getFullYear(),
-    months: months,
-    month: 2,
-    days: days,
-    day: 2,
-    value: [9999, 1, 1],
+    testData:[
+      {
+        url:'/images/icons/avatar2.jpeg',
+        msg: '1'
+      },
+      {
+        url: '/images/icons/avatar2.jpeg',
+        msg: '2'
+      },
+      {
+        url: '/images/icons/avatar2.jpeg',
+        msg: '3'
+      },
+      {
+        url: '/images/icons/avatar2.jpeg',
+        msg: '4'
+      },
+      {
+        url: '/images/icons/avatar2.jpeg',
+        msg: '5'
+      },
+      {
+        url: '/images/icons/avatar2.jpeg',
+        msg: '6'
+      },
+      {
+        url: '/images/icons/avatar2.jpeg',
+        msg: '7'
+      },
+      {
+        url: '/images/icons/avatar2.jpeg',
+        msg: '8'
+      },
+      {
+        url: '/images/icons/avatar2.jpeg',
+        msg: '9'
+      },
+      {
+        url: '/images/icons/avatar2.jpeg',
+        msg: '10'
+      },
+      {
+        url: '/images/icons/avatar2.jpeg',
+        msg: '11'
+      }
 
-    style:[
-      '出',
-      '找',
-      '代客出',
-      '代客找'
-    ],
-    items: [
-      { name: '上线', value: '0', checked: 'true' },
-      { name: '下架', value: '1' },
     ]
   },
 

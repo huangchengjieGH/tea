@@ -1,0 +1,67 @@
+<view style='padding-bottom:150rpx;' scroll-top="{{scrollTop}}" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+  <view class='body'>
+    <view style='border-bottom:1rpx solid rgb(220, 220, 220)'>
+      <view class='bodymsg'>
+        <view class='bodyname'>
+          <image class='nameImg' src="{{objs.wxUser.avatarUrl==null?'/images/icons/avatar2.jpeg':objs.wxUser.avatarUrl}}"></image>
+          <text style='margin-left:20rpx;'>{{publishList.name}}</text>
+        </view>
+        <view class='loaction'>
+          <view class='time'>
+            <image style='height:30rpx;width:30rpx;border-radius:5rpx;' src='/images/icons/time.png'></image>
+            <text style='margin-left:10rpx;'>{{publishList.updatedAt}}</text>
+          </view>
+          <view class='location'>
+            <!-- <image style='height:28rpx;width:28rpx;border-radius:5rpx;margin-left:10rpx;' src='/images/icons/location.png'></image> -->
+            <!-- <text style='margin-left:10rpx;letter-spacing:1px;'>广东广州</text> -->
+          </view>
+        </view>
+        <view class='count'>
+          <view style='width:50%;'>
+            <text>浏览 {{publishList.visitCount}}</text>
+            <text style='margin-left:20rpx;'>收藏 {{publishList.likeCount}}</text>
+          </view>
+
+          <view class='contact' catchtap='onPhoneTap' data-phone="{{publishList.phone}}">
+            <image style='height:30rpx;width:30rpx;' src='/images/icons/phone3.png'></image>
+            <text style='margin-right:30rpx;margin-left:10rpx;'>{{publishList.phone}}</text>
+          </view>
+        </view>
+        <view class='star' catchtap='collectTea' data-requireId="{{publishList.id}}" data-like="{{publishList.like}}" data-index="{{index}}">
+          <image wx:if="{{publishList.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star_l.png'></image>
+          <image wx:if="{{!publishList.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star.png'></image>
+        </view>
+      </view>
+    </view>
+    <view style='margin-top:10px;'>
+      <view class='bodyproducts' wx:for="{{publishList.objects}}" wx:for-item="obj">
+        <view class='bodyclassify' style="{{obj.style==1?'border: 1rpx solid #fd7995;color:#fd7995':''}}">
+          <text class='bodyclassifyValue'>{{obj.classify}}</text>
+        </view>
+        <view class='product'>
+          <view class='name' wx:for="{{obj.object}}" wx:for-item='product' wx:for-index="productindex">
+            <view>
+              <text>{{product.name}}</text>
+              <text style='font-weight:300;margin-left:5px;letter-spacing:2px' wx:if="{{product.count>0}}">X{{product.count}}{{product.unit}}</text>
+              <view class="money-wrapper">
+                <text style='font-weight:300;color: #EC820E;margin-left:20px;letter-spacing:1px;' wx:if="{{product.price}}">￥{{product.price>10000?(product.price/10000):product.price}}</text>
+                <text style='font-weight:300;color: #EC820E;letter-spacing:1px;' wx:if="{{product.price>10000}}">万</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class='count'>
+        <view style='width:50%;'>
+          <text>浏览 {{publishList.visitCount}}</text>
+          <text style='margin-left:20rpx;'>收藏 {{publishList.likeCount}}</text>
+        </view>
+
+        <view class='contact' catchtap='onPhoneTap' data-phone="{{objs.phone}}">
+          <image style='height:30rpx;width:30rpx;' src='/images/icons/phone3.png'></image>
+          <text style='margin-right:30rpx;margin-left:10rpx;'>{{publishList.phone}}</text>
+        </view>
+      </view> -->
+    </view>
+  </view>
+</view>

@@ -1,0 +1,166 @@
+/* pages/my/my.wxss */
+
+page {
+  background-color: #f0f2f7;
+}
+
+.myCon {
+  /* background-color: #f8f8f8; */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.background {
+  height: 500rpx;
+  width: 100%;
+  background-image: url(' http://wegtech.oss-cn-shenzhen.aliyuncs.com/image/1513943032560_41531395a5681ab9f304a666cdd99ead.jpeg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-color: black;
+  background-attachment: fixed;
+  /* opacity: 0.6; */
+  filter: blur(10rpx);
+}
+
+.myImg {
+  width: 100%;
+  height: 350rpx;
+  opacity: 0.3;
+}
+
+.Avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  display: block;
+  overflow: hidden;
+}
+
+.msg {
+  position: absolute;
+  top: 90rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.userNickName {
+  margin-left: 10rpx;
+  /* font-weight: 300 */
+}
+
+.call {
+  position: relative;
+  background-color: white;
+  margin-top: 20rpx;
+  border: none;
+  width: 100%;
+  height: 100rpx;
+}
+
+.kefuImg {
+  height: 55rpx;
+  width: 55rpx;
+  position: absolute;
+  left: 20rpx;
+  top: 20rpx;
+}
+
+.calltxt {
+  position: absolute;
+  left: 85rpx;
+  top: 5rpx;
+}
+
+/****tarbar***/
+
+.tarBar {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 100rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  align-items: center;
+  color: rgb(51, 51, 51);
+  z-index: 2;
+}
+
+.left {
+  display: flex;
+  width: 40%;
+}
+
+.right {
+  display: flex;
+  width: 40%;
+}
+
+.message {
+  display: flex;
+  position: relative;
+}
+
+.number {
+  background-color: red;
+  color: white;
+  height: 28rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 10rpx;
+  font-size: 20rpx;
+  position: absolute;
+  left: 38rpx;
+}
+
+.avatar {
+  height: 80rpx;
+  width: 80rpx;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+  background-color: white;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding-left: 32rpx;
+  padding-top: 2rpx;
+  font-size: 20px;
+}
+
+.msgvalue {
+  background-color: red;
+  color: white;
+  font-size: 25rpx;
+  border-radius: 50%;
+  height: relative;
+  padding: 1rpx 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 84rpx;
+}
+
+.contentmsg {
+  font-weight: 300;
+  font-size: 14px;
+  padding-top: 2px;
+  overflow: hidden;
+  /* flex-wrap:nowrap; */
+  white-space: nowrap;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  width: 500rpx;
+}

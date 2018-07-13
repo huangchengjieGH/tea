@@ -19,7 +19,7 @@
   .myImg{
     width: 100%;
     height: 350rpx;
-    opacity: 0.5;
+    opacity: 0.3;
   }
   .Avatar {
   width: 120rpx;
@@ -30,12 +30,19 @@
 }
 
 .msg{
-  position: absolute;
-  top: 90rpx;
-  left: 330rpx;
+position:absolute;
+top:90rpx;
+width:100%;
+display:flex;
+flex-direction:column;
+text-align:center;
+justify-content:center;
+align-items:center;
+
 }
 .userNickName{
   margin-left: 10rpx;
+  /* font-weight: 300 */
 }
 .call{
   position: relative;
@@ -46,14 +53,38 @@
   height: 100rpx;
 }
 .kefuImg{
-height:50rpx;width:50rpx;
+height:55rpx;width:55rpx;
 position: absolute;
 left: 20rpx;
-top: 25rpx;
+top: 20rpx;
 
 }
 .calltxt{
    position: absolute; 
-  left: 80rpx;
+  left: 85rpx;
   top: 5rpx;
+}
+
+/****tarbar***/
+.tarBar {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 100rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  align-items: center;
+  color: rgb(51, 51, 51);
+  z-index: 2;
+}
+.left {
+  display: flex;
+  width: 40%;
+}
+
+.right {
+  display: flex;
+  width: 40%;
 }

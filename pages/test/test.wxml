@@ -1,5 +1,13 @@
-<radio-group class="radio-group" bindchange="radioChange">
-  <label class="radio" wx:for="{{items}}">
-    <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.name}}
-  </label>
-</radio-group>
+<view class='test'>
+  <view style='overflow: scroll;height: 500rpx; ' >
+    <view style='display:flex;flex-direction: column-reverse;'>
+      <block wx:for="{{testData}}" >
+        <view style='display:flex;'>
+          <image src="{{item.url}}" style='height:80rpx;width:80rpx;'></image>
+          <text>{{item.msg}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+</view>

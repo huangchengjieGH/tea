@@ -14,7 +14,7 @@ Page({
       },
       {
         id: 1,
-        name: '我的收藏'
+        name: '我的关注'
       },
 
     ],
@@ -27,7 +27,7 @@ Page({
    */
   onLoad: function (options) {
     this.getMyLikeRequire()
-
+    this.getMyMsg();
   },
   onTypeTap: function (e) {
     var status = e.currentTarget.dataset.status;
@@ -77,10 +77,15 @@ Page({
     var find02 = [];  //代客找
     var out01 = [];   // 出
     var out02 = [];   //代客出
+    var maxLength = false;
+    var length = 0;
     for (var idx in data) {
+      length = 0;
       var object = data[idx].objects;
+      maxLength = false
       data[idx].updatedAt = app.util.formatTime(new Date(data[idx].updatedAt));
       data[idx].createdAt = app.util.formatTime(new Date(data[idx].createdAt));
+      length += object.length;
       for (var idx2 in object) {
         switch (object[idx2].type) {
           case 1:
@@ -97,6 +102,9 @@ Page({
             break;
           default:
             break;
+        }
+        if (object.length >= 15) {
+          maxLength = true;
         }
       }
       if (find01.length != 0) {
@@ -136,6 +144,8 @@ Page({
         out02 = [];
       }
       data[idx].objects = objects;
+      data[idx].maxLength = maxLength;
+      data[idx].length = length;
       objects = [];
     }
     // console.log('haha');
@@ -144,21 +154,62 @@ Page({
       publishList: data
     })
   },
-  collectTea:function(e){
+  // collectTea:function(e){
+  //   var requireId = e.currentTarget.dataset.requireid;
+  //   var that = this;
+  //   wx.showModal({
+  //     title: '提示',
+  //     content: '确认取消该收藏',
+  //     success:function(res){
+  //       if (res.confirm) {
+  //         console.log('用户点击确定');
+  //         that.cancelCollect(requireId);
+  //       } else if (res.cancel) {
+  //         console.log('用户点击取消')
+  //       }
+  //     }
+  //   })
+  // },
+  collectTea: function (e) {
+    // var flag = 0;
     var requireId = e.currentTarget.dataset.requireid;
+    var like = e.currentTarget.dataset.like;
+    var index = e.currentTarget.dataset.index;
+    console.log(index);
     var that = this;
-    wx.showModal({
-      title: '提示',
-      content: '确认取消该收藏',
-      success:function(res){
-        if (res.confirm) {
-          console.log('用户点击确定');
-          that.cancelCollect(requireId);
-        } else if (res.cancel) {
-          console.log('用户点击取消')
+    var publishList = that.data.publishList;
+    var data = {
+      requireId: requireId
+    };
+    if (!like) {
+      var url = `${app.api.collect}`;
+      var title = '关注成功';
+    } else {
+      var url = `${app.api.uncollect}`;
+      var title = '取消关注';
+    }
+    app.apiFunctions.requestUrl(
+      url,
+      'POST',
+      true,
+      true,
+      data,
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+          wx.showToast({
+            title: title,
+          })
+          publishList[index].like = !that.data.publishList[index].like;
+          that.setData({
+            teaList: data.data,
+            edit: false,
+            publishList: publishList
+          })
+          that.getMyLikeRequire();
         }
       }
-    })
+    );
   },
   cancelCollect: function (e) {
     var flag = 1;
@@ -168,10 +219,10 @@ Page({
     };
     if (flag == 0) {
       var url = `${app.api.collect}`;
-      var title = '收藏成功';
+      var title = '关注成功';
     } else {
       var url = `${app.api.uncollect}`;
-      var title = '取消收藏';
+      var title = '取消关注';
     }
     app.apiFunctions.requestUrl(
       url,
@@ -208,6 +259,78 @@ Page({
       phoneNumber: phone //仅为示例，并非真实的电话号码
     })
   },
+  onCheckMoreTap: function (e) {
+    var id = e.currentTarget.dataset.id;
+    console.log(id);
+    wx.navigateTo({
+      url: '../more/more?requireId=' + id,
+    })
+  },
+  getUnreadCount: function (requireId) {
+    var that = this;
+    app.apiFunctions.requestUrl(
+      app.api.unreadCount,
+      'GET',
+      true,
+      true,
+      '',
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+          that.setData({
+            unReadCount: data.data
+          })
+        }
+      }
+    );
+  },
+  onBodyTap: function (e) {
+    // console.log('ssss');
+    var requireId = e.currentTarget.dataset.requireid;
+    var ortherUserId = e.currentTarget.dataset.ortheruserid;
+    this.getVisit(requireId);
+    wx.navigateTo({
+      url: '../chat/chat?ortherUserId=' + ortherUserId,
+    })
+    console.log(requireId);
+  },
+  getVisit: function (requireId) {
+    var that = this;
+    var data = {
+      requireId: requireId
+    }
+    app.apiFunctions.requestUrl(
+      app.api.visit,
+      'POST',
+      true,
+      true,
+      data,
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+
+        }
+      }
+    );
+  },
+  getMyMsg: function (e) {
+    var that = this;
+    app.apiFunctions.requestUrl(
+      app.api.getMyMsg,
+      'GET',
+      true,
+      true,
+      '',
+      function (data) {
+        console.log(data);
+        if (data.status == 1) {
+          that.setData({
+            myMsg: data.data
+          })
+        }
+      }
+    );
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -219,21 +342,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getUnreadCount();
+    this.interval = setInterval(this.getUnreadCount, 10000);
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    console.log('onHide');
+    var that = this;
+    clearInterval(that.interval);
   },
-
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    var that = this;
+    clearInterval(that.interval);
   },
 
   /**

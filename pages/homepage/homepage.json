@@ -1,7 +1,7 @@
 {
-    "navigationBarTitleText": "首页",
-    "navigationBarBackgroundColor": "white",
-    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "找找茶",
+    "navigationBarBackgroundColor": "#4EAEFE",
+    "navigationBarTextStyle": "white",
     "enablePullDownRefresh":true,
     "usingComponents": {
       "footer": "/components/footer/footer"

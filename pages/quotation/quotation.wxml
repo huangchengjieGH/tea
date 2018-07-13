@@ -1,0 +1,131 @@
+<view class='quotaionCon'>
+  <view class='searchCon'>
+    <view>
+      <image src='/images/icons/list2.png' style='height:60rpx;width:60rpx;margin-left:10rpx;margin-top:10rpx' catchtap='onChangeShowState'></image>
+    </view>
+    <navigator class='search' url='../searchtea/searchtea'>
+      <icon style='padding-left:10rpx;' type="search" size="16"></icon>
+      <text style='margin-left:200rpx;color:#7d7a7a'>搜索</text>
+    </navigator>
+  </view>
+  <view class='reservetype' style="position:sticky;top:0px;z-index:2;position:-webkit-sticky;">
+    <block wx:for="{{columnStatus}}" wx:for-item="item">
+      <view class='type' style="{{status==item.name?'border-bottom:3rpx solid #0068aa;color:#0068aa':''}}" catchtap='onTypeTap' data-status='{{item.name}}' data-id='{{item.id}}'>{{item.name}}</view>
+    </block>
+  </view>
+
+  <view class='body'>
+    <view class='name'>
+      <view style='width:35%;text-align:center; font-size: 18px;'>{{title.name}}</view>
+      <view style='width:25%;text-align:center; font-size: 18px;'>{{title.price}}</view>
+      <view style='width:20%;text-align:left; font-size: 18px;margin-left:15rpx;'>{{title.up}}</view>
+      <view style='width:20%;text-align:left; font-size: 18px;'>{{title.percent}}</view>
+    </view>
+    <view class='name2'>
+      <block wx:for="{{teaList}}" wx:for-item="item" wx:for-index="index" class='product'>
+        <navigator url="{{'../detail/detail?name='+item.fields.name}}" class='list' style="{{(index+1)%2==0?'background-color:#f5f5f9':''}}">
+          <view style='padding:15px 0;width:35%;text-align:center;color:#0663e1;font-size:17px'>{{item.fields.name}}</view>
+          <view style='padding:15px 0;width:25%;text-align:center;'>{{item.fields.referencePrice}}</view>
+          <view class='uprise' style="{{item.riseAndFallStatus==1?'color:#f30a26':''}}">{{item.fields.riseAndFall}}</view>
+          <view class='uprise' style="{{item.riseAndFallStatus==1?'color:#f30a26':''}}">{{item.fields.percent}}</view>
+        </navigator>
+      </block>
+    </view>
+
+    <view class="body-view">
+      <loading hidden="{{hidden}}" bindchange="loadingChange">
+        加载中...
+      </loading>
+    </view>
+  </view>
+
+  <view class='tarBar'>
+    <view class='left'>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../homepage/homepage" open-type="switchTab">
+        <image style='height:44rpx;width:44rpx;' src='/images/icons/hp_l.png'></image>
+        <text>首页</text>
+      </navigator>
+      <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;'>
+        <image style='height:50rpx;width:50rpx;' src='/images/icons/price_l.png'></image>
+        <text>报价</text>
+      </view>
+    </view>
+    <navigator style='position:relative;top:-10px;' url="../publish/publish" open-type="switchTab">
+      <image style='height:130rpx;width:130rpx' src='/images/icons/aaa.png'></image>
+    </navigator>
+    <view class='right'>
+      <!-- <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../message/message" open-type="switchTab">
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:50rpx;width:50rpx;' src='/images/icons/message_l.png'></image>
+          <text>私信</text>
+        </view>
+      </navigator> -->
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../message/message" open-type="switchTab">
+        <view class='message'>
+          <view style='display:flex;flex-direction:column'>
+            <image style='height:50rpx;width:50rpx;' src='/images/icons/message_l.png'></image>
+            <text>私信</text>
+          </view>
+          <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view>
+        </view>
+      </navigator>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../attention/attention" open-type="switchTab">
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:50rpx;width:50rpx;' src='/images/icons/attention.png'></image>
+          <text>关注</text>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<!-- 弹窗 -->
+<view class="{{showChapter?'view_show2':'view_hide2'}}">
+  <view class="popup-wrapper2" bindtap="onChangeShowState"></view>
+  <view class="popup-left2">
+    <view class="kind-list">
+      <!-- <block wx:for-items="{{chapter}}" wx:for-index="chapterIndex" wx:key="{{item.name}}">
+        <view class="kind-list__item">
+          <view class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}" data-type="chapter" data-index="{{chapterIndex}}" bindtap="kindToggle">
+            <view class="weui-flex__item2">{{item.name}}</view>
+            <view wx:if="{{item.list.length}}" class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>
+          <view class="kind-list__item-bd {{item.open ? 'kind-list__item-bd_show' : ''}}">
+            <view style='margin-left:20px;' class="weui-cells {{item.open ? 'weui-cells_show' : ''}}">
+
+          
+              <block wx:if="{{chapterIndex===1}}" wx:for-items="{{chapterList}}" wx:for-item="chapterList" wx:key="{{chapterList.id}}">
+                <view class="kind-list__item">
+                  <view class="weui-flex kind-list__item-hd {{chapterList.open ? 'kind-list__item-hd_show' : ''}}" data-type="chapter" data-index="{{index}}" bindtap="kindToggle">
+                     <view class="weui-flex__item2">{{chapterList.name}}</view> 
+                    <view wx:if="{{chapterList.subchapter.length}}" class="weui-cell__ft weui-cell__ft_in-access"></view>
+                  </view>
+                  <view class="kind-list__item-bd {{chapterList.open ? 'kind-list__item-bd_show' : ''}}">
+                    <view style='margin-left:20px;' class="weui-cells {{chapterList.open ? 'weui-cells_show' : ''}}">
+                      <block wx:for-items="{{chapterList.subchapter}}" wx:for-index="chapterIndex" wx:for-item="subchapter" wx:key="{{subchapter.id}}">
+                        <view class="weui-cell weui-cell_access2">
+                          <view data-name="{{subchapter.name}}" data-index="{{index + '-' + chapterIndex}}" data-type="chapter" data-classifyId="{{subchapter.id}}" class="weui-cell__bd2" bindtap="subChapter">{{subchapter.name}}</view>
+                        </view>
+                      </block>
+                    </view>
+                  </view>
+                </view>
+              </block>
+
+            </view>
+          </view>
+        </view>
+      </block> -->
+      <view wx:for-items="{{chapterList}}" wx:for-item="chapterList">
+        <view class='year'>{{chapterList.name}}</view>
+        <scroll-view scroll-y style='height:1100rpx;'>
+          <view wx:for="{{chapterList.subchapter}}" wx:for-item="item" wx:for-index="index">
+            <view style="{{(index+1)%2==0?'background-color:#f5f5f9':''}}" class='yearlist' catchtap='onYearTap' data-name="{{item.name}}">
+              <text>{{item.name}}</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,47 @@
+<scroll-view class='myCon'>
+  <scroll-view scroll-y style='height:1100rpx;'>
+    <navigator wx:for="{{messageList}}" wx-for-item="item" class='body' url="{{'../chat/chat?id='+ item.id}}">
+      <image src="{{item.othersAvatarUrl!=null?item.othersAvatarUrl:'/images/icons/avatar2.jpeg'}}" class='avatar'></image>
+      <view class='msgvalue' wx-if="{{item.unreadCount>0}}">{{item.unreadCount}}</view>
+      <view class='content'>
+        <text>{{item.othersName==null?'匿名':item.othersName}}</text>
+        <view class='contentmsg'>{{item.msg}}</view>
+      </view>
+    </navigator>
+  </scroll-view>
+
+
+  <view class='tarBar'>
+    <view class='left'>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../homepage/homepage" open-type="switchTab">
+        <image style='height:44rpx;width:44rpx;' src='/images/icons/hp_l.png'></image>
+        <text>首页</text>
+      </navigator>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../quotation/quotation" open-type="switchTab">
+        <image style='height:50rpx;width:50rpx;' src='/images/icons/price.png'></image>
+        <text>报价</text>
+      </navigator>
+    </view>
+    <navigator style='position:relative;top:-10px;' url="../publish/publish" open-type="switchTab">
+      <image style='height:130rpx;width:130rpx' src='/images/icons/aaa.png'></image>
+    </navigator>
+    <view class='right'>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;'>
+        <view class='message'>
+          <view style='display:flex;flex-direction:column'>
+            <image style='height:50rpx;width:50rpx;' src='/images/icons/message.png'></image>
+            <text>私信</text>
+          </view>
+          <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view>
+        </view>
+      </navigator>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;padding-top:8rpx;' url="../attention/attention" open-type="switchTab">
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:45rpx;width:45rpx;' src='/images/icons/attention.png'></image>
+          <text>关注</text>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <!-- <footer></footer>   -->
+</scroll-view>

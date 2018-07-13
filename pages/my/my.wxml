@@ -1,7 +1,7 @@
 <scroll-view class='myCon'>
   <view style='position:relative'>
     <view>
-       <image class='myImg' mode="aspectFill" src='/images/icons/fangzi.jpeg'></image> 
+       <image class='myImg' mode="aspectFill" src='/images/icons/teabg.jpeg'></image> 
     </view>
     <view class='msg'>
       <open-data type="userAvatarUrl" class='Avatar'></open-data>
@@ -9,13 +9,41 @@
     </view>
   </view> 
 
-  <button class='call' open-type="contact">
-   <image class='kefuImg' src='/images/icons/calls.png'></image>
+  <!-- <button class='call' open-type="contact">
+   <image class='kefuImg' src='/images/icons/conc.png'></image>
    <view class='calltxt'>联系客服</view>
-  </button>
-<!-- <button class="float-btn service-btn" open-type="contact">
-  <image class="kefu" mode="widthFix" src="/images/icons/kefu_r.png" />
-</button> -->
+  </button> -->
+
+
+ <view class='tarBar'>
+    <view class='left'>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../homepage/homepage" open-type="switchTab">
+        <image style='height:44rpx;width:44rpx;' src='/images/icons/hp_l.png'></image>
+        <text>首页</text>
+      </navigator>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../quotation/quotation" open-type="switchTab">
+        <image style='height:50rpx;width:50rpx;' src='/images/icons/price.png'></image>
+        <text>报价</text>
+      </navigator>
+    </view>
+    <navigator style='position:relative;top:-10px;' url="../publish/publish" open-type="switchTab">
+      <image style='height:130rpx;width:130rpx' src='/images/icons/aaa.png'></image>
+    </navigator>
+    <view class='right'>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;'>
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:50rpx;width:50rpx;' src='/images/icons/my.png'></image>
+          <text>消息</text>
+        </view>
+      </navigator>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;padding-top:8rpx;' url="../attention/attention" open-type="switchTab">
+        <view style='display:flex;flex-direction:column'>
+          <image style='height:45rpx;width:45rpx;' src='/images/icons/attention.png'></image>
+          <text>关注</text>
+        </view>
+      </navigator>
+    </view>
+  </view>
 
  <!-- <footer></footer>   -->
 </scroll-view>
