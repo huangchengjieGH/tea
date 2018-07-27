@@ -53,7 +53,9 @@ page {
   border-radius: 8rpx;
   /* padding-top: 10rpx;
   padding-bottom: 10rpx; */
-  padding:8rpx 16rpx;
+  /* padding:8rpx 16rpx; */
+  padding:4px 8px;
+
 }
 
 .content02 {
@@ -64,7 +66,8 @@ page {
   font-size: 16px;
   padding-right: 25rpx;
   border-radius: 8rpx;
-  padding:8rpx 16rpx ;
+  /* padding:8rpx 16rpx ; */
+  padding:4px 8px;
 }
 
 .msg02 {
@@ -139,16 +142,24 @@ page {
   margin-left: 9px;
   /* height: 70rpx; */
    margin-top: 18rpx; 
+
 }
 
 .body {
   
   /* flex-wrap: wrap; *//* width:80vh; */
   /* height: calc(100vh - 65px); */
-  max-height: calc(100vh - 2em - 32px - 26rpx);
+  max-height: calc(100vh - 2em - 32px - 40rpx);
   min-height: 80vh;
   overflow-y: scroll;
   -webkit-overflow-scrolling : touch;
+  
+   display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column-reverse;
 }
 .body2{
   display: -webkit-box;
@@ -162,7 +173,7 @@ page {
 .time {
   text-align: center;
   width: 255rpx;
-  background-color: #bdb8b8;
+  background-color: #e6e7e8;
   color: white;
   border-radius: 5rpx;
   margin: 30rpx 250rpx;
@@ -186,8 +197,8 @@ page {
 
 .userInfo {
   position: fixed;
-  bottom: 115rpx;
-  right: 15rpx;
+  bottom: 190rpx;
+  right: 25rpx;
   color: white;
   background-color: #ff7146;
   font-size: 31rpx;

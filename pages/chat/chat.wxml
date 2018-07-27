@@ -2,7 +2,7 @@
   <!-- <scroll-view scroll-y style='height:1080rpx;'>  -->
   <view style='position:relative'>
     <view class='body'>
-      <view class='body2'>
+      <!-- <view class='body2'> -->
         <block wx:for="{{messageList}}" wx:for-item="item">
           <view class='msg01' wx:if="{{!item.mine}}">
             <view class='time' x-if="{{item.flag}}">{{item.createdAt}}</view>
@@ -14,7 +14,7 @@
 
               <view class='content-left'>
                 <view class='content'>
-                  <text>{{item.msg}}</text>
+                  <text style='padding:8rpx 16rpx'>{{item.msg}}</text>
                 </view>
               </view>
             </view>
@@ -24,7 +24,7 @@
             <view class='msg02'>
               <view class='content-right'>
                 <view class='content02'>
-                  <text>{{item.msg}}</text>
+                  <text style='padding:8rpx 16rpx' >{{item.msg}}</text>
                 </view>
               </view>
               <view class='triangleImg'>
@@ -35,18 +35,19 @@
           </view>
 
         </block>
-      </view>
+      <!-- </view> -->
 
     </view>
   </view>
-  <button open-type='getUserInfo' bindgetuserinfo="onGetUserInfoTap" class='userInfo' style="{{myMsg.nickName != null?'display:none':''}}">
+  <button open-type='getUserInfo' bindgetuserinfo="onGetUserInfoTap" class='userInfo' style="{{myMsg.nickName != null?'display:none':''}}" wx-if="{{getMyMsgBtn}}">
     使用我的用户信息
   </button>
   <!-- </scroll-view>  -->
   <view class='inputmsg'>
     <view class='inputView'>
       <!-- <input placeholder-class="input" cursor-spacing='30' class='cinput' bindconfirm="messageInput" value="{{msg}}" confirm-hold="true" adjust-position="true" />  -->
-      <textarea placeholder-class="input" auto-height="true" cursor-spacing='30' class='cinput' bindconfirm="messageInput" value="{{msg}}" confirm-hold="true" adjust-position="true" bindinput="bindblurInput"></textarea>
+      <textarea placeholder-class="input" auto-height="true" cursor-spacing='30' class='cinput' bindconfirm="messageInput" value="{{msg}}" confirm-hold="true" adjust-position="true" focus="{{textareaFlag}}" bindinput="bindblurInput">
+      </textarea>
     </view>
     <!-- <image src='/images/icons/biaoqing.png' class='biaoqing'></image>  -->
     <view class='send' catchtap='onSendTap'>发送</view>

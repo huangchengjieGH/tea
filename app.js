@@ -21,7 +21,7 @@ App({
           console.log(e)
         }
       });
-      wx.hideTabBar();
+      // wx.hideTabBar();
     },
     onShow() {
           const that = this;

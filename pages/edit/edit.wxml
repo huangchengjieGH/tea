@@ -10,7 +10,7 @@
         </view>
         <!-- <button open-type='getUserInfo' bindgetuserinfo="onGetUserInfoTap" class='userInfo'>一键获取</button> -->
         <button open-type='getUserInfo' bindgetuserinfo="onGetUserInfoTap" class='userInfo2' style="{{openUserInfo?'display:none':''}}">
-         输入店铺名,如:云风茶叶-张三
+          输入店铺名,如:云风茶叶-张三
         </button>
       </view>
       <view class='phone'>
@@ -18,11 +18,11 @@
           <text style='color: rgb(84, 84, 84);margin-left:10rpx;'>电话</text>
         </view>
         <view class='inputPhone' style="{{openPhoneInfo?'':'display:none'}}">
-          <input placeholder-class="inputName" style='margin-left:10px;' focus="{{UserPhoneStatus}}" type="number" confirm-type="done" max-length="11" placeholder="请输入你的联系方式" bindblur="phoneInput" value="{{phone}}"/>
+          <input placeholder-class="inputName" style='margin-left:10px;' focus="{{UserPhoneStatus}}" type="number" confirm-type="done" max-length="11" placeholder="请输入你的联系方式" bindblur="phoneInput" value="{{phone}}" />
         </view>
         <!-- <button open-type='getPhoneNumber' bindgetphonenumber="onPhoneNumberTap" class='phoneInfo'>一键获取</button> -->
         <button open-type='getPhoneNumber' bindgetphonenumber="onPhoneNumberTap" class='userPhone2' style="{{openPhoneInfo?'display:none':''}}">
-         输入你的联系方式
+          输入你的联系方式
         </button>
       </view>
     </view>
@@ -53,8 +53,9 @@
           <input placeholder-class="{{flag?'':'fontclass'}}" style='margin-left:10rpx;' placeholder="请输入名称" bindblur="teaInput" value="{{item.name}}" data-teaindex="{{index}}" />
         </view>
         <view style='display:flex;align-items: center;justify-content: center;'>
-          <image style='height:22px;width:17px;margin-left:7px;' src='/images/icons/delete.png' catchtap='onDeleteTap' data-teaindex="{{index}}"></image>
-          <text style='color:#4faffe;font-size:17px;margin-left:8px;' bindtap="onMoreTap" data-teaindex="{{index}}">更多</text>
+          <image style='height:44rpx;width:34rpx;margin-left:7px;' src='/images/icons/arrowdown.png' catchtap='onArrowdownTap' data-teaindex="{{index}}"></image>
+          <image style='height:44rpx;width:34rpx;margin-left:7px;' src='/images/icons/delete.png' catchtap='onDeleteTap' data-teaindex="{{index}}"></image>
+          <text style='color:#4faffe;font-size:34rpx;margin-left:8px;' bindtap="onMoreTap" data-teaindex="{{index}}">更多</text>
         </view>
       </view>
 

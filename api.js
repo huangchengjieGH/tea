@@ -2,6 +2,7 @@ const server = require('./server.js');
 const url = server.domain;
 const dhyurl = server.dhData;
 module.exports = {
+  quote: dhyurl +'/spider/search_detail_new',
   getMyMsg:'/api/wx/user',
   requireUserId:'/api/wx/require/byUserId',
   unreadCount:'/api/wx/chat/unreadCount',

@@ -13,8 +13,47 @@
       <view class='type' style="{{status==item.name?'border-bottom:3rpx solid #0068aa;color:#0068aa':''}}" catchtap='onTypeTap' data-status='{{item.name}}' data-id='{{item.id}}'>{{item.name}}</view>
     </block>
   </view>
+  <scroll-view scroll-x="true" class='yearColumn'>
+    <view class='yearValue'>年份</view>
+    <view wx:for="{{yearCycle}}" wx:for-index="index" class='forYear' style="{{item.choosed?'background-color:#4eaefe;font-size: 14px;color: rgb(255, 255, 255);line-height: 1.2;text-align: center;padding:7px 15px;border-radius:14px;margin:0 5px 5px 10px;':''}}"
+      catchtap='onYearChoose' data-name="{{item.name}}">
+      <text>{{item.name}}</text>
+    </view>
+  </scroll-view>
 
-  <view class='body'>
+  <scroll-view scroll-x="true" class='yearColumn'>
+    <view class='yearValue'>工艺</view>
+    <view wx:for="{{process}}" wx:for-index="index" class='forYear' style="{{item.choosed?'background-color:#4eaefe;font-size: 14px;color: rgb(255, 255, 255);line-height: 1.2;text-align: center;padding:7px 15px;border-radius:14px;margin:0 5px 5px 10px;':''}}"
+      catchtap='onProcessChoose' data-name="{{item.name}}">
+      <text>{{item.name}}</text>
+    </view>
+  </scroll-view>
+  <view style='display:flex;flex-wrap:wrap;margin-bottom: 180rpx;'>
+    <view wx:for="{{teaList}}">
+      <navigator class='teaCard' url="{{'../detail/detail?name='+item.fields.name}}">
+        <view class='teaName'>{{item.fields.name}}</view>
+        <view class='priceScore'>
+          <text style='font-size: 36rpx;color: rgb(163, 163, 163);line-height: 1.2;'>{{item.fields.price}}</text>
+          <text style='font-size: 28rpx;color: rgb(228, 173, 77);line-height: 1.2;margin-left:5rpx;'>({{item.fields.score}}分)</text>
+        </view>
+        <view class='updown' style="{{item.riseAndFallStatus == 1?'color:rgb(243, 17, 44)':'color: rgb(40, 171, 84);'}}">
+          <image wx:if="{{item.riseAndFallStatus == 0}}" style='height:32rpx;width:25rpx;' src='/images/icons/down.png'></image>
+          <image wx:if="{{item.riseAndFallStatus == 1}}" style='height:32rpx;width:25rpx;' src='/images/icons/up.png'></image>
+          <text style='font-size: 30rpx;line-height: 1.2;margin-left:5rpx;'>{{item.fields.riseAndFall}}</text>
+          <text style='font-size: 30rpx;line-height: 1.2;margin-left:10rpx;'>{{item.fields.percent}}</text>
+        </view>
+        <view class='update'>
+          <text style='margin-left:20rpx;'>更新日期:{{item.fields.updateDate}}</text>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <view class="body-view">
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+      加载中...
+    </loading>
+  </view>
+  <view class='body' style='display:none'>
     <view class='name'>
       <view style='width:35%;text-align:center; font-size: 18px;'>{{title.name}}</view>
       <view style='width:25%;text-align:center; font-size: 18px;'>{{title.price}}</view>

@@ -1,18 +1,19 @@
 {
   "pages": [
+     "pages/homepage/homepage",
+    "pages/publish/publish",
+    "pages/quotation/quotation",
+    "pages/quote/quote",
+    "pages/edit/edit",
     "pages/message/message",
     "pages/test/test",
-    "pages/homepage/homepage",
     "pages/chat/chat",
-    "pages/publish/publish",
     "pages/more/more",
-    "pages/edit/edit",
     "pages/search/search",
     "pages/attention/attention",
     "pages/my/my",
     "pages/searchtea/searchtea",
     "pages/detail/detail",
-    "pages/quotation/quotation",
     "pages/index/index",
     "pages/logs/logs",
     "pages/aboutyf/aboutyf"

@@ -342,14 +342,14 @@ page {
   border: 1rpx solid rgb(220, 220, 220);
   position: relative;
   margin: 4px;
-  padding: 16rpx 10rpx;
+  padding: 16rpx 1rpx;
   border-radius: 5px;
 }
 
 .editinput {
-  width: 52%;
+  width: 50%;
   color: rgb(22, 22, 22);
-  font-size: 37rpx;
+  font-size: 30rpx;
   border: 1rpx solid rgb(220, 220, 220);
   padding-top: 6px;
   padding-bottom: 6px;

@@ -343,7 +343,7 @@ Page({
    */
   onShow: function () {
     this.getUnreadCount();
-    this.interval = setInterval(this.getUnreadCount, 10000);
+    this.interval = setInterval(this.getUnreadCount, 20000);
   },
 
   /**

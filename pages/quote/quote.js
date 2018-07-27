@@ -12,11 +12,11 @@ Page({
     inputVal: "",
     inputShowed: true,
     search: false,
-    history:[],
+    history: [],
     hot: [],
     body: false,
-    teaList:[],
-    nodata:false,
+    teaList: [],
+    nodata: false,
     showHistory: true,
     showHot: true,
     showChapter: false,
@@ -133,7 +133,7 @@ Page({
         teaList: []
       })
       this.getSearchTeaByYear(name);
-    } 
+    }
   },
   /***搜索输入 */
   showInput: function () {
@@ -141,16 +141,16 @@ Page({
     this.setData({
       inputShowed: true,
       showHistory: true,
-      showHot:true
+      showHot: true
     });
   },
-  checkinputTyping:function(e){
+  checkinputTyping: function (e) {
     console.log('checkinputTyping');
     var queryString = e.detail.value;
     this.setData({
       inputVal: queryString,
-      showHistory:true,
-      showHot:true
+      showHistory: true,
+      showHot: true
     })
   },
   inputTyping: function (e) {
@@ -167,10 +167,10 @@ Page({
       that.recordSearchTea(queryString);
     }
   },
-  onSearchTap:function(e){
+  onSearchTap: function (e) {
     console.log('onSearchTap');
     var that = this;
-    if (this.data.str){
+    if (this.data.str) {
       page = 1;
       this.setData({
         teaList: []
@@ -178,16 +178,16 @@ Page({
       that.getSearchTea(this.data.str);
       that.recordSearchTea(this.data.str);
     }
-    
+
   },
-  clearInput:function(e){
+  clearInput: function (e) {
     this.setData({
-      inputVal:'',
+      inputVal: '',
       inputShowed: false,
       search: false,
       showHistory: true,
       showHot: true,
-      teaList:[]
+      teaList: []
     })
   },
   hideInput: function () {
@@ -199,7 +199,7 @@ Page({
       showHistory: false
     });
   },
-  onClearHotTap:function(e){
+  onClearHotTap: function (e) {
     this.setData({
       inputVal: "",
       inputShowed: false,
@@ -207,25 +207,25 @@ Page({
       showHot: false
     });
   },
-  onClearTap:function(e){
+  onClearTap: function (e) {
     this.setData({
       showHistory: false
     });
   },
-  onHistoryTap:function(e){
+  onHistoryTap: function (e) {
     var name = e.currentTarget.dataset.name;
     this.setData({
       inputVal: name
     })
-    if(name){
+    if (name) {
       page = 1;
       this.setData({
-        teaList:[]
+        teaList: []
       })
       this.getSearchTea(name);
       this.recordSearchTea(name);
     }
-    
+
     console.log(name);
   },
   onHotTap: function (e) {
@@ -233,14 +233,14 @@ Page({
     this.setData({
       inputVal: name
     })
-    if(name){
+    if (name) {
       page = 1;
       this.setData({
         teaList: []
       })
       this.getSearchTea(name);
       this.recordSearchTea(name);
-    }  
+    }
     console.log(name);
   },
   getSearchTea: function (name) {
@@ -268,7 +268,7 @@ Page({
         for (var i = 0; i < data.data.length; i++) {
           var referencePrice = data.data[i].fields.referencePrice;
           index = referencePrice.indexOf('(');
-          price = referencePrice.substring( 0 , index);
+          price = referencePrice.substring(0, index);
           date = referencePrice.substring(index + 1, referencePrice.length);
           date = date.replace(/[^0-9-]/ig, "");
           console.log(date);
@@ -276,7 +276,7 @@ Page({
             model: data.data[i].model,
             pk: data.data[i].pk,
             price: price,
-            updateDate : date,
+            updateDate: date,
             fields: data.data[i].fields
           }
           teaList.push(temp);
@@ -285,13 +285,13 @@ Page({
           teaList: teaList,
           showHistory: false,
           showHot: false,
-          body:true
+          body: true
         })
-        if (teaList.length == 0 ){
+        if (teaList.length == 0) {
           that.setData({
             nodata: true
           })
-        }else{
+        } else {
           that.setData({
             nodata: false
           })
@@ -356,7 +356,7 @@ Page({
     );
   },
 
-  recordSearchTea:function(name){
+  recordSearchTea: function (name) {
     var that = this;
     var type = '10'
     var url = `${app.api.search}` + '?str=' + `${name}` + '&type=' + `${type}`;
@@ -391,12 +391,12 @@ Page({
             that.setData({
               hot: data.data
             })
-          }else{
+          } else {
             that.setData({
-              showHot:false
+              showHot: false
             })
           }
-          
+
         }
       }
     );
@@ -414,22 +414,22 @@ Page({
         console.log('historySearch');
         console.log(data);
         if (data.status == 1) {
-          if (data.data.length > 0){
+          if (data.data.length > 0) {
             that.setData({
               history: data.data
             })
-          }else{
+          } else {
             that.setData({
-              showHistory:false
+              showHistory: false
             })
           }
-          
+
         }
       }
     );
   },
   /******搜索输入 */
-// 弹窗
+  // 弹窗
   onChangeShowState: function (e) {
     console.log('展开');
     let that = this;
@@ -477,14 +477,14 @@ Page({
       classifyId: classifyId,
       chooseChapter: chooseChapter
     });
-    if (name){
+    if (name) {
       page = 1;
       name = name.substring(0, 4);
       that.setData({
         teaList: []
       })
       this.getSearchTeaByYear(name);
-    }    
+    }
   },
   onChangeShowState: function () {
     console.log('onChangeShowState');
@@ -537,13 +537,13 @@ Page({
         showChapter: false,
       })
       this.getSearchTeaByYear(name);
-    } 
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
@@ -558,34 +558,34 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

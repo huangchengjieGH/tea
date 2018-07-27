@@ -1,5 +1,5 @@
 page {
-  background-color: #f0f2f7;
+  background-color: rgb(245, 245, 249);
 }
 
 .quotaionCon {
@@ -279,6 +279,7 @@ page {
   display: flex;
   padding-left: 43px;
 }
+
 .number {
   background-color: red;
   color: white;
@@ -289,7 +290,83 @@ page {
   position: absolute;
   left: 38rpx;
 }
+
 .message {
   display: flex;
   position: relative;
+}
+
+.yearColumn {
+  display: flex;
+  white-space: nowrap;
+  margin-top: 8rpx;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+.yearValue {
+  display: inline-block;
+  font-size: 15px;
+  color: rgb(26, 26, 26);
+  line-height: 1.2;
+  text-align: right;
+  width: 45px;
+  padding: 10px 0 5px 0;
+}
+
+.forYear {
+  display: inline-block;
+  padding: 0 5px;
+  font-size: 15px;
+  color: rgb(102, 102, 102);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.teaCard {
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 8px 27px 0px rgba(28, 28, 27, 0.05);
+  width: 336rpx;
+  height: 236rpx;
+  margin: 10rpx 2rpx 20rpx 25rpx;
+  position: relative;
+}
+
+.teaName {
+  font-size: 34rpx;
+  color: rgb(38, 38, 38);
+  line-height: 1.2;
+  /* margin: 20rpx; */
+  padding: 20rpx 0 10rpx 20rpx;
+  width: 300rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+  text-overflow: ellipsis;
+}
+
+.priceScore {
+  padding: 0 0 10rpx 20rpx;
+}
+
+.updown {
+  padding: 5rpx 0 10rpx 20rpx;
+   display: flex;
+  align-items: center; 
+}
+
+.update {
+  background-color: rgb(250, 250, 250);
+  font-size: 24rpx;
+  color: rgb(172, 172, 172);
+  line-height: 1.2;
+  height: 59rpx;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+  display: flex;
+  align-items: center;
 }

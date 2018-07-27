@@ -70,7 +70,7 @@ Page({
   onShow: function () {
     var that = this;
     this.getMessageList();
-    this.interval = setInterval(this.getMessageList, 10000);
+    this.interval = setInterval(this.getMessageList, 20000);
   },
 
   /**

@@ -10,17 +10,15 @@ Page({
     flag: true,
     down: true,
     product: '',
-    teaList: [
-      {
-        id: '',
-        type: '1',
-        name: '',
-        status: '1',
-        count: '',
-        unit: '',
-        price: ''
-      }
-    ],
+    teaList: [{
+      id: '',
+      type: '1',
+      name: '',
+      status: '1',
+      count: '',
+      unit: '',
+      price: ''
+    }],
     style: [
       '找',
       '代客找',
@@ -28,12 +26,17 @@ Page({
       '代客出'
     ],
     index: '0',
-    items: [
-      { name: '上线', value: '0', checked: 'true' },
-      { name: '下架', value: '1' },
+    items: [{
+        name: '上线',
+        value: '0',
+        checked: 'true'
+      },
+      {
+        name: '下架',
+        value: '1'
+      },
     ],
-    chooseTea: {
-    },
+    chooseTea: {},
     shopName: '',
     phone: '',
     canvasId: 'shareCanvas',
@@ -42,54 +45,52 @@ Page({
     showCanvas: false,
     qrCode: '',
     showCan: true,
-    textFindList: [
-    ],
-    textSoldList: [
-    ],
+    textFindList: [],
+    textSoldList: [],
     smartinput: false,
     requireId: '',
-    openUserInfo:false,
-    openPhoneInfo:false,
-    UserInfoStatus:false,
-    UserPhoneStatus:false
+    openUserInfo: false,
+    openPhoneInfo: false,
+    UserInfoStatus: false,
+    UserPhoneStatus: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var requireId = options.requireId;
     console.log('aaa', requireId);
     if (requireId) {
       this.setData({
         requireId: requireId,
-        openUserInfo:true,
-        UserInfoStatus:false,
-        openPhoneInfo:true,
+        openUserInfo: true,
+        UserInfoStatus: false,
+        openPhoneInfo: true,
         UserPhoneStatus: false
       })
       this.getPublish(requireId);
     }
     this.getWindowWidth();
   },
-  onGetUserInfoTap: function (e) {
+  onGetUserInfoTap: function(e) {
     console.log(e.detail.userInfo);
     if (e.detail.userInfo) {
       console.log('queding');
       this.getUserInfo(e.detail.userInfo);
       this.setData({
         shopName: e.detail.userInfo.nickName,
-        openUserInfo:true,
-        UserInfoStatus:false
+        openUserInfo: true,
+        UserInfoStatus: false
       })
-    }else{
+    } else {
       this.setData({
         openUserInfo: true,
-        UserInfoStatus:true
+        UserInfoStatus: true
       })
     }
   },
-  onPhoneNumberTap: function (e) {
+  onPhoneNumberTap: function(e) {
     console.log(e);
     var that = this;
     var encryptedData = e.detail.encryptedData;
@@ -100,7 +101,7 @@ Page({
     var iv = e.detail.iv;
     wx.login({
       async: false,
-      success: function (res) {
+      success: function(res) {
         if (res.code) {
           /*获取商品信息 */
           var data = {
@@ -114,22 +115,22 @@ Page({
             true,
             true,
             data,
-            function (data) {
+            function(data) {
               if (data.status == 1) {
                 console.log(data);
-                if (data.data != null){
+                if (data.data != null) {
                   that.setData({
                     phone: data.data.phoneNumber,
                     openPhoneInfo: true,
-                    UserPhoneStatus:false
+                    UserPhoneStatus: false
                   })
-                }else{
+                } else {
                   console.log('取消');
                   that.setData({
                     openPhoneInfo: true,
-                    UserPhoneStatus:true
+                    UserPhoneStatus: true
                   })
-                }              
+                }
               }
             }
           );
@@ -139,7 +140,7 @@ Page({
       }
     });
   },
-  getUserInfo: function (data) {
+  getUserInfo: function(data) {
     var url = `${app.api.userInfo}`;
     var that = this;
     var data = {
@@ -156,7 +157,7 @@ Page({
       true,
       false,
       data,
-      function (data) {
+      function(data) {
         if (data.status == 1) {
           console.log(data);
         }
@@ -166,7 +167,7 @@ Page({
   // getUserPhone: function (data) {
 
   // },
-  getPublish: function (requireId) {
+  getPublish: function(requireId) {
     var url = `${app.api.getPublish}` + '/' + `${requireId}`;
     var that = this;
     app.apiFunctions.requestUrl(
@@ -175,7 +176,7 @@ Page({
       true,
       true,
       '',
-      function (data) {
+      function(data) {
         if (data.status == 1) {
           that.setData({
             shopName: data.data.name,
@@ -185,13 +186,13 @@ Page({
       }
     );
   },
-  onClickTap: function (e) {
+  onClickTap: function(e) {
     var down = !this.data.down;
     this.setData({
       down: down
     });
   },
-  bindPickerChange: function (e) {
+  bindPickerChange: function(e) {
     var down = !this.data.down;
     var teaIndex = e.currentTarget.dataset.teaindex;
     var index = e.detail.value;
@@ -203,29 +204,33 @@ Page({
       teaList: teaList
     });
   },
-  bindCancelTap: function (e) {
+  bindCancelTap: function(e) {
     var down = !this.data.down;
     this.setData({
       down: down
     });
   },
-  show: function () {
-    this.setData({ flag: false })
+  show: function() {
+    this.setData({
+      flag: false
+    })
 
   },
   //消失
-  hide: function () {
-    this.setData({ flag: true })
+  hide: function() {
+    this.setData({
+      flag: true
+    })
 
   },
-  onModalCancelTap: function (e) {
+  onModalCancelTap: function(e) {
     this.setData({
       flag: true,
       moreIndex: '',
       chooseTea: {}
     })
   },
-  onModalConfirmTap: function (e) {
+  onModalConfirmTap: function(e) {
     var teaList = this.data.teaList;
     teaList[this.data.moreIndex] = this.data.chooseTea;
     this.setData({
@@ -233,13 +238,13 @@ Page({
       teaList: teaList
     })
   },
-  shopNameInput: function (e) {
+  shopNameInput: function(e) {
     var shopName = e.detail.value;
     this.setData({
       shopName: shopName
     })
   },
-  phoneInput: function (e) {
+  phoneInput: function(e) {
     var phone = e.detail.value;
     this.setData({
       phone: phone
@@ -248,7 +253,7 @@ Page({
   isValid() {
     return /\d{11}/.test(this.data.phone);
   },
-  bodyInput: function (e) {
+  bodyInput: function(e) {
     var body = e.detail.value;
     this.setData({
       body: body
@@ -260,16 +265,16 @@ Page({
       })
     }
   },
-  onSmartInputDoneTap: function (e) {
+  onSmartInputDoneTap: function(e) {
     this.smartInput();
   },
-  onClearupTap: function (e) {
+  onClearupTap: function(e) {
     this.setData({
       body: '',
       smartinput: false
     })
   },
-  smartInput: function (e) {
+  smartInput: function(e) {
     var that = this;
     var body = this.data.body;
     var phone = '';
@@ -279,7 +284,7 @@ Page({
       true,
       false,
       body,
-      function (data) {
+      function(data) {
         console.log(data);
         if (data.data.phone != '' && data.data.phone != null) {
           phone = data.data.phone;
@@ -294,7 +299,7 @@ Page({
       }
     );
   },
-  addTeaTap: function (e) {
+  addTeaTap: function(e) {
     var teas = [],
       teas = this.data.teaList;
     var temp = {
@@ -310,7 +315,7 @@ Page({
       teaList: teas
     })
   },
-  teaInput: function (e) {
+  teaInput: function(e) {
     var teaIndex = e.currentTarget.dataset.teaindex;
     var teaName = e.detail.value;
     var teaList = this.data.teaList;
@@ -319,22 +324,61 @@ Page({
       teaList: teaList
     })
   },
-  onDeleteTap: function (e) {
+  onDeleteTap: function(e) {
+    var that = this;
+    var length = that.data.teaList.length;
+    if (length > '1') {
+    wx.showModal({
+      title: '提示',
+      content: '确认删除该选项吗',
+      success: function(res) {
+        if (res.confirm) {
+          var index = e.currentTarget.dataset.teaindex;
+          var teaList = [];
+            teaList = that.data.teaList;
+            teaList.splice(index, 1);
+            that.setData({
+              teaList: teaList
+            })        
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+    }else{
+      wx.showToast({
+        title: '内容不能为空',
+      })
+    }
+  },
+  onArrowdownTap: function(e) {
     var index = e.currentTarget.dataset.teaindex;
     var teaList = [];
+    var objects = [];
     var length = this.data.teaList.length;
-    if (length > '1') {
-      teaList = this.data.teaList;
-      teaList.splice(index, 1);
+    teaList = this.data.teaList;
+    if (index != length - 1) {
+      teaList = this.swapItems(teaList, index, index + 1)
+      this.setData({
+        teaList: teaList
+      })
+    } else {
+      var str = teaList.splice(index, 1);
+      teaList.unshift(str[0]);
       this.setData({
         teaList: teaList
       })
     }
   },
-  radioChange: function (e) {
+  // 交换数组元素
+  swapItems: function(arr, index1, index2) {
+    arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+    return arr;
+  },
+  radioChange: function(e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
   },
-  onMoreTap: function (e) {
+  onMoreTap: function(e) {
     var moreIndex = e.currentTarget.dataset.teaindex;
     var chooseTea = this.data.teaList[moreIndex];
     this.setData({
@@ -343,7 +387,7 @@ Page({
       moreIndex: moreIndex
     })
   },
-  onModalNameInput: function (e) {
+  onModalNameInput: function(e) {
     var modalName = e.detail.value;
     var chooseTea = this.data.chooseTea;
     if (modalName != '') {
@@ -353,7 +397,7 @@ Page({
       })
     }
   },
-  onModalCountInput: function (e) {
+  onModalCountInput: function(e) {
     var count = e.detail.value;
     var chooseTea = this.data.chooseTea;
     if (count != '') {
@@ -363,7 +407,7 @@ Page({
       })
     }
   },
-  onModalPriceInput: function (e) {
+  onModalPriceInput: function(e) {
     var price = e.detail.value;
     var chooseTea = this.data.chooseTea;
     if (price != '') {
@@ -373,7 +417,7 @@ Page({
       })
     }
   },
-  onModalUnitInput: function (e) {
+  onModalUnitInput: function(e) {
     var unit = e.detail.value;
     var chooseTea = this.data.chooseTea;
     if (unit != '') {
@@ -383,7 +427,7 @@ Page({
       })
     }
   },
-  publishRequire: function (e) {
+  publishRequire: function(e) {
     var that = this;
     var requestStyle = 'POST';
     var body = {
@@ -403,7 +447,7 @@ Page({
       true,
       false,
       body,
-      function (data) {
+      function(data) {
         if (data.status == 1) {
           wx.switchTab({
             url: '../publish/publish',
@@ -413,7 +457,7 @@ Page({
       }
     );
   },
-  onConfirmTap: function (e) {
+  onConfirmTap: function(e) {
     console.log('onConfirmTap');
     var that = this;
     var length = this.data.teaList.length;
@@ -437,7 +481,7 @@ Page({
       })
     }
   },
-  onPreviewTap: function (e) {
+  onPreviewTap: function(e) {
     this.setData({
       showCan: true
     })
@@ -446,7 +490,7 @@ Page({
   getWindowWidth() {
     const that = this;
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           windowWidth: res.windowWidth * 2,
           windowHeight: res.windowHeight * 2
@@ -456,18 +500,22 @@ Page({
   },
   saveCanvas(canvasId) {
     const that = this;
-    return new Promise(function (resolve) {
+    return new Promise(function(resolve) {
       wx.canvasToTempFilePath({
         x: 0,
         y: 0,
         canvasId,
-        success: function (res) {
+        success: function(res) {
           resolve();
-          wx.previewImage({ urls: [res.tempFilePath] });
+          wx.previewImage({
+            urls: [res.tempFilePath]
+          });
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
-            success: function (res) {
-              that.setData({ showCanvas: false });
+            success: function(res) {
+              that.setData({
+                showCanvas: false
+              });
             }
           });
         }
@@ -476,15 +524,18 @@ Page({
   },
   downloadFile(url) {
     const that = this;
-    return new Promise(function (resolve) {
+    return new Promise(function(resolve) {
       wx.downloadFile({
         url,
-        success: function (downRes) {
+        success: function(downRes) {
           if (downRes.statusCode === 200) {
             wx.getImageInfo({
               src: downRes.tempFilePath,
-              success: function (info) {
-                resolve({ info, url: downRes.tempFilePath });
+              success: function(info) {
+                resolve({
+                  info,
+                  url: downRes.tempFilePath
+                });
               }
             });
           }
@@ -546,16 +597,23 @@ Page({
       `https://zhaocha.yf-gz.cn/oss/file/1529825482542_43cecb63f716dd6b9dd7390b20dabb3.png`,
       `https://zhaocha.yf-gz.cn/oss/file/1529825635940_7a8b4ce5c1abaedd5af521eb4006e616.png`,
       `https://zhaocha.yf-gz.cn/oss/file/1529828023628_4061fc6131b97ed4cdfcd0a53ea6d579.png`,
-      `https://zhaocha.yf-gz.cn/oss/file/1529828109391_78412cb505dba7f0981003b51ac9b541.png`];
+      `https://zhaocha.yf-gz.cn/oss/file/1529828109391_78412cb505dba7f0981003b51ac9b541.png`
+    ];
     let ctx = wx.createCanvasContext(canvasId);
-    that.setData({ showCanvas: true });
-    wx.showLoading({ title: '生成中...' });
+    that.setData({
+      showCanvas: true
+    });
+    wx.showLoading({
+      title: '生成中...'
+    });
     that.downloadFileList(imgList).then(urlList => {
       let imgInfo = urlList[0];
       let sw = imgInfo.info.width;
       let sh = imgInfo.info.height;
       let imgHeight = windowWidth * sh / sw;
-      that.setData({ canvasWHRate: sw / sh });
+      that.setData({
+        canvasWHRate: sw / sh
+      });
       //画布框
       ctx.setFillStyle(canvasColor);
       ctx.fillRect(0, 0, windowWidth, canvasHeight);
@@ -594,7 +652,7 @@ Page({
       let y = windowWidth * pTextY;
 
       if (findLength > 0) {
-        ctx.drawImage(urlList[4].url, 85, 85, qrCodeSize * 1.3, qrCodeSize * 1.3);  //找
+        ctx.drawImage(urlList[4].url, 85, 85, qrCodeSize * 1.3, qrCodeSize * 1.3); //找
         //文字
         ctx.setFontSize(fontSize);
         ctx.setFillStyle(textColor);
@@ -632,7 +690,7 @@ Page({
         y4 += fontSize * 1.2;
       })
 
-      ctx.draw(false, function () {
+      ctx.draw(false, function() {
         //生成海报
         if (data == 1) {
           that.saveCanvas(canvasId).then(() => {
@@ -651,16 +709,16 @@ Page({
   },
   checkSaveImageAuthor() {
     const that = this;
-    return new Promise(function (resolve) {
+    return new Promise(function(resolve) {
       wx.getSetting({
-        success: function (res) {
+        success: function(res) {
           console.log('success')
           let authorization = res.authSetting['scope.writePhotosAlbum'];
           authorization && resolve();
           authorization === false && wx.openSetting();
           authorization === undefined && wx.authorize({
             scope: 'scope.writePhotosAlbum',
-            success: function () {
+            success: function() {
               resolve();
             }
           });
@@ -671,7 +729,7 @@ Page({
   },
   makeGoodsCard(data) {
     const that = this;
-    this.processPreviewData(function (res) {
+    this.processPreviewData(function(res) {
       console.log(res);
       if (res = 'success') {
         that.drawCanvas(data);
@@ -681,7 +739,7 @@ Page({
     //   that.drawCanvas();
     // });
   },
-  processPreviewData: function (callback) {
+  processPreviewData: function(callback) {
     var contact = [];
     var textFind = [];
     var textSold = [];
@@ -703,7 +761,7 @@ Page({
     })
     callback("success");
   },
-  deletePublish: function (requireId) {
+  deletePublish: function(requireId) {
     var url = `${app.api.deletePublish}` + '/' + `${requireId}`;
     var that = this;
     app.apiFunctions.requestUrl(
@@ -712,7 +770,7 @@ Page({
       true,
       true,
       '',
-      function (data) {
+      function(data) {
         if (data.status == 1) {
           // wx.navigateTo({
           //   url: '../edit/edit',
@@ -724,14 +782,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.setData({
       showCan: false
     })
@@ -740,35 +798,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

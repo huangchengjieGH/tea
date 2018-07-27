@@ -3,10 +3,10 @@
     <view class='top'>
       <view class='title'>
         <view class='img'>
-          <image style='width: 30px;height: 31px;' src='/images/icons/avatar2.png'></image>
+          <image style='width: 30px;height: 31px;' src="{{shareList.wxUser.avatarUrl==null?'/images/icons/avatar2.jpeg':shareList.wxUser.avatarUrl}}"></image>
         </view>
 
-        <view style='margin-left:20rpx;font-size:20px;'>{{shareList.name}}</view>
+        <view style='margin-left:20rpx;font-size:20px;' catchtap='onBodyTap' data-requireid="{{shareList.id}}" data-ortheruserid = "{{shareList.wxUser.id}}">{{shareList.name}}</view>
       </view>
       <!-- <view class='phone'>
         <image style='height:44rpx;width:45rpx;' src='/images/icons/phone2.png'></image>
@@ -27,7 +27,7 @@
               <text style='font-weight:300;color: #EC820E;letter-spacing:1px;' wx:if="{{product.price>10000}}">万</text>
             </view>
           </view> -->
-          <view class='name' wx:for="{{item.object}}" wx:for-item='product' wx:for-index="productindex">
+          <view class='name' wx:for="{{item.object}}" wx:for-item='product' wx:for-index="productindex" catchtap='onBodyTap' data-requireid="{{shareList.id}}" data-ortheruserid = "{{shareList.wxUser.id}}">
             <view wx-if="{{productindex<15}}">
               <text>{{product.name}}</text>
               <text style='font-weight:300;margin-left:5px;letter-spacing:2px' wx:if="{{product.count>0}}">X{{product.count}}{{product.unit}}</text>
@@ -42,6 +42,10 @@
       <view class='checkmore' wx-if="{{shareList.maxLength}}" catchtap='onCheckMoreTap' data-id="{{shareList.id}}">查看全部({{shareList.length}}条)</view>
     </view>
     <view class='phoneView' catchtap='onPhoneTap' data-phone="{{shareList.phone}}">
+    <view class='sixin' catchtap='onBodyTap' data-requireid="{{shareList.id}}" data-ortheruserid = "{{shareList.wxUser.id}}">
+         <image style='height:44rpx;width:45rpx;' src='/images/icons/sixin.png'></image> 
+        <text style='margin-left:10rpx;'>私信ta</text>
+      </view>
       <view class='phone'>
         <image style='height:44rpx;width:45rpx;' src='/images/icons/phone2.png'></image>
         <text style='margin-left:10rpx;'>{{shareList.phone}}</text>
@@ -81,7 +85,7 @@
           <view class='bodyname'>
             <!-- <view>{{objs.wxUser.avatarUrl}}</view> -->
             <image class='nameImg' src="{{objs.wxUser.avatarUrl==null?'/images/icons/avatar2.jpeg':objs.wxUser.avatarUrl}}" catchtap='onAvatarTap' data-url='{{objs.wxUser.avatarUrl}}'></image>
-            <text style='margin-left:20rpx;' catchtap='onBodyTap' data-requireid="{{objs.id}}" data-ortheruserid = "{{objs.wxUser.id}}">{{objs.name}}</text>
+            <text style='margin-left:20rpx;width:400rpx;' catchtap='onBodyTap' data-requireid="{{objs.id}}" data-ortheruserid = "{{objs.wxUser.id}}">{{objs.name}}</text>
           </view>
           <view class='loaction'>
             <view class='time'>

@@ -2,7 +2,7 @@
 let app = getApp();
 const tools = require('../../tools.js');
 var page = 1;
-var page_size = 7;
+var page_size = 10;
 Page({
 
   /**
@@ -11,7 +11,9 @@ Page({
   data: {
     chatList:[],
     messageList:[],
-    msg:''
+    msg:'',
+    getMyMsgBtn:false,
+    textareaFlag:false
   },
 
   /**
@@ -50,8 +52,8 @@ Page({
     if (this.data.myMsg.nickName!= null){
       if (msg) {
         var otherId = this.data.ortherUserId;
-        this.sendMessage(otherId, msg);
-        this.processSendMessageData(this.data.msg);
+        // this.sendMessage(otherId, msg);
+        // this.processSendMessageData(this.data.msg);
       } else {
       }
     }else{
@@ -84,6 +86,9 @@ Page({
         var otherId = this.data.ortherUserId;
         this.sendMessage(otherId, this.data.msg);
         this.processSendMessageData(this.data.msg);
+        this.setData({
+          textareaFlag:true
+        })
       } else {
       }
     } else {
@@ -102,21 +107,30 @@ Page({
     }  
   },
   processSendMessageData:function(msg){
+    var that = this;
     var createdAt = app.util.formatTime(new Date());
     var messageList = this.data.messageList;
-    var temp ={
-      id: messageList[0].id+1,
-      status: messageList[0].status,
-      createdAt: createdAt,
-      updatedAt: messageList[0].updatedAt,
-      msg: msg,
-      chatId: messageList[0].chatId,
-      mine:true,
-      flag: messageList[0].flag
-    };
-    messageList = this.prepend(messageList, temp);
+    if (messageList.length > 0){
+      var temp = {
+        id: messageList[0].id + 1,
+        status: messageList[0].status,
+        createdAt: createdAt,
+        updatedAt: messageList[0].updatedAt,
+        msg: msg,
+        chatId: messageList[0].chatId,
+        mine: true,
+        flag: messageList[0].flag
+      };
+      messageList = this.prepend(messageList, temp);
+      this.setData({
+        messageList: messageList
+      })
+    }else{
+         page=1;
+         that.getMessageByOrtherUserId(this.data.ortherUserId);
+    }
     this.setData({
-      messageList: messageList
+      msg: '',
     })
   },
   getMessage: function(id) {
@@ -136,7 +150,8 @@ Page({
         console.log(data);
         if (data.status == 1) {
           that.setData({
-            ortherUserId: data.data.other.id
+            ortherUserId: data.data.other.id,
+            getMyMsgBtn:true
           })
           page++;
           that.setMessageReaded(data.data.other.id);
@@ -163,9 +178,12 @@ Page({
       data,
       function (data) {
         console.log(data);
+        that.setData({
+          getMyMsgBtn: true
+        })
         if (data.status == 1) {
           that.setData({
-            ortherUserId: data.data.other.id
+            ortherUserId: data.data.other.id,
           })
           page++;
           that.setMessageReaded(data.data.other.id);
@@ -285,7 +303,7 @@ Page({
         console.log(data.data);
         if (data.status == 1) {
           that.setData({
-            msg:'',
+            // msg:'',
             // messageList:[]
           })
           // page=1;
@@ -390,7 +408,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.interval2 = setInterval(this.getUnreadMessage, 5000);
+    this.interval2 = setInterval(this.getUnreadMessage, 10000);
   },
 
   /**

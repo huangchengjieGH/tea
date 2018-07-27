@@ -19,10 +19,10 @@
               <image style='height:30rpx;width:30rpx;border-radius:5rpx;' src='/images/icons/time.png'></image>
               <text style='margin-left:10rpx;'>{{objs.updatedAt}}</text>
             </view>
-            <view class='location'>
+            <!-- <view class='location'>
               <image style='height:28rpx;width:28rpx;border-radius:5rpx;margin-left:10rpx;' src='/images/icons/location.png'></image>
               <text style='margin-left:10rpx;letter-spacing:1px;'>广东广州</text>
-            </view>
+            </view> -->
           </view>
           <view class='star' catchtap='collectTea' data-requireId="{{objs.id}}" data-like="{{objs.like}}" data-index="{{index}}">
             <image wx:if="{{objs.like}}" style='height:100rpx;width:100rpx;' src='/images/icons/star_l.png'></image>

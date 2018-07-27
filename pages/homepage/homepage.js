@@ -46,7 +46,7 @@ Page({
    */
   onLoad: function (options) {
     var requireId = options.requireId;
-    // var requireId = 37;
+    // var requireId = 8;
     var scene = decodeURIComponent(options.scene);
     if (requireId == null || requireId==''){
       requireId = this.GetQueryString(scene, 'requireId');
@@ -81,7 +81,7 @@ Page({
   },
   onShow: function () {
     this.getUnreadCount();
-    this.interval = setInterval(this.getUnreadCount, 10000);
+    this.interval = setInterval(this.getUnreadCount, 20000);
   },
   onTypeTap: function (e) {
     var status = e.currentTarget.dataset.status;

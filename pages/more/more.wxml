@@ -3,7 +3,7 @@
     <view style='border-bottom:1rpx solid rgb(220, 220, 220)'>
       <view class='bodymsg'>
         <view class='bodyname'>
-          <image class='nameImg' src="{{objs.wxUser.avatarUrl==null?'/images/icons/avatar2.jpeg':objs.wxUser.avatarUrl}}"></image>
+          <image class='nameImg' src="{{publishList.wxUser.avatarUrl==null?'/images/icons/avatar2.jpeg':publishList.wxUser.avatarUrl}}"></image>
           <text style='margin-left:20rpx;'>{{publishList.name}}</text>
         </view>
         <view class='loaction'>
