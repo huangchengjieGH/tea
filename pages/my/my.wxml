@@ -1,21 +1,73 @@
 <scroll-view class='myCon'>
-  <view style='position:relative'>
+  <!-- <view style='position:relative'>
     <view>
-       <image class='myImg' mode="aspectFill" src='/images/icons/teabg.jpeg'></image> 
+      <image class='myImg' mode="aspectFill" src='/images/icons/teabg.jpeg'></image>
     </view>
     <view class='msg'>
       <open-data type="userAvatarUrl" class='Avatar'></open-data>
       <open-data type="userNickName" class='userNickName'></open-data>
     </view>
-  </view> 
+  </view> -->
+  <view class='msMsg'>
+    <view class='msg'>
+      <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;padding:10rpx 30rpx;'>
+        <open-data type="userAvatarUrl" class='Avatar'></open-data>
+        <open-data type="userNickName" class='userNickName'></open-data>
+      </view>
+    </view>
+  </view>
+  <view class='vipCon'>
+    <view class='reward'>
+      <text class='rewardtxt'>0</text>
+      <text class='rewardtxt2'>积分</text>
+    </view>
 
-  <!-- <button class='call' open-type="contact">
-   <image class='kefuImg' src='/images/icons/conc.png'></image>
-   <view class='calltxt'>联系客服</view>
-  </button> -->
+    <view class='direcVip'>
+      <text class='direcViptxt'>{{teaList.visitCount}}</text>
+      <text class='direcViptxt2'>浏览</text>
+    </view>
 
+    <view class='allVip'>
+      <text class='allViptxt'>{{teaList.likeCount}}</text>
+      <text class='allViptxt2'>关注</text>
+    </view>
+  </view>
 
- <view class='tarBar'>
+  <view class='styleCon'>
+    <view class='columnone'>
+      <navigator class='wallet' url='../message/message'>
+        <view style='display:flex;flex-direction:column;align-items:center;position:relative;'>
+          <image src='/images/icons/msg.png' class='iconImg'></image>
+          <text class='txtValue'>我的私信</text>
+          <view class='number02' wx-if="{{unReadCount>0}}">{{unReadCount}}</view>
+        </view>
+      </navigator>
+
+      <navigator class='order' url="{{'../attention/attention?chooseStatus=' + visit}}">
+        <image src='/images/icons/order.png' class='iconImg02'></image>
+        <text class='txtValue'>我看过的</text>
+      </navigator>
+      <navigator class='noodle' url="{{'../attention/attention?chooseStatus=' + attention}}">
+        <image src='/images/icons/noodle.png' class='iconImg03'></image>
+        <text class='txtValue'>我的关注</text>
+      </navigator>
+
+    </view>
+
+    <view class='columntwo'>
+      <view class='pingdan'>
+        <!-- <image src='/images/icons/pingdan.png' class='pingdanImg'></image>
+        <text class='txtValue'>评单</text> -->
+      </view>
+
+      <view class='proxy'>
+        <!-- <image src='/images/icons/proxy.png' class='iconImg'></image>
+        <text class='txtValue'>代理商</text> -->
+      </view>
+    </view>
+  </view>
+
+  <view class='tarBar'>
     <view class='left'>
       <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../homepage/homepage" open-type="switchTab">
         <image style='height:44rpx;width:44rpx;' src='/images/icons/hp_l.png'></image>
@@ -30,20 +82,26 @@
       <image style='height:130rpx;width:130rpx' src='/images/icons/aaa.png'></image>
     </navigator>
     <view class='right'>
-      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;'>
-        <view style='display:flex;flex-direction:column'>
-          <image style='height:50rpx;width:50rpx;' src='/images/icons/my.png'></image>
-          <text>消息</text>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../information/information" open-type="switchTab">
+        <view class='message'>
+          <view style='display:flex;flex-direction:column'>
+            <image style='height:50rpx;width:50rpx;' src='/images/icons/info.png'></image>
+            <text>资讯</text>
+          </view>
+          <!-- <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view> -->
         </view>
       </navigator>
-      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;padding-top:8rpx;' url="../attention/attention" open-type="switchTab">
-        <view style='display:flex;flex-direction:column'>
-          <image style='height:45rpx;width:45rpx;' src='/images/icons/attention.png'></image>
-          <text>关注</text>
+      <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;'>
+        <view class='mymy'>
+          <view style='display:flex;flex-direction:column'>
+            <image style='height:55rpx;width:55rpx;' src='/images/icons/my.png'></image>
+            <text>我的</text>
+          </view>
+          <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view>
         </view>
-      </navigator>
+      </view>
     </view>
   </view>
 
- <!-- <footer></footer>   -->
+  <!-- <footer></footer>   -->
 </scroll-view>

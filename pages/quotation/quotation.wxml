@@ -99,19 +99,19 @@
           <text>私信</text>
         </view>
       </navigator> -->
-      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../message/message" open-type="switchTab">
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../information/information" open-type="switchTab">
         <view class='message'>
           <view style='display:flex;flex-direction:column'>
-            <image style='height:50rpx;width:50rpx;' src='/images/icons/message_l.png'></image>
-            <text>私信</text>
+            <image style='height:50rpx;width:50rpx;' src='/images/icons/info.png'></image>
+            <text>资讯</text>
           </view>
           <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view>
         </view>
       </navigator>
-      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../attention/attention" open-type="switchTab">
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../my/my" open-type="switchTab">
         <view style='display:flex;flex-direction:column'>
-          <image style='height:50rpx;width:50rpx;' src='/images/icons/attention.png'></image>
-          <text>关注</text>
+          <image style='height:50rpx;width:50rpx;' src='/images/icons/my_l.png'></image>
+          <text>我的</text>
         </view>
       </navigator>
     </view>

@@ -1,6 +1,9 @@
 {
   "pages": [
-     "pages/homepage/homepage",
+    "pages/homepage/homepage",
+    "pages/my/my",
+    "pages/information/information",
+    "pages/attention/attention",
     "pages/publish/publish",
     "pages/quotation/quotation",
     "pages/quote/quote",
@@ -10,8 +13,6 @@
     "pages/chat/chat",
     "pages/more/more",
     "pages/search/search",
-    "pages/attention/attention",
-    "pages/my/my",
     "pages/searchtea/searchtea",
     "pages/detail/detail",
     "pages/index/index",
@@ -50,16 +51,16 @@
         "selectedIconPath": "/images/icons/pic_l.png"
       },
       {
-        "pagePath": "pages/attention/attention",
-        "text": "我的",
-        "iconPath": "images/icons/my_l.png",
-        "selectedIconPath": "/images/icons/my.png"
+        "pagePath": "pages/information/information",
+        "text": "资讯",
+        "iconPath": "images/icons/info_l.png",
+        "selectedIconPath": "/images/icons/info.png"
       },
       {
-        "pagePath": "pages/message/message",
-        "text": "关注",
+        "pagePath": "pages/my/my",
+        "text": "我的",
         "iconPath": "images/icons/attention.png",
-        "selectedIconPath": "/images/icons/attention_l.png"
+        "selectedIconPath": "/images/icons/my.png"
       }
     ]
   }

@@ -82,6 +82,7 @@ Page({
   onShow: function () {
     this.getUnreadCount();
     this.interval = setInterval(this.getUnreadCount, 20000);
+    wx.hideTabBar();
   },
   onTypeTap: function (e) {
     var status = e.currentTarget.dataset.status;

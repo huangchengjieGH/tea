@@ -1,23 +1,53 @@
 <view class='quotaionCon'>
+  <view style='display:none;background-color:white' catchtap='onImageTap'>
+    <swiper autoplay="True" class="swiper_show60" indicator-dots="True" lower-threshold="30" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="rgba(255,255,255,0.6)">
+      <swiper-item wx:for="{{previewImageList}}" wx:for-item="isBanner" wx:key="{{index}}" id="{{index}}" bindtap="bannerJump">
+        <image style="width:100%; height:100%;display:block;" mode="scaleToFill" src="{{isBanner}}" />
+      </swiper-item>
+    </swiper>
+  </view>
+
   <view class='namemsg'>
-    <view class='namescore'>
-      <text class='name'>{{teaList.name}}</text>
-      <text class='score'>{{teaList.score}}</text>
-      <text class='fen'>分</text>
-    </view>
-    <view style='font-weight: 300;'>
-      <view class='yearbatch'>
-        <text>年份:</text>
-        <text style='margin-left:10rpx;'>{{teaList.year}}</text>
-        <text class='batch'>批次:</text>
-        <text class='batchValue'>{{teaList.batch}}</text>
+    <view style=''>
+      <view style='display:flex;'>
+        <view catchtap='onImageTap' wx:if="{{previewImageList[0]!=''}}" style='position:relative'>
+           <image style='width:300rpx;height:300rpx;' src="{{previewImageList[0]}}"></image> 
+           <view class='picnum'>共{{previewImageList.length}}张</view>
+        </view>
+        <view catchtap='onImageTap' wx:if="{{previewImageList[0]==''}}">
+           <image style='width:300rpx;height:300rpx;' src="{{noPic}}"></image> 
+        </view>
+        <view style='display:column;'>
+          <view class='namescore'>
+            <text class='name'>{{teaList.name}}</text>
+            <!-- <text class='score'>{{teaList.score}}</text>
+          <text class='fen'>分</text>  -->
+          </view>
+          <view class='yearbatch'>
+            <view style='padding:5rpx 0;'>
+              <text>年份:</text>
+              <text style='margin-left:10rpx;'>{{teaList.year}}</text>
+            </view>
+            <view style='padding:5rpx 0;'>
+              <text class='batch'>批次:</text>
+              <text class='batchValue'>{{teaList.batch}}</text>
+            </view>
+          </view>
+          <view class='Technology'>
+            <view style='padding:5rpx 0;'>
+              <text>生产工艺:</text>
+              <text style='margin-left:10rpx;'>{{teaList.productionTechnology}}</text>
+            </view>
+            <view style='padding:5rpx 0;'>
+              <text class='product'>公斤生产价:</text>
+              <text class='productValue'>{{teaList.referencePricePerKg}}</text>
+            </view>
+          </view>
+        </view>
+
       </view>
-      <view class='Technology'>
-        <text>生产工艺:</text>
-        <text style='margin-left:10rpx;'>{{teaList.productionTechnology}}</text>
-        <text class='product'>公斤生产价:</text>
-        <text class='productValue'>{{teaList.referencePricePerKg}}</text>
-      </view>
+
+
       <view class='specification'>
         <text>规格:</text>
         <text style='margin-left:10rpx;'>{{teaList.specification}}</text>
@@ -47,20 +77,21 @@
   <view class='dateChoose'>
     <view class='begintime'>
       <!-- <text>2018-01-01</text> -->
-      <picker bindchange="inputStartTime" mode="date" value="{{startTime}}" start="1970-01-01" end="{{today}}">{{startTime}}</picker>
+      <picker bindchange="inputStartTime" mode="date" value="{{startTime}}" start="1970-01-01" end="{{today}}" style='margin-left:20rpx'>{{startTime}}</picker>
       <view class='triangleDown'></view>
     </view>
-    <view style='margin:0rpx 15rpx;'>至</view>
+    <view style='margin:0rpx 20rpx;'>至</view>
     <view class='endtime'>
-      <picker bindchange="inputEndTime" mode="date" value="{{endTime}}" start="{{startTime}}" end="{{today}}">{{endTime}}</picker>
+      <picker bindchange="inputEndTime" mode="date" value="{{endTime}}" start="{{startTime}}" end="{{today}}" style='margin-left:20rpx'>{{endTime}}</picker>
       <view class='triangleDown'></view>
     </view>
-    <view class='search'>
+    <!-- <view class='search'>
       <button class="hoverclass">查询</button>
-    </view>
+    </view> -->
   </view>
 
-  <!-- <view class='search'>
-    <button class="hoverclass">查询</button>
-  </view> -->
+   <view class='search'>
+   <button class="hoverclass2" catchtap='onBackTap'>返回首页</button>
+    <button class="hoverclass" catchtap='onSearchTap'>查询</button>
+  </view> 
 </view>

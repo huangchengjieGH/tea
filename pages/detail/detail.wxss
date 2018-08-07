@@ -2,6 +2,12 @@ page {
   background-color: #f0f2f7;
 }
 
+.swiper_show60 {
+  /* min-height: 80vw;  
+  width: 100%;
+  background-position: 50% 50%; */
+}
+
 .quotaionCon {
   display: flex;
   flex-direction: column;
@@ -146,14 +152,16 @@ page {
 }
 
 .namescore {
-  padding: 25rpx 0;
-  width: 100%;
-  border-bottom: 1rpx solid rgb(220, 220, 220);
+  /* padding: 25rpx 0; */
+  width: 350rpx;
+  margin-left: 30rpx;
+  margin-top: 10rpx;
+  /* border-bottom: 1rpx solid rgb(220, 220, 220); */
 }
 
 .name {
   font-size: 20px;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 .score {
@@ -173,47 +181,47 @@ page {
 
 .yearbatch {
   position: relative;
-  padding: 15rpx 0;
+  /* padding: 15rpx 0; */
   margin-left: 30rpx;
   margin-top: 10rpx;
+  color: #707070;
 }
 
 .batch {
-  position: absolute;
-  right: 300rpx;
+  /* position: absolute;
+  right: 300rpx; */
 }
 
 .batchValue {
   /* position: absolute;
-  right: 170rpx; */
-  margin-left: 200rpx;
+  right: 170rpx; *//* margin-left: 200rpx; */
+  margin-left: 10rpx;
 }
 
 .Technology {
-  padding: 15rpx 0;
-  position: relative;
+  /* padding: 15rpx 0; *//* position: relative; */
   margin-left: 30rpx;
+  color: #707070;
 }
 
 .product {
-  position: absolute;
-  right: 210rpx;
+  /* position: absolute;
+  right: 210rpx; */
 }
 
 .productValue {
   /* position: absolute;
-  right: 50rpx; */
-  margin-left: 250rpx;
+  right: 50rpx; *//* margin-left: 250rpx; */
 }
 
 .specification {
   /* padding: 20rpx 30rpx; */
-  margin-left: 30rpx;
+  margin-left: 10rpx;
   margin-top: 15rpx;
 }
 
 .reference {
-  padding: 15rpx 0 20rpx 30rpx;
+  padding: 10rpx 0 20rpx 10rpx;
 }
 
 .price {
@@ -230,15 +238,14 @@ page {
   /* width: 95%; */
   height: 85rpx;
   background: white;
-  /* margin: 10rpx 20rpx; */
-  /* border-radius: 5px; */
+  /* margin: 10rpx 20rpx; *//* border-radius: 5px; */
   border: none;
 }
 
 .classify {
   display: inline-block;
   padding: 20rpx 20rpx 20rpx 20rpx;
-  border-bottom: none; 
+  border-bottom: none;
 }
 
 .classify-txt {
@@ -262,17 +269,20 @@ page {
   margin-top: 8rpx;
 }
 
- .price-chart {
+.price-chart {
   padding: 5px 15px 0;
 }
+
 .canvas {
   width: 100%;
   height: 250px;
   margin-top: 12px;
 }
-.chart{
+
+.chart {
   background-color: white;
 }
+
 .triangleUp {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
@@ -288,46 +298,79 @@ page {
   border-right: 5px solid transparent;
   border-top: 5px solid #555;
   width: 0;
-  margin-left: 10rpx;
+  margin-right: 20rpx;
 }
-.hoverclass{
-  background-color: #4EAEFE;
+
+.hoverclass {
+  background-color: #4eaefe;
   color: white;
   height: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 15px;
+  width:290rpx;
+  font-weight:300;
   /* padding: 0 20px; */
 }
-.search{
-  /* margin: 30rpx 20rpx; */
-  margin-left: 20rpx;
+.hoverclass2 {
+  background-color: #e98f36;
+  color: white;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  width:290rpx;
+  font-weight:300;
+  /* padding: 0 20px; */
 }
-.dateChoose{
+.search {
+  /* margin: 30rpx 20rpx; */
+  /* margin-left: 20rpx; */
+  display: flex;
+  background-color: white;
+  padding-bottom:40rpx;
+}
+
+.dateChoose {
   background-color: white;
   display: flex;
   flex-direction: row;
-   justify-content: center; 
+  justify-content: center;
   align-items: center;
-  padding-bottom: 46rpx;
+  padding-bottom: 30rpx;
   padding-top: 10px;
 }
-.begintime{
- display: flex;
- flex-direction: row;
- /* margin: 20rpx 30rpx; */
- border: 1rpx solid #E6E4E4;
- padding: 15rpx;
- /* justify-content: center; */
- align-items: center;
-}
-.endtime{
+
+.begintime {
   display: flex;
- flex-direction: row;
- /* margin: 20rpx 30rpx; */
- border: 1rpx solid #E6E4E4;
- padding: 15rpx;
- /* justify-content: center; */
- align-items: center;
+  flex-direction: row;
+  border: 1rpx solid #e6e4e4;
+  /* padding:15rpx; */
+  align-items: center;
+  height: 70rpx;
+  width: 290rpx;
+  justify-content: space-between;
+}
+
+.endtime {
+  display: flex;
+  flex-direction: row;
+  border: 1rpx solid #e6e4e4;
+  /* padding:15rpx; */
+  align-items: center;
+  height: 70rpx;
+  width: 290rpx;
+  justify-content: space-between;
+}
+
+.picnum {
+  position: absolute;
+  bottom: 8rpx;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  font-size: 25rpx;
+  padding: 5rpx 8rpx;
+  font-weight: 300;
 }

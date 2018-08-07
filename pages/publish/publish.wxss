@@ -96,12 +96,12 @@ page {
   background-color: #ff7146;
   height: 88rpx;
   color: white;
-  width: 300rpx;
+  width: 160rpx;
   font-size: 35rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 85rpx;
+  margin-left: 40rpx;
   border-radius: 10rpx;
 }
 
@@ -483,6 +483,7 @@ page {
   position: fixed;
   bottom: 169rpx;
   z-index: 3;
+  padding-right: 20rpx;
    /* height:120rpx;  */
 }
 

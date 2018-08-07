@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "资讯",
+  "navigationBarBackgroundColor": "#4EAEFE",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "footer": "/components/footer/footer"
+  }
+}

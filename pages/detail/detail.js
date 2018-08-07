@@ -187,7 +187,20 @@ Page({
     startTime: '2018-01-01',
     endTime: '2018-12-01',
     name: '1801 益原素',
-    upWan: '0'
+    upWan: '0',
+    bannerList: [{
+        id: '1',
+        name: 'test',
+        url: 'https://zhaocha.yf-gz.cn/file/1532687374122_81ac39451baab54ddcb60f9dfe24a37d.jpg'
+      },
+      {
+        id: '2',
+        name: 'test',
+        url: 'https://zhaocha.yf-gz.cn/file/1532687428058_885ddf7bd00784e104037299dba52a2b.jpg'
+      }
+    ],
+    previewImageList:[],
+    noPic:'http://www.dayihangqing.com/images/no_picture.gif'
   },
   /**
    * 生命周期函数--监听页面加载
@@ -203,6 +216,17 @@ Page({
       name: teaName
     })
     this.initChart();
+  },
+  onImageTap: function(e) {
+   var that = this;
+    // wx.previewImage({
+    //   urls: that.data.previewImageList
+    // });
+    var current = this.data.previewImageList[0];
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接
+      urls: that.data.previewImageList // 需要预览的图片http链接列表
+    })
   },
   getToday: function(e) {
     var date = new Date();
@@ -338,7 +362,7 @@ Page({
         console.log(data.statusCode);
         if (data.statusCode == 200)
 
-        var teaList = data.data;
+          var teaList = data.data;
         var temp = {};
 
         var referencePrice = data.data.referencePrice;
@@ -351,14 +375,25 @@ Page({
         teaList.referencePrice = price;
         teaList.updateDate = date;
         that.processPriceData(data.data.teaPriceList);
+        // that.processPreviewImg(data.data.img);
         that.setData({
           teaList: teaList,
           showHistory: false,
           showHot: false,
+          previewImageList: data.data.img
         })
         callback('success');
       }
     );
+  },
+  processPreviewImg:function(data){
+    var previewImageList = [];
+    for(var idx  in data){
+      previewImageList.push(data[idx].url);
+    }
+    this.setData({
+      previewImageList: previewImageList
+    })
   },
   processPriceData: function(data) {
     var maxi = this.getMaxPrice(data);
@@ -367,7 +402,7 @@ Page({
     var temp = {};
     var date = '';
     var teaPriceList = [];
-    if(data.length>0){
+    if (data.length > 0) {
       var minPrice = data[mini].price;
       if (minPrice > 10000) {
         minPrice = parseFloat(minPrice / 10000).toFixed(2) - 0.02;
@@ -486,7 +521,7 @@ Page({
     let categories = [];
     let data = [];
     let unit = '';
-    let tips='元'
+    let tips = '元'
     priceList.forEach(item => {
       categories.push(item.date);
       data.push(item.price);
@@ -532,33 +567,38 @@ Page({
       }
     });
   },
+  onSearchTap:function(e){
+    this.initChart();
+  },
+  onBackTap:function(e){
+    wx.switchTab({
+      url: '../homepage/homepage',
+    })
+  },
   /*********图表 */
-  
+
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (options) {
+  onShareAppMessage: function(options) {
     // console.log(options);
     var that = this;
     var name = '找找茶';
     var shareObj = {
       title: `${name}`,
-      path: '/pages/quotation/quotation',
+      path: '/pages/detail/detail',
       imageUrl: '',
-      success: function (res) {
-        if (res.errMsg == 'shareAppMessage:ok') {
-        }
+      success: function(res) {
+        if (res.errMsg == 'shareAppMessage:ok') {}
       },
-      fail: function (res) {
-        if (res.errMsg == 'shareAppMessage:fail cancel') {
-        } else if (res.errMsg == 'shareAppMessage:fail') {
-        }
+      fail: function(res) {
+        if (res.errMsg == 'shareAppMessage:fail cancel') {} else if (res.errMsg == 'shareAppMessage:fail') {}
       }
     };
     if (options.from == 'button') {
-      shareObj.path = '/pages/quotation/quotation';
+      shareObj.path = '/pages/detail/detail?name=' + that.data.teaList.name;
     } else {
-      shareObj.path = '/pages/quotation/quotation';
+      shareObj.path = '/pages/detail/detail?name=' + that.data.teaList.name;
     }
     return shareObj;
   }

@@ -1,42 +1,12 @@
-// pages/my/my.js
-let app = getApp();
-const tools = require('../../tools.js');
+const app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    teaList:[],
-    visit:0,
-    attention:1,
-    unReadCount:0
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    this.getPublish();
-  },
-  getPublish: function (e) {
-    var url = `${app.api.getPublish}` + '/' + `${this.data.userId}`;
-    var that = this;
-    app.apiFunctions.requestUrl(
-      app.api.myPublish,
-      'GET',
-      true,
-      true,
-      '',
-      function (data) {
-        console.log(data);
-        if (data.status == 1) {
-          that.setData({
-            teaList: data.data[0]
-          })
-        }
-      }
-    );
+    articleList:[]
   },
   getUnreadCount: function (requireId) {
     var that = this;
@@ -56,6 +26,29 @@ Page({
       }
     );
   },
+
+  initData(){
+    let articleList = [];
+    let item = {
+      title:'东盟企业家俱乐部会员问禅-鸡足山',
+      subTitle:'禅茶一味，身心大益。',
+      imgUrl:'/images/aboutyf/index_10.jpg'
+    }
+    for(let i= 0;i<10;i++){
+      articleList.push(item);
+    }
+    this.setData({
+      articleList
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.initData();
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -67,7 +60,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   this.getUnreadCount();
+    this.getUnreadCount();
     this.interval = setInterval(this.getUnreadCount, 20000);
   },
 

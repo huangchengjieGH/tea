@@ -26,6 +26,7 @@ Page({
       '',
       function (data) {
         console.log(data);
+        wx.hideLoading();
         if (data.status == 1) {
           that.setData({
             messageList:data.data
@@ -69,6 +70,9 @@ Page({
    */
   onShow: function () {
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     this.getMessageList();
     this.interval = setInterval(this.getMessageList, 20000);
   },

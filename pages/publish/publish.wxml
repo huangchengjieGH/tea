@@ -100,7 +100,7 @@
   <view class='func' style="{{edit?'display:none':''}}">
     <view class='delete' catchtap='onClearTap' data-requireId="{{teaList.id}}">清空并重新发布</view>
     <view class='edit' catchtap='onEditTap'>编辑</view>
-    <view class='preview' catchtap='onPreviewTap' style='display:none'>预览</view>
+    <view class='preview' catchtap='onPreviewTap'>一键复制</view>
   </view>
 
   <view class='confirmcel' style="{{edit?'':'display:none'}}">
@@ -117,14 +117,16 @@
   <!-- 提示 -->
   <view style="{{edit?'display:none':''}}">
     <view class='iconstxt'>选择喜欢的背景图标再生成图片</view>
-    <scroll-view  scroll-x="true" class='scrollview'>
-      <view style='display: inline-block;padding:0 2px;' wx:for="{{iconList}}" wx:for-item="work" wx:key="{{index}}">
-        <view style='padding:10rpx;position:relative;' catchtap='onIconsTap' data-id="{{index}}">
-          <view class="{{chooseIcon == index ?'':'tips'}}"></view>
-          <image class='work-img' src='{{work.url}}'></image>
+    <view>
+      <scroll-view scroll-x="true" class='scrollview'>
+        <view style='display: inline-block;padding:0 2px;' wx:for="{{iconList}}" wx:for-item="work" wx:key="{{index}}">
+          <view style='padding:10rpx;position:relative;' catchtap='onIconsTap' data-id="{{index}}">
+            <view class="{{chooseIcon == index ?'':'tips'}}"></view>
+            <image class='work-img' src='{{work.url}}'></image>
+          </view>
         </view>
-      </view>
-    </scroll-view>
+      </scroll-view>
+    </view>
   </view>
 
 
@@ -136,7 +138,7 @@
     </button>
     <button class='share' catchtap='onGeneratePicTap'>
       <image style='width:45rpx;height:45rpx;padding-top:10rpx' src='/images/icons/share.png'></image>
-      <text style='font-size:25rpx'>生成分享图片</text>
+      <text style='font-size:25rpx' catchtap='onGeneratePicTap'>生成分享图片</text>
     </button>
   </view>
 
@@ -161,19 +163,19 @@
           <text>私信</text>
         </view>
       </navigator> -->
-      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../message/message" open-type="switchTab">
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../information/information" open-type="switchTab">
         <view class='message'>
           <view style='display:flex;flex-direction:column'>
-            <image style='height:50rpx;width:50rpx;' src='/images/icons/message_l.png'></image>
-            <text>私信</text>
+            <image style='height:50rpx;width:50rpx;' src='/images/icons/info.png'></image>
+            <text>资讯</text>
           </view>
           <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view>
         </view>
       </navigator>
-      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../attention/attention" open-type="switchTab">
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../my/my" open-type="switchTab">
         <view style='display:flex;flex-direction:column'>
-          <image style='height:50rpx;width:50rpx;' src='/images/icons/attention.png'></image>
-          <text>关注</text>
+          <image style='height:50rpx;width:50rpx;' src='/images/icons/my_l.png'></image>
+          <text>我的</text>
         </view>
       </navigator>
     </view>

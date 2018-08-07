@@ -26,8 +26,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getMyLikeRequire()
-    this.getMyMsg();
+    var chooseStatus = options.chooseStatus;
+    console.log(options);
+    if (chooseStatus){
+      this.setData({
+        chooseStatus: chooseStatus
+      })
+      if (chooseStatus == '0'){
+        this.setData({
+          status:'我看过的'
+        })
+      }else{
+        this.setData({
+          status: '我的关注'
+        })
+      }
+      wx.showLoading({
+        title: '加载中',
+      })
+      this.getMyLikeRequire(chooseStatus)
+      this.getMyMsg();
+    }
+    
   },
   onTypeTap: function (e) {
     var status = e.currentTarget.dataset.status;
@@ -37,19 +57,25 @@ Page({
         chooseStatus:'0',
         status: status
       })
-      this.getMyLikeRequire();
+      wx.showLoading({
+        title: '加载中',
+      })
+      this.getMyLikeRequire('0');
     }else{
       this.setData({
         chooseStatus: '1',
         status: status
       })
-      this.getMyLikeRequire();
+      wx.showLoading({
+        title: '加载中',
+      })
+      this.getMyLikeRequire('1');
     }
     // this.getMyLikeRequire();
   },
-  getMyLikeRequire: function (e) {
+  getMyLikeRequire: function (data) {
     var that = this;
-    var chooseStatus = this.data.chooseStatus;
+    var chooseStatus = data;
     if (chooseStatus == '1'){
       var url = `${app.api.myLikeRequire}`
     }else{
@@ -63,6 +89,7 @@ Page({
       '',
       function (data) {
         console.log(data);
+        wx.hideLoading();
         if (data.status == 1) {
           that.processPublishData(data.data)
         }
@@ -342,8 +369,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getUnreadCount();
-    this.interval = setInterval(this.getUnreadCount, 20000);
+    // this.getUnreadCount();
+    // this.interval = setInterval(this.getUnreadCount, 20000);
   },
 
   /**

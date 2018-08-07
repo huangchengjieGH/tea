@@ -1,75 +1,257 @@
 /* pages/my/my.wxss */
-.myCon{
+
+.myCon {
   background-color: #f8f8f8;
   display: flex;
   flex-direction: column;
-   height: 100%; 
+  height: 100%;
 }
- .background{
-  height:500rpx;
-  width:100%;
-  background-image: url(' http://wegtech.oss-cn-shenzhen.aliyuncs.com/image/1513943032560_41531395a5681ab9f304a666cdd99ead.jpeg');  
+
+.msMsg {
+  height: 300rpx;
+  width: 100%;
+  background-image: url(' https://zhaocha.yf-gz.cn/file/1533298162907_b3a850c5a4657489903afb525fb48c12.png');
+  background-size: contain;
   background-repeat: no-repeat;
-  background-size:100% 100%;
+  background-origin: center;
+}
+
+.background {
+  height: 500rpx;
+  width: 100%;
+  background-image: url(' http://wegtech.oss-cn-shenzhen.aliyuncs.com/image/1513943032560_41531395a5681ab9f304a666cdd99ead.jpeg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   background-color: black;
-  background-attachment:fixed;
+  background-attachment: fixed;
   /* opacity: 0.6; */
-  filter: blur(10rpx); 
-  }
-  .myImg{
-    width: 100%;
-    height: 350rpx;
-    opacity: 0.3;
-  }
-  .Avatar {
-  width: 120rpx;
-  height: 120rpx;
+  filter: blur(10rpx);
+}
+
+.myImg {
+  width: 100%;
+  height: 350rpx;
+  opacity: 0.3;
+}
+
+.Avatar {
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
   display: block;
   overflow: hidden;
 }
 
-.msg{
-position:absolute;
-top:90rpx;
-width:100%;
-display:flex;
-flex-direction:column;
-text-align:center;
-justify-content:center;
-align-items:center;
+.page {
+  background-color: #f7f7f7;
+}
 
+.msg {
+  /* position: absolute;
+  top: 90rpx;
+  width: 100%; */
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: flex-start;
 }
-.userNickName{
-  margin-left: 10rpx;
-  /* font-weight: 300 */
+
+.userNickName {
+  /* margin-left: 10rpx; */
+  font-weight: 300;
+  font-size: 30rpx;
 }
-.call{
-  position: relative;
-  background-color: white;
-  margin-top: 20rpx;
-  border: none;
+
+.vipCon {
+  border-bottom-right-radius: 4rpx;
+  border-bottom-left-radius: 4rpx;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0rpx 0.5rpx 15rpx 0rpx rgba(28, 28, 27, 0.07);
+  width: 690rpx;
+  height: 150rpx;
+  margin: 0 30rpx;
+  border-top: 1rpx solid #f0f2f7;
+  /* position: absolute; */
+  margin-top: -27rpx;
+  display: flex;
+  /* flex-direction: row; */
+}
+
+.reward {
+  display: flex;
+  flex-direction: column;
+  width: 33.3%;
+  text-align: center;
+  justify-content: center;
+}
+
+.rewardtxt {
+  font-size: 36rpx;
+  color: rgb(255, 54, 54);
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+
+.rewardtxt2 {
+  font-size: 27rpx;
+  color: rgb(98, 98, 98);
+  letter-spacing: 2rpx;
+}
+
+.direcVip {
+  display: flex;
+  flex-direction: column;
+  width: 33.3%;
+  text-align: center;
+  justify-content: center;
+}
+
+.direcViptxt {
+  font-size: 36rpx;
+  color: rgb(49, 49, 49);
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+
+.direcViptxt2 {
+  font-size: 27rpx;
+  color: rgb(98, 98, 98);
+  letter-spacing: 2rpx;
+}
+
+.allVip {
+  display: flex;
+  flex-direction: column;
+  width: 33.3%;
+  text-align: center;
+  justify-content: center;
+}
+
+.allViptxt {
+  font-size: 36rpx;
+  color: rgb(49, 49, 49);
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+
+.allViptxt2 {
+  font-size: 27rpx;
+  color: rgb(98, 98, 98);
+  letter-spacing: 2rpx;
+}
+
+.styleCon {
+  border-radius: 4rpx;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0.5rpx 15px 0px rgba(28, 28, 27, 0.07);
+  width: 690rpx;
+  height: 460rpx;
+  margin: 30rpx 30rpx;
+  font-weight: 300;
+}
+
+.columnone {
   width: 100%;
-  height: 100rpx;
-}
-.kefuImg{
-height:55rpx;width:55rpx;
-position: absolute;
-left: 20rpx;
-top: 20rpx;
-
-}
-.calltxt{
-   position: absolute; 
-  left: 85rpx;
-  top: 5rpx;
+  height: 50%;
+  display: flex;
 }
 
-/****tarbar***/
+.columntwo {
+  width: 100%;
+  height: 50%;
+  display: flex;
+}
+
+.iconImg {
+  height: 60rpx;
+  width: 60rpx;
+}
+
+.iconImg02 {
+  height: 60rpx;
+  width: 75rpx;
+}
+
+.iconImg03 {
+  height: 60rpx;
+  width: 75rpx;
+}
+
+.pingdanImg {
+  height: 60rpx;
+  width: 70rpx;
+}
+
+.wallet {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33.3%;
+  border-right: 1rpx solid #f0f2f7;
+  border-bottom: 1rpx solid #f0f2f7;
+  font-size: 30rpx;
+  color: rgb(70, 70, 70);
+  line-height: 1.239;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33.3%;
+  border-right: 1rpx solid #f0f2f7;
+  border-bottom: 1rpx solid #f0f2f7;
+  font-size: 30rpx;
+  color: rgb(70, 70, 70);
+}
+
+.noodle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33.3%;
+  border-right: 1rpx solid #f0f2f7;
+  border-bottom: 1rpx solid #f0f2f7;
+  font-size: 30rpx;
+  color: rgb(70, 70, 70);
+}
+
+.pingdan {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+  border-right: 1rpx solid #f0f2f7;
+  /* border-bottom: 1rpx solid #f0f2f7; */
+  font-size: 30rpx;
+  color: rgb(70, 70, 70);
+}
+
+.proxy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+  border-right: 1rpx solid #f0f2f7;
+  /* border-bottom: 1rpx solid #f0f2f7; */
+  font-size: 30rpx;
+  color: rgb(70, 70, 70);
+}
+
+.txtValue {
+  line-height: 2.439;
+}
+
 .tarBar {
   position: fixed;
   bottom: 0;
-  width: 100vw;
+  width: 100%;
   height: 100rpx;
   background-color: white;
   display: flex;
@@ -77,7 +259,7 @@ top: 20rpx;
   font-size: 12px;
   align-items: center;
   color: rgb(51, 51, 51);
-  z-index: 2;
+   z-index: 2; 
 }
 .left {
   display: flex;
@@ -87,4 +269,44 @@ top: 20rpx;
 .right {
   display: flex;
   width: 40%;
+}
+.checkmore {
+  color: #4eaefe;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: right;
+  margin-right: 20px;
+}
+.number {
+  background-color: red;
+  color: white;
+  height: 28rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 10rpx;
+  font-size: 20rpx;
+  position: absolute;
+  left: 38rpx;
+}
+.number02 {
+  background-color: red;
+  color: white;
+  height: 28rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 10rpx;
+  font-size: 20rpx;
+  position: absolute;
+  left: 95rpx;
+}
+.message {
+  display: flex;
+  position: relative;
+}
+.chat{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.mymy{
+  display: flex;
+  position: relative;
 }

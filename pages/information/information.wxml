@@ -1,0 +1,45 @@
+<view class='infoCon'>
+  <view class='body'>
+    <view class="article__item" wx:for="{{articleList}}">
+      <view class="article-item__title">{{item.title}}</view>
+      <view class="article-item__sub-title">{{item.subTitle}}</view>
+      <image class="article-item__image" mode="aspectFill" src="{{item.imgUrl}}"></image>
+    </view>
+  </view>
+
+  <view class='tarBar'>
+    <view class='left'>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../homepage/homepage" open-type="switchTab">
+        <image style='height:44rpx;width:44rpx;' src='/images/icons/hp_l.png'></image>
+        <text>首页</text>
+      </navigator>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../quotation/quotation" open-type="switchTab">
+        <image style='height:50rpx;width:50rpx;' src='/images/icons/price.png'></image>
+        <text>报价</text>
+      </navigator>
+    </view>
+    <navigator style='position:relative;top:-10px;' url="../publish/publish" open-type="switchTab">
+      <image style='height:130rpx;width:130rpx' src='/images/icons/aaa.png'></image>
+    </navigator>
+    <view class='right'>
+      <view style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;'>
+        <view class='message'>
+          <view style='display:flex;flex-direction:column'>
+            <image style='height:50rpx;width:50rpx;' src='/images/icons/info_l.png'></image>
+            <text>资讯</text>
+          </view>
+          <!-- <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view> -->
+        </view>
+      </view>
+      <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../my/my" open-type="switchTab">
+        <view class='mymy'>
+          <view style='display:flex;flex-direction:column'>
+            <image style='height:55rpx;width:55rpx;' src='/images/icons/my_l.png'></image>
+            <text>我的</text>
+          </view>
+          <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>

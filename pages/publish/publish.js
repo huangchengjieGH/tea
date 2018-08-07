@@ -94,6 +94,7 @@ Page({
     //   title: '发布'
     // })
     this.getWindowWidth();
+    this.getIconImg();
   },
   onEditTap: function(e) {
     var edit = !this.data.edit;
@@ -203,6 +204,25 @@ Page({
     wx.redirectTo({
       url: '../attention/attention',
     })
+  },
+  getIconImg: function(e) {
+    var url = `${app.api.iconImg}`;
+    var that = this;
+    app.apiFunctions.requestUrl(
+      app.api.iconImg,
+      'GET',
+      true,
+      true,
+      '',
+      function(data) {
+        console.log(data);
+        if (data.status == 1) {
+          that.setData({
+            iconList: data.data
+          })
+        }
+      }
+    );
   },
   getPublish: function(e) {
     var url = `${app.api.getPublish}` + '/' + `${this.data.userId}`;
@@ -548,21 +568,104 @@ Page({
 
   },
   onPreviewTap: function(e) {
-    this.setData({
-      showCan: true,
-      flag: false,
-      previewOrMore: '0'
-    })
-    if (this.data.modyfyStatus) {
-      wx.showLoading({
-        title: '生成中...'
-      });
-      this.makeGoodsCard(2);
-    } else {
-      this.setData({
-        showCan: false,
-      })
+    var teaList = this.data.teaList;
+    var temp = {};
+    var find01 = []; //我要找
+    var find02 = []; //代客找
+    var out01 = []; // 出
+    var out02 = []; //代客出
+    var copyData = [];
+    var finalData = '';
+    var objects = teaList.objects;
+    for (var idx in objects) {
+      switch (objects[idx].type) {
+        case 1:
+          find01.push(objects[idx].name)
+          break;
+        case 2:
+          find02.push(objects[idx].name)
+          break;
+        case 3:
+          out01.push(objects[idx].name)
+          break;
+        case 4:
+          out02.push(objects[idx].name)
+          break;
+        default:
+          break;
+      }
     }
+    if (find01.length != 0) {
+      temp = {
+        classify: '找:',
+        object: find01
+      }
+      copyData.push(temp);
+      find01 = [];
+    }
+    if (find02.length != 0) {
+      temp = {
+        classify: '代客找:',
+        object: find02
+      }
+      copyData.push(temp);
+      find02 = [];
+    }
+    if (out01.length != 0) {
+      temp = {
+        classify: '出:',
+        object: out01
+      }
+      copyData.push(temp);
+      out01 = [];
+    }
+    if (out02.length != 0) {
+      temp = {
+        classify: '代客出',
+        object: out02
+      }
+      copyData.push(temp);
+      out02 = [];
+    }
+    this.setData({
+      copyData: copyData
+    })
+    console.log(copyData, teaList);
+    let str = '';
+    copyData.forEach(item => {
+      // console.log(item,str)
+      str += `${item.classify}\n`;
+      str += item.object.join('\n');
+      str += `\n`;
+    });
+    str += `☎️:${teaList.phone}`;
+    console.log(str);
+    console.log(finalData);
+    wx.setClipboardData({
+      data: str,
+      success: function(res) {
+        wx.getClipboardData({
+          success: function(res) {
+            console.log(res.data) // data
+          }
+        })
+      }
+    })
+    // this.setData({
+    //   showCan: true,
+    //   flag: false,
+    //   previewOrMore: '0'
+    // })
+    // if (this.data.modyfyStatus) {
+    //   wx.showLoading({
+    //     title: '生成中...'
+    //   });
+    //   this.makeGoodsCard(2);
+    // } else {
+    //   this.setData({
+    //     showCan: false,
+    //   })
+    // }
   },
   onIconsTap: function(e) {
     var id = e.currentTarget.dataset.id;
@@ -628,9 +731,9 @@ Page({
           wx.previewImage({
             urls: [res.tempFilePath]
           });
-          wx.previewImage({
-            urls: that.data.previewImageList
-          });
+          // wx.previewImage({
+          //   urls: that.data.previewImageList
+          // });
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
             success: function(res) {
@@ -902,8 +1005,8 @@ Page({
       `https://zhaocha.yf-gz.cn/file/1532488920459_4a47a0db6e60853dedfcfdf08a5ca249.png`,
       `https://zhaocha.yf-gz.cn/file/1532489796444_7afbb1602613ec52b265d7a54ad27330.png`
     ];
-   var urlicon = that.data.iconList[that.data.chooseIcon].url;
-   imgList.push(urlicon);
+    var urlicon = that.data.iconList[that.data.chooseIcon].url;
+    imgList.push(urlicon);
     let ctx = wx.createCanvasContext(canvasId);
     that.setData({
       showCanvas: true
@@ -950,7 +1053,7 @@ Page({
       //二维码
       ctx.drawImage(urlList[6].url, 60, canvasHeight - 240, qrCodeSize * 1.8, qrCodeSize * 1.8);
       var length = urlList.length;
-      ctx.drawImage(urlList[length-1].url, windowWidth - 360, canvasHeight - 320, qrCodeSize * 3, qrCodeSize * 3);
+      ctx.drawImage(urlList[length - 1].url, windowWidth - 360, canvasHeight - 320, qrCodeSize * 3, qrCodeSize * 3);
 
 
       let x = windowWidth * pTextX;
