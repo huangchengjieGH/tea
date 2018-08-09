@@ -10,10 +10,12 @@
 .msMsg {
   height: 300rpx;
   width: 100%;
-  background-image: url(' https://zhaocha.yf-gz.cn/file/1533298162907_b3a850c5a4657489903afb525fb48c12.png');
+  /* background-image: url(' https://zhaocha.yf-gz.cn/file/1533298162907_b3a850c5a4657489903afb525fb48c12.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-origin: center;
+  background-origin: center; */
+  position: relative;
+  background: linear-gradient(45deg, #3385ff 0%, #4eaefe 100%);
 }
 
 .background {
@@ -47,20 +49,23 @@
 }
 
 .msg {
-  /* position: absolute;
-  top: 90rpx;
-  width: 100%; */
+  position: absolute;
+  bottom: 0;
+  left: 30rpx;
+  right: 30rpx;
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
   align-items: flex-start;
+  background-color: white;
+  border-bottom: 1px solid #f6f6f6;
+  padding: 15px;
 }
 
 .userNickName {
-  /* margin-left: 10rpx; */
   font-weight: 300;
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 
 .vipCon {
@@ -259,8 +264,9 @@
   font-size: 12px;
   align-items: center;
   color: rgb(51, 51, 51);
-   z-index: 2; 
+  z-index: 2;
 }
+
 .left {
   display: flex;
   width: 40%;
@@ -270,6 +276,7 @@
   display: flex;
   width: 40%;
 }
+
 .checkmore {
   color: #4eaefe;
   font-weight: 300;
@@ -277,6 +284,7 @@
   text-align: right;
   margin-right: 20px;
 }
+
 .number {
   background-color: red;
   color: white;
@@ -287,6 +295,7 @@
   position: absolute;
   left: 38rpx;
 }
+
 .number02 {
   background-color: red;
   color: white;
@@ -297,16 +306,39 @@
   position: absolute;
   left: 95rpx;
 }
+
 .message {
   display: flex;
   position: relative;
 }
-.chat{
- display: flex;
- justify-content: center;
- align-items: center;
+
+.chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.mymy{
+
+.mymy {
   display: flex;
   position: relative;
+}
+
+.avatar__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx 30rpx;
+}
+
+.avatar__info {
+  padding: 0 10px;
+}
+
+.user__level {
+  padding: 5px 8px;
+  border-radius: 2em;
+  margin-top: 5px;
+  background: linear-gradient(45deg, #3385ff 0%, #4eaefe 100%);
+  color: white;
+  font-size: 13px;
 }

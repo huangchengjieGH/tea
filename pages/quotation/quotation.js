@@ -306,6 +306,7 @@ Page({
    */
   onLoad: function(options) {
     // this.getTealist(this.data.indexStatus);
+		wx.hideTabBar();
     this.setData({
       yearCycle: this.data.year
     })
@@ -317,11 +318,7 @@ Page({
     this.getTealists(data);
   },
   onShow: function(options) {
-    // page = 1;
-    // this.setData({
-    //   teaList:[],
-    //   hidden: false
-    // })
+		wx.hideTabBar();
     this.getUnreadCount();
     this.interval = setInterval(this.getUnreadCount, 30000);
   },

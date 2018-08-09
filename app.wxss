@@ -1,4 +1,3 @@
-/**app.wxss**/
 .container {
   height: 100%;
   display: flex;
@@ -7,19 +6,15 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
 
 page {
   height: 100%;
-   line-height: 1.2; 
-   font-family: -apple-system-font, "Microsoft YaHei"; 
-    /* font-family: -apple-system-font, "Helvetica Neue", sans-serif;   */
-   /* font-family: -apple-system-font, "PingFang SC";  */
-    /* font-weight: 300;     */
-  font-size:32rpx;
+  line-height: 1.2;
+  font-family: -apple-system-font, "Microsoft YaHei";
+  font-size: 32rpx;
 }
-/*****字体   ****/
 
- /* ::-webkit-scrollbar{
-  display: none;
-}  */
+navigator:hover, navigator:focus, navigator:active {
+  background-color: white;
+}

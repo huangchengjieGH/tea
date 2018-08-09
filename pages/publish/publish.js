@@ -90,9 +90,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // wx.setNavigationBarTitle({
-    //   title: '发布'
-    // })
+		wx.hideTabBar();
     this.getWindowWidth();
     this.getIconImg();
   },
@@ -1265,7 +1263,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    console.log('onShow');
+    wx.hideTabBar();
     this.getPublish();
     this.setData({
       showCan: false,

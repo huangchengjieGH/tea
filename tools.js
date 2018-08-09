@@ -89,7 +89,6 @@ let tools = {
       method: request.method,
       dataType: request.dataType,
       success: function(res) {
-        // console.log(res.data)
         if (res.data.status >= 0) {
           let data = null;
           request.isRes && (data = res.data);
@@ -205,7 +204,6 @@ let tools = {
       }
     );
   }
-
 }
 
 module.exports = tools;

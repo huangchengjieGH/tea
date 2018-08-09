@@ -10,9 +10,12 @@
   </view> -->
   <view class='msMsg'>
     <view class='msg'>
-      <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;padding:10rpx 30rpx;'>
+      <view class="avatar__wrapper">
         <open-data type="userAvatarUrl" class='Avatar'></open-data>
-        <open-data type="userNickName" class='userNickName'></open-data>
+        <view class="avatar__info">
+          <open-data type="userNickName" class='userNickName'></open-data>
+          <view wx:if="{{customer.levelName}}" class="user__level">等级：{{customer.levelName}}</view>
+        </view>
       </view>
     </view>
   </view>

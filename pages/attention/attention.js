@@ -27,7 +27,7 @@ Page({
    */
   onLoad: function (options) {
     var chooseStatus = options.chooseStatus;
-    console.log(options);
+		wx.hideTabBar();
     if (chooseStatus){
       this.setData({
         chooseStatus: chooseStatus
@@ -365,12 +365,9 @@ Page({
   
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+
   onShow: function () {
-    // this.getUnreadCount();
-    // this.interval = setInterval(this.getUnreadCount, 20000);
+		wx.hideTabBar();
   },
 
   /**

@@ -41,19 +41,14 @@ Page({
     }
     return theRequest[key];
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function (options) {
+		wx.hideTabBar();
     var requireId = options.requireId;
-    // var requireId = 8;
     var scene = decodeURIComponent(options.scene);
     if (requireId == null || requireId==''){
       requireId = this.GetQueryString(scene, 'requireId');
     }
-    console.log('url');
-    console.log(scene);
-    console.log(requireId);
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
