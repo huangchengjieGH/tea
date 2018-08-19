@@ -1,25 +1,32 @@
-// pages/my/my.js
 let app = getApp();
 const tools = require('../../tools.js');
+const Ajax = require('../../ajaxMethods/ajax.js');
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    teaList:[],
-    visit:0,
-    attention:1,
-    unReadCount:0
+    teaList: [],
+    visit: 0,
+    attention: 1,
+    unReadCount: 0,
+    customer: {}
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    wx.hideTabBar();
     this.getPublish();
+    this.getCustomer();
   },
-  getPublish: function (e) {
+
+  getCustomer() {
+    const that = this;
+    Ajax.prototype.getCustomer().then(res => {
+      that.setData({
+        customer: res.data
+      });
+    });
+  },
+
+  getPublish: function(e) {
     var url = `${app.api.getPublish}` + '/' + `${this.data.userId}`;
     var that = this;
     app.apiFunctions.requestUrl(
@@ -28,7 +35,7 @@ Page({
       true,
       true,
       '',
-      function (data) {
+      function(data) {
         console.log(data);
         if (data.status == 1) {
           that.setData({
@@ -38,7 +45,8 @@ Page({
       }
     );
   },
-  getUnreadCount: function (requireId) {
+
+  getUnreadCount: function(requireId) {
     var that = this;
     app.apiFunctions.requestUrl(
       app.api.unreadCount,
@@ -46,7 +54,7 @@ Page({
       true,
       true,
       '',
-      function (data) {
+      function(data) {
         console.log(data);
         if (data.status == 1) {
           that.setData({
@@ -56,55 +64,23 @@ Page({
       }
     );
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-   this.getUnreadCount();
+  onShow: function() {
+    wx.hideTabBar();
+    this.getUnreadCount();
     this.interval = setInterval(this.getUnreadCount, 20000);
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+
+  onHide: function() {
     var that = this;
     clearInterval(that.interval);
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
+
+  onUnload: function() {
     var that = this;
     clearInterval(that.interval);
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
-})
+
+});

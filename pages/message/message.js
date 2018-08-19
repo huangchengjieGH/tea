@@ -3,18 +3,12 @@ let app = getApp();
 const tools = require('../../tools.js');
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     messageList:[]
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    
+		wx.hideTabBar();
   },
   getMessageList: function (e) {
     var that = this;
@@ -69,10 +63,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+		wx.hideTabBar();
     var that = this;
     wx.showLoading({
       title: '加载中',
-    })
+    });
     this.getMessageList();
     this.interval = setInterval(this.getMessageList, 20000);
   },

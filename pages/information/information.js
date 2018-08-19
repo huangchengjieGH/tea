@@ -1,14 +1,12 @@
 const app = getApp();
+const prefixUrl = `https://zhaocha.yf-gz.cn/zhaocha/article/mp/homepage`;
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    articleList:[]
+    articleUrl: `${prefixUrl}?__biz=Mzg4NjAwMDY3NQ%3D%3D&hid=1&sn=20daaf3a4ef42565b79028dec6e25eae`,
+    articleList: []
   },
-  getUnreadCount: function (requireId) {
+  getUnreadCount: function(requireId) {
     var that = this;
     app.apiFunctions.requestUrl(
       app.api.unreadCount,
@@ -16,7 +14,7 @@ Page({
       true,
       true,
       '',
-      function (data) {
+      function(data) {
         console.log(data);
         if (data.status == 1) {
           that.setData({
@@ -27,14 +25,14 @@ Page({
     );
   },
 
-  initData(){
+  initData() {
     let articleList = [];
     let item = {
-      title:'东盟企业家俱乐部会员问禅-鸡足山',
-      subTitle:'禅茶一味，身心大益。',
-      imgUrl:'/images/aboutyf/index_10.jpg'
+      title: '东盟企业家俱乐部会员问禅-鸡足山',
+      subTitle: '禅茶一味，身心大益。',
+      imgUrl: '/images/aboutyf/index_10.jpg'
     }
-    for(let i= 0;i<10;i++){
+    for (let i = 0; i < 10; i++) {
       articleList.push(item);
     }
     this.setData({
@@ -42,62 +40,13 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.initData();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  onShow: function() {
+    wx.showTabBar();
     this.getUnreadCount();
     this.interval = setInterval(this.getUnreadCount, 20000);
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    var that = this;
-    clearInterval(that.interval);
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    var that = this;
-    clearInterval(that.interval);
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
-})
+});

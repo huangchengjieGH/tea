@@ -1,9 +1,11 @@
 page {
   background-color: #f6f6f6;
 }
-.body{
-  margin-bottom:200rpx;
+
+.body {
+  margin-bottom: 200rpx;
 }
+
 .tarBar {
   position: fixed;
   bottom: 0;

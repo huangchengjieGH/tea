@@ -1,4 +1,6 @@
-<view class='infoCon'>
+<web-view src="{{articleUrl}}"></web-view>
+
+<!-- <view class='infoCon'>
   <view class='body'>
     <view class="article__item" wx:for="{{articleList}}">
       <view class="article-item__title">{{item.title}}</view>
@@ -6,6 +8,7 @@
       <image class="article-item__image" mode="aspectFill" src="{{item.imgUrl}}"></image>
     </view>
   </view>
+
 
   <view class='tarBar'>
     <view class='left'>
@@ -28,7 +31,6 @@
             <image style='height:50rpx;width:50rpx;' src='/images/icons/info_l.png'></image>
             <text>资讯</text>
           </view>
-          <!-- <view class='number' wx-if="{{unReadCount>0}}">{{unReadCount}}</view> -->
         </view>
       </view>
       <navigator style='display:flex;flex-direction:column;width:50%;align-items: center;justify-content:center;' url="../my/my" open-type="switchTab">
@@ -42,4 +44,4 @@
       </navigator>
     </view>
   </view>
-</view>
+</view> -->
